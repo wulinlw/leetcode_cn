@@ -50,6 +50,41 @@ class Solution(object):
         else:
             return r
 
+#参考
+class Solution(object):
+    valids = '-+0123456789'
+    int_max = 2147483647
+    int_min = -2147483648
+    
+    def myAtoi(self, s):
+        """
+        :type str: str
+        :rtype: int
+        """
+        s = s.strip()
+        
+        if not s:
+            return 0
+        
+        pre_is_number = False
+        
+        for i in xrange(len(s) + 1):
+            if i < len(s) and s[i] in self.valids:
+                continue
+            break
+        
+        try:
+            number = int(s[:i])
+        except:
+            return 0
+        
+        if number > self.int_max:
+            return self.int_max
+        
+        if number < self.int_min:
+            return self.int_min
+        
+        return number
 
 s = "42"
 # s = "   -42"
