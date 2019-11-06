@@ -15,7 +15,8 @@
                 "reveal": "always",
                 "panel": "new",
                 "focus": true
-            }
+            },
+            "problemMatcher": []
         },
         {
             "taskName": "nosetest",
