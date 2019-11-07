@@ -1,62 +1,185 @@
 #!/usr/bin/python
 #coding:utf-8
-class Solution(object):
-    def rotate(self, matrix):
-        """
-        :type matrix: List[List[int]]
-        :rtype: void Do not return anything, modify matrix in-place instead.
-        x,y坐标交换，在讲每一列反转即可
-        """
-        print(matrix[::-1])
-        print(zip(matrix))
-        return
-        p = []
-        l = len(matrix)
-        for i in range(l):
-            for j in range(len(matrix[i])):
-                if (i, j) in p or (j, i) in p:
-                    continue
-                else:
-                    p.extend([(i, j), (j, i)])
-                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
-        for i in range(l):
-            matrix[i] = matrix[i][::-1]
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/30/
+# 有效的数独
+# 判断一个 9x9 的数独是否有效。只需要根据以下规则，验证已经填入的数字是否有效即可。
 
-        print(matrix)
-
-    def rotate2(self, matrix):
-        """
-        :type matrix: List[List[int]]
-        :rtype: void Do not return anything, modify matrix in-place instead.
-        http://www.runoob.com/python/python-func-zip.html
-        zip() 函数用于将可迭代的对象作为参数，将对象中对应的元素打包成一个个元组，然后返回由这些元组组成的列表。
-        如果各个迭代器的元素个数不一致，则返回列表长度与最短的对象相同，利用 * 号操作符，可以将元组解压为列表。
-        """
-        matrix[::] = zip(*matrix[::-1])
+# 数字 1-9 在每一行只能出现一次。
+# 数字 1-9 在每一列只能出现一次。
+# 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
 
 
-# matrix = [
-#   [1,2,3],
-#   [4,5,6],
-#   [7,8,9]
-# ]
-# x,y坐标交换
-# [1,4,7]
-# [2,5,8]
-# [3,6,9]
+# 上图是一个部分填充的有效的数独。
+
+# 数独部分空格内已填入了数字，空白格用 '.' 表示。
+
+# 示例 1:
+
+# 输入:
 # [
-#   [7,4,1],
-#   [8,5,2],
-#   [9,6,3]
+#   ["5","3",".",".","7",".",".",".","."],
+#   ["6",".",".","1","9","5",".",".","."],
+#   [".","9","8",".",".",".",".","6","."],
+#   ["8",".",".",".","6",".",".",".","3"],
+#   ["4",".",".","8",".","3",".",".","1"],
+#   ["7",".",".",".","2",".",".",".","6"],
+#   [".","6",".",".",".",".","2","8","."],
+#   [".",".",".","4","1","9",".",".","5"],
+#   [".",".",".",".","8",".",".","7","9"]
 # ]
+# 输出: true
+# 示例 2:
 
-matrix = [[5, 1, 9, 11], [2, 4, 8, 10], [13, 3, 6, 7], [15, 14, 12, 16]]
-# [5,2,13,15]
-# [1,4,3,14]
-# [9,8,6,12]
-# [11,10,7,16]
+# 输入:
+# [
+#   ["8","3",".",".","7",".",".",".","."],
+#   ["6",".",".","1","9","5",".",".","."],
+#   [".","9","8",".",".",".",".","6","."],
+#   ["8",".",".",".","6",".",".",".","3"],
+#   ["4",".",".","8",".","3",".",".","1"],
+#   ["7",".",".",".","2",".",".",".","6"],
+#   [".","6",".",".",".",".","2","8","."],
+#   [".",".",".","4","1","9",".",".","5"],
+#   [".",".",".",".","8",".",".","7","9"]
+# ]
+# 输出: false
+# 解释: 除了第一行的第一个数字从 5 改为 8 以外，空格内其他数字均与 示例1 相同。
+#      但由于位于左上角的 3x3 宫内有两个 8 存在, 因此这个数独是无效的。
+# 说明:
+
+# 一个有效的数独（部分已被填充）不一定是可解的。
+# 只需要根据以上规则，验证已经填入的数字是否有效即可。
+# 给定数独序列只包含数字 1-9 和字符 '.' 。
+# 给定数独永远是 9x9 形式的。
+import sys
+
+
+class Solution(object):
+    # 80ms
+    def isValidSudoku(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: bool
+        数字 1-9 在每一行只能出现一次。
+        数字 1-9 在每一列只能出现一次。
+        数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
+        """
+        # print(set(board[0]))
+        r = range(10)
+        c = range(10)
+        z = range(10)
+        for i in c:
+            r[i] = {}
+            c[i] = {}
+            z[i] = {}
+        for i in range(9):
+            for j in range(9):
+                # x
+                if board[i][j] != "." and r[i].has_key(board[i][j]):
+                    print('x', i, j, board[i][j])
+                    return False
+                else:
+                    r[i][board[i][j]] = 1
+
+                # y
+                if board[j][i] != "." and c[i].has_key(board[j][i]):
+                    print('y', i, j, board[j][i])
+                    print(c)
+                    return False
+                else:
+                    c[i][board[j][i]] = 1
+
+                # zone
+                zone = self.zonePosition(i, j)
+                if board[i][j] != "." and z[zone].has_key(board[i][j]):
+                    print('z', i, j, board[i][j])
+                    return False
+                else:
+                    z[zone][board[i][j]] = 1
+
+            # print(r)
+            # print(c)
+            # print("\r\n")
+            # sys.exit(0)
+        # print(c)
+        # sys.exit(0)
+        return True
+
+    def zonePosition(self, x, y):
+        if x < 3:
+            if y < 3:
+                return 1
+            elif y >= 3 and y <= 5:
+                return 4
+            else:
+                return 7
+        elif x >= 3 and x <= 5:
+            if y < 3:
+                return 2
+            elif y >= 3 and y <= 5:
+                return 5
+            else:
+                return 8
+        else:
+            if y < 3:
+                return 3
+            elif y >= 3 and y <= 5:
+                return 6
+            else:
+                return 9
+
+    # 56ms
+    def isValidSudoku_best(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: bool
+        (row, block)            x轴重复
+        (block, col)            y轴重复
+        (row/3, col/3, block)   块重复
+        """
+        exist = []
+        for row, rows in enumerate(board):
+            for col, block in enumerate(rows):
+                if block != ".":
+                    exist.extend([(row, block), (block, col),(row / 3, col / 3, block)])
+        return len(exist) == len(set(exist))
+
+
+# board = [
+#   ["5","3",".",".","7",".",".",".","."],
+#   ["6",".",".","1","9","5",".",".","."],
+#   [".","9","8",".",".",".",".","6","."],
+#   ["8",".",".",".","6",".",".",".","3"],
+#   ["4",".",".","8",".","3",".",".","1"],
+#   ["7",".",".",".","2",".",".",".","6"],
+#   [".","6",".",".",".",".","2","8","."],
+#   [".",".",".","4","1","9",".",".","5"],
+#   [".",".",".",".","8",".",".","7","9"]
+# ]
+# board = [
+#   ["8","3",".",".","7",".",".",".","."],
+#   ["6",".",".","1","9","5",".",".","."],
+#   [".","9","8",".",".",".",".","6","."],
+#   ["8",".",".",".","6",".",".",".","3"],
+#   ["4",".",".","8",".","3",".",".","1"],
+#   ["7",".",".",".","2",".",".",".","6"],
+#   [".","6",".",".",".",".","2","8","."],
+#   [".",".",".","4","1","9",".",".","5"],
+#   [".",".",".",".","8",".",".","7","9"]
+# ]
+board = [
+    [".", ".", "4", ".", ".", ".", "6", "3","."], 
+    [".", ".", ".", ".", ".", ".", ".", ".","."], 
+    ["5", ".", ".", ".", ".", ".", ".", "9","."], 
+    [".", ".", ".", "5", "6", ".", ".", ".", "."],
+    ["4", ".", "3", ".", ".", ".", ".", ".","1"],
+    [".", ".", ".", "7", ".", ".", ".", ".","."],
+    [".", ".", ".", "5", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", ".","."], 
+    [".", ".", ".", ".", ".", ".", ".", ".", "."]
+]
+# 3，5  5，4  3/3,4/3,5
+# 3, 5  5,6   3/3,6/3,5
 s = Solution()
-n = s.rotate(matrix)
-print('return', matrix)
-for i in range(len(matrix)):
-    print(matrix[i])
+n = s.isValidSudoku_best(board)
+print('return', n)

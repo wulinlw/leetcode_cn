@@ -1,6 +1,8 @@
 #!/usr/bin/python
 #coding:utf-8
 
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/26/others/67/
+# 帕斯卡三角形
 # 给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。
 # 在杨辉三角中，每个数是它左上方和右上方的数的和。
 
@@ -21,12 +23,9 @@ class Solution(object):
         :type numRows: int
         :rtype: List[List[int]]
         """
-        triangle = []
-        for i in range(numRows):
+        triangle = [[1]]
+        for i in range(1,numRows):
             row = [1]
-            if i == 0:
-                triangle.append(row)
-                continue
             for j in range(1, i):
                 num = triangle[i-1][j-1] + triangle[i-1][j]
                 row.append(num)

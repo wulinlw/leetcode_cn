@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #coding:utf-8
 import random
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/24/design/58/
 # Shuffle an Array
 # 打乱一个没有重复元素的数组。
 

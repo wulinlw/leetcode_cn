@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/7/trees/51/
 # 将有序数组转换为二叉搜索树
 # 将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。
 
@@ -107,18 +107,19 @@ class Solution(object):
         length = len(nums)
         if not nums:
             return None
-        root = TreeNode(nums[length/2])
-        root.left = self.sortedArrayToBST(nums[:length/2])
-        root.right = self.sortedArrayToBST(nums[length/2+1:])
+        mid = length//2
+        root = TreeNode(nums[mid])
+        root.left = self.sortedArrayToBST(nums[:mid])
+        root.right = self.sortedArrayToBST(nums[mid+1:])
         return root
 
 
 
 
 # treeList = [3,9,20,None,None,15,7]
-# treeList = [-10,-3,0,5,9]
+treeList = [-10,-3,0,5,9]
 b = B_Tree()
-b.build(treeList)
+# b.build(treeList)
 # b.preTraverse(b.root)
 # b.midTraverse(b.root)
 # b.afterTraverse(b.root)

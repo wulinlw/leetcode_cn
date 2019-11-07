@@ -1,6 +1,7 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/23/dynamic-programming/54/
+# 爬楼梯
 # 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
 # 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
 # 注意：给定 n 是一个正整数。
@@ -36,7 +37,7 @@ class Solution(object):
     def climbStairs2(self, n):
         if(n == 1 or n == 0):
             return 1
-        a, b = 1, 1
+        a, b = 1, 1#第0，1步都是1
         result = 0
         while(n > 1):
             result = a + b

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/8/sorting-and-searching/52/
 # 合并两个有序数组
 # 给定两个有序整数数组 nums1 和 nums2，将 nums2 合并到 nums1 中，使得 num1 成为一个有序数组。
 # 说明:
@@ -46,6 +46,7 @@ class Solution(object):
             else:
                 nums1[m+n-1]=nums2[n-1]
                 n-=1
+            print(nums1)
         if n>0:#若nums1完了，nums2还没完
             nums1[:n]=nums2[:n]#把剩下nums2加在最开始
 
@@ -56,5 +57,5 @@ nums2 = [2,5,6]
 n = 3
 
 s = Solution()
-deep = s.merge(nums1, m, nums2, n)
+deep = s.merge2(nums1, m, nums2, n)
 print("deep:",deep)

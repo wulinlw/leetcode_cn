@@ -1,5 +1,21 @@
 #!/usr/bin/python
 #coding:utf-8
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/6/linked-list/45/
+# 回文链表
+# 请判断一个链表是否为回文链表。
+
+# 示例 1:
+
+# 输入: 1->2
+# 输出: false
+# 示例 2:
+
+# 输入: 1->2->2->1
+# 输出: true
+# 进阶：
+# 你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
+
+
 # 请判断一个链表是否为回文链表。
 # https://blog.csdn.net/weixin_36372879/article/details/82596003
 # 1. 采用快慢指针来找到链表中点

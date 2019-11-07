@@ -1,12 +1,32 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/7/trees/48/
+# 验证二叉搜索树
 # 给定一个二叉树，判断其是否是一个有效的二叉搜索树。
+
 # 假设一个二叉搜索树具有如下特征：
 
 # 节点的左子树只包含小于当前节点的数。
 # 节点的右子树只包含大于当前节点的数。
 # 所有左子树和右子树自身必须也是二叉搜索树。
+# 示例 1:
+
+# 输入:
+#     2
+#    / \
+#   1   3
+# 输出: true
+# 示例 2:
+
+# 输入:
+#     5
+#    / \
+#   1   4
+#      / \
+#     3   6
+# 输出: false
+# 解释: 输入为: [5,1,4,null,null,3,6]。
+#      根节点的值为 5 ，但是其右子节点值为 4 。
 
 # 用Python实现二叉树、二叉树非递归遍历及绘制
 # https://blog.csdn.net/huang_shiyang/article/details/79981332
@@ -136,9 +156,9 @@ b.build(treeList)
 b.midTraverse(b.root)
 # b.afterTraverse(b.root)
 
-s = Solution()
-deep = s.isValidBST(b.root)
-print("deep:",deep)
+# s = Solution()
+# deep = s.isValidBST(b.root)
+# print("deep:",deep)
 
 
 

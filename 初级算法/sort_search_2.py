@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/8/sorting-and-searching/53/
 # 第一个错误的版本
 # 你是产品经理，目前正在带领一个团队开发新的产品。不幸的是，你的产品的最新版本没有通过质量检测。
 # 由于每个版本都是基于之前的版本开发的，所以错误的版本之后的所有版本都是错的。
@@ -23,6 +23,7 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
+        # 标准二分法
         left = 1
         right = n
         while left<right:

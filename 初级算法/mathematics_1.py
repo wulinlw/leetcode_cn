@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/25/math/60/
 # Fizz Buzz
 # 写一个程序，输出从 1 到 n 数字的字符串表示。
 

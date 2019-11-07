@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/23/dynamic-programming/56/
 # 最大子序和
 # 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
 
@@ -24,7 +24,8 @@ class Solution(object):
         for i in range(1,length):  
             #当前值的大小与前面的值之和比较，若当前值更大，则取当前值，舍弃前面的值之和  
             subMaxSum=max(nums[i]+nums[i-1],nums[i])  
-            nums[i]=subMaxSum#将当前和最大的赋给nums[i]，新的nums存储的为和值  
+            nums[i]=subMaxSum#将当前和最大的赋给nums[i]，新的nums存储的为和值
+            # 则每一步存储的都是当前步和前一步的最大值  
         return max(nums)
 
     #遍历法 ，非动态规划，仅供参考

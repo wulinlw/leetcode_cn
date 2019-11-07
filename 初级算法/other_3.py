@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/26/others/66/
 # 颠倒二进制位
 # 颠倒给定的 32 位无符号整数的二进制位。
 
@@ -28,8 +28,9 @@ class Solution:
     # @return an integer
     def reverseBits(self, n):
         # format语法a :[填充字符][对齐方式 <^>][宽度]
+        print(bin(n))
         bits = "{:0>32b}".format(n)
-        print bits
+        print(bits)
         return int(bits[::-1], 2)#2进制
 
 

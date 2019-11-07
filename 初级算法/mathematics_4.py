@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #coding:utf-8
 
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/25/math/63/
 # 罗马数字转整数
 # 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。
 
@@ -55,15 +55,16 @@ class Solution(object):
         d = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
         result = 0
         for i in range(len(s)-1):
-            if d[s[i]] < d[s[i+1]]:
+            if d[s[i]] < d[s[i+1]]:#当前值比下一个小，则减去当前值（只有4和9的10倍数）
                 result-= d[s[i]]
             else:
                 result+=d[s[i]]
-        result+=d[s[len(s)-1]]
+        result+=d[s[len(s)-1]]#加上最后一位
         return result if 1 <= result <= 3999 else False
 
 
 n='VII'
+n='IV'
 s = Solution()
 re = s.romanToInt(n)
 print("deep:",re)

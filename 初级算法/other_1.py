@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/26/others/64/
 # 位1的个数
 # 编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。
 # 示例 1：
@@ -38,6 +38,7 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
+        # 向右移位法>>
         count=0
         while n!=0:
             if n&1==1:#十进制可以使用&，>>

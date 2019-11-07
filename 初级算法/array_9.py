@@ -1,134 +1,52 @@
 #!/usr/bin/python
 #coding:utf-8
-import sys
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/29/
+# 两数之和
+# 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
 
+# 你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
 
+# 示例:
+
+# 给定 nums = [2, 7, 11, 15], target = 9
+
+# 因为 nums[0] + nums[1] = 2 + 7 = 9
+# 所以返回 [0, 1]
 class Solution(object):
-    # 80ms
-    def isValidSudoku(self, board):
+    def twoSum(self, nums, target):
         """
-        :type board: List[List[str]]
-        :rtype: bool
-        数字 1-9 在每一行只能出现一次。
-        数字 1-9 在每一列只能出现一次。
-        数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
         """
-        # print(set(board[0]))
-        r = range(10)
-        c = range(10)
-        z = range(10)
-        for i in c:
-            r[i] = {}
-            c[i] = {}
-            z[i] = {}
-        for i in range(9):
-            for j in range(9):
-                # x
-                if board[i][j] != "." and r[i].has_key(board[i][j]):
-                    print('x', i, j, board[i][j])
-                    return False
-                else:
-                    r[i][board[i][j]] = 1
+        h = {}
+        for idx, i in enumerate(nums):
+            h[i] = idx
+        for idx, s in enumerate(nums):
+            print(s, target - s)
+            if h.has_key(target - s) and (idx != h[target - s]):
+                return [idx, h[target - s]]
 
-                # y
-                if board[j][i] != "." and c[i].has_key(board[j][i]):
-                    print('y', i, j, board[j][i])
-                    print(c)
-                    return False
-                else:
-                    c[i][board[j][i]] = 1
-
-                # zone
-                zone = self.zonePosition(i, j)
-                if board[i][j] != "." and z[zone].has_key(board[i][j]):
-                    print('z', i, j, board[i][j])
-                    return False
-                else:
-                    z[zone][board[i][j]] = 1
-
-            # print(r)
-            # print(c)
-            # print("\r\n")
-            # sys.exit(0)
-        # print(c)
-        # sys.exit(0)
-        return True
-
-    def zonePosition(self, x, y):
-        if x < 3:
-            if y < 3:
-                return 1
-            elif y >= 3 and y <= 5:
-                return 4
-            else:
-                return 7
-        elif x >= 3 and x <= 5:
-            if y < 3:
-                return 2
-            elif y >= 3 and y <= 5:
-                return 5
-            else:
-                return 8
-        else:
-            if y < 3:
-                return 3
-            elif y >= 3 and y <= 5:
-                return 6
-            else:
-                return 9
-
-    # 56ms
-    def isValidSudoku_best(self, board):
+    def twoSum2(self, nums, target):
         """
-        :type board: List[List[str]]
-        :rtype: bool
-        (row, block)            x轴重复
-        (block, col)            y轴重复
-        (row/3, col/3, block)   块重复
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
         """
-        exist = []
-        for row, rows in enumerate(board):
-            for col, block in enumerate(rows):
-                if block != ".":
-                    exist.extend([(row, block), (block, col),(row / 3, col / 3, block)])
-        return len(exist) == len(set(exist))
+        dict = {}
+        for i in range(len(nums)):
+            x = nums[i]
+            if target - x in dict:
+                return (dict[target - x], i)
+            dict[x] = i
 
 
-# board = [
-#   ["5","3",".",".","7",".",".",".","."],
-#   ["6",".",".","1","9","5",".",".","."],
-#   [".","9","8",".",".",".",".","6","."],
-#   ["8",".",".",".","6",".",".",".","3"],
-#   ["4",".",".","8",".","3",".",".","1"],
-#   ["7",".",".",".","2",".",".",".","6"],
-#   [".","6",".",".",".",".","2","8","."],
-#   [".",".",".","4","1","9",".",".","5"],
-#   [".",".",".",".","8",".",".","7","9"]
-# ]
-# board = [
-#   ["8","3",".",".","7",".",".",".","."],
-#   ["6",".",".","1","9","5",".",".","."],
-#   [".","9","8",".",".",".",".","6","."],
-#   ["8",".",".",".","6",".",".",".","3"],
-#   ["4",".",".","8",".","3",".",".","1"],
-#   ["7",".",".",".","2",".",".",".","6"],
-#   [".","6",".",".",".",".","2","8","."],
-#   [".",".",".","4","1","9",".",".","5"],
-#   [".",".",".",".","8",".",".","7","9"]
-# ]
-board = [
-    [".", ".", "4", ".", ".", ".", "6", "3","."], 
-    [".", ".", ".", ".", ".", ".", ".", ".","."], 
-    ["5", ".", ".", ".", ".", ".", ".", "9","."], 
-    [".", ".", ".", "5", "6", ".", ".", ".", "."],
-    ["4", ".", "3", ".", ".", ".", ".", ".","1"],
-    [".", ".", ".", "7", ".", ".", ".", ".","."],
-    [".", ".", ".", "5", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", ".","."], 
-    [".", ".", ".", ".", ".", ".", ".", ".", "."]
-]
-# 3，5  5，4  3/3,4/3,5
-# 3, 5  5,6   3/3,6/3,5
+# nums = [2, 7, 11, 15]
+# target = 9
+nums = [3, 2, 4]
+target = 6
+# nums = [-3,4,3,90]
+# target = 0
 s = Solution()
-n = s.isValidSudoku_best(board)
+n = s.twoSum(nums, target)
 print('return', n)

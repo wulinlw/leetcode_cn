@@ -1,6 +1,7 @@
 #!/usr/bin/python
 #coding:utf-8
 import math
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/25/math/62/
 # 3的幂
 # 给定一个整数，写一个函数来判断它是否是 3 的幂次方。
 

@@ -1,5 +1,14 @@
 #!/usr/bin/python
 #coding:utf-8
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/6/linked-list/44/
+# 合并两个有序链表
+# 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+
+# 示例：
+
+# 输入：1->2->4, 1->3->4
+# 输出：1->1->2->3->4->4
+
 # 新建链表，对比两个链表指针，小的放新链表中，直到某条链表结束，
 # 将另一条链表剩余部分接入新链表
 

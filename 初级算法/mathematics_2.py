@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/25/math/61/
 # 计数质数
 # 统计所有小于非负整数 n 的质数的数量。
 
