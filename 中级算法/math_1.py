@@ -41,6 +41,7 @@ class Solution(object):
             se_n = sq_sum
         return True
 
+    #只有4才是false
     def isHappy2(self, n):
         # Write your code here
         if n is None: return False

@@ -30,14 +30,17 @@ class Solution(object):
         :type n: int
         :rtype: float
         """
+        # 根据奇偶幂分类（递归法，迭代法，位运算法）
+        # 如果n为偶数，则pow(x,n) = pow(x^2, n/2)；
+        # 如果n为奇数，则pow(x,n) = x*pow(x^2, n-1)。
         if n == 0:
             return 1.0
         elif n < 0:
             return 1 / self.myPow(x, -n)
-        elif n % 2:
-            return self.myPow(x*x,n/2)*x
-        else:
+        elif n % 2 == 0 :
             return self.myPow(x*x,n/2)
+        else:
+            return self.myPow(x*x,n/2)*x
 
 x = 2.00000
 n = 10

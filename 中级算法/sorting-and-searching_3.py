@@ -29,6 +29,8 @@ class Solution(object):
         # 循环结束后数组中最小的数即是我们要找到第 k 大的数。
         # 时间复杂度 (n-k)logk
         # 插入排序,
+
+        #前K个元素排序
         for i in range(1,k):
             for j in range(i,0,-1):
                 if nums[j] > nums[j-1]:

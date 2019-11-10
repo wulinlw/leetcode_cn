@@ -31,7 +31,7 @@ class Solution(object):
         for coin in coins:
             for j in range(coin, amount+1):
                 dp[j] = min(dp[j], dp[j - coin] + 1)
-                # print(dp)
+        # print(dp)
         return -1 if dp[-1] > amount else dp[-1]
 # https://blog.csdn.net/u014160286/article/details/80261440
 # 当总金额为amount时，所需的最少硬币个数为dp[amount]，

@@ -33,7 +33,7 @@ class Solution(object):
         if s is None or len(s) == 0:
             return max_len
         str_dict = {}# 存储不重复的字符和字符所在的下标
-        one_max = 0# 存储每次循环中最长的子串长度
+        # one_max = 0# 存储每次循环中最长的子串长度
         start = 0# 记录最近重复字符所在的位置+1
         for i in range(len(s)):
             # 判断当前字符是否在字典中,当前字符的下标是否>=最近重复字符的所在位置

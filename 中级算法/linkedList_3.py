@@ -50,7 +50,7 @@ class Solution(object):
             cpmDic[headA] = 1
             headA = headA.next
         while headB is not None:
-            if cpmDic.has_key(headB):
+            if headB in cpmDic:
                 return headB
             headB = headB.next
         return None

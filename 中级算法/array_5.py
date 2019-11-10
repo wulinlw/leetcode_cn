@@ -41,16 +41,15 @@ class Solution(object):
             # print(1,i,start,max_length,s[i-max_length: i+1] ,s[i-max_length: i+1][::-1],s[i-max_length: i+1] == s[i-max_length: i+1][::-1])
             # print(2,i,start,max_length,s[i-max_length-1: i+1] , s[i-max_length-1: i+1][::-1],s[i-max_length-1: i+1] == s[i-max_length-1: i+1][::-1])
             # 如果当前循环次数-当前最大长度大于等于1  并  字符串[当前循环次数-当前最大长度-1:当前循环次数+1]  == 取反后字符串
-            if i - max_length >= 1 and s[i-max_length-1: i+1] == s[i-max_length-1: i+1][::-1]:
-                # print(i,max_length)
+            if i - max_length >= 1 and s[i-max_length-1: i+1] == s[i-max_length-1: i+1][::-1] :
+                print(i,max_length)
                 # 记录当前开始位置
                 start = i - max_length - 1
                 # 取字符串最小长度为2，所以+=2，s[i-max_length-1: i+1]
                 max_length += 2
                 continue
             # 如果当前循环次数-当前最大长度大于等于0  并  字符串[当前循环次数-当前最大长度:当前循环次数+1]  == 取反后字符串
-            if i - max_length >= 0 and s[i-max_length: i+1] == s[i-max_length: i+1][::-1]:
-                
+            if i - max_length >= 0 and s[i-max_length: i+1] == s[i-max_length: i+1][::-1] :
                 start = i - max_length
                 # 取字符串最小长度为1，所以+=1，s[i-max_length: i+1]
                 max_length += 1

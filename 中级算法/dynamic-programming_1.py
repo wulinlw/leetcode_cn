@@ -56,7 +56,8 @@ class Solution(object):
             if i - j <= nums[j]:
                 #我们的i位就往前挪
                 i = j
-        #如果能走到第一步，最后i会被减为0
+        #i是第一位的位置
+        #i == 0 就是能走到第一步
         return i == 0
 
 

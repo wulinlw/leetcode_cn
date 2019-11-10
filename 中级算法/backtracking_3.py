@@ -44,9 +44,9 @@ class Solution(object):
         self.helper(nums,0)
         return self.res
 
-    def helper(self,nums,i):
+    def helper(self,nums,i):#i:当前处理的下标
         nums1=nums[:]
-        if i == (len(nums1)-1):
+        if i == (len(nums1)-1):#边界条件
             self.res.append(nums1)
             return
         for l in range(i,len(nums)):

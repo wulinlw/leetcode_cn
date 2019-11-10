@@ -36,12 +36,12 @@ class Solution(object):
     # 如果左括号还有剩余，则可以放置左括号，如果右括号的剩余数大于左括号，则可以放置右括号。
     def generateParenthesis(self, n):
         res = []
-        self.DFS(n, n, '', res)
+        self.DFS(n, n, '', res)#左括号，右括号，生存的字符串，结果集
         return res
         
  
     def DFS(self, left, right, s, res):
-        if left == 0 and right == 0:
+        if left == 0 and right == 0:#边界条件
             res.append(s)
         else:
             if left > 0:

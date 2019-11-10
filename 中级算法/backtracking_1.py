@@ -35,7 +35,8 @@ class Solution(object):
             '9': 'wxyz'
         }
         
-        res = [ i for i in digit2chars[digits[0]] ]
+        # res = [ i for i in digit2chars[digits[0]] ]
+        res = list(digit2chars[digits[0]])
         # print(res)
         
         # 每个数字对应的字母都是不重复的，所以直接拼接即可
