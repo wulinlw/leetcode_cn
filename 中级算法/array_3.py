@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-medium/29/array-and-strings/77/
 # 字谜分组
 # 给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。
 
@@ -26,6 +26,7 @@ class Solution(object):
         :type strs: List[str]
         :rtype: List[List[str]]
         """
+        # 排序后放入hash，后面的在hash中找有没有
         hash = {}
         for str in strs:
             char = ''.join(sorted(str))

@@ -34,13 +34,14 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        # 标准二分法查找
         left = 0
         right = len(nums)-1
         while left <= right:
-            print left, right
+            print(left, right)
             if left == right:
                 return left
-            mid = left + (right -left) / 2 
+            mid = (right +left) // 2 
             # 如果中间小于右边，那么一定在右边
             if nums[mid] < nums[mid+1]:
                 left = mid + 1

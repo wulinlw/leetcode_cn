@@ -31,15 +31,18 @@ class Solution(object):
         freq_dict = dict()
         for num in nums:
             freq_dict[num] = freq_dict.get(num, 0) + 1
+        print(freq_dict)
 
         # 桶排序
         bucket = [[] for _ in range(len(nums) + 1)]#创建一个桶数组
         for key, value in freq_dict.items():
             bucket[value].append(key)#越多的元素越是排在后面，bucket中index元素存储的是出现index次数的元素 
+        print(bucket)
 
         # 逆序取出前k个元素，从后往前即可
         ret = list()
         for i in range(len(nums), -1, -1):
+            print(i)
             if bucket[i]:
                 ret.extend(bucket[i])
             if len(ret) >= k:

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-medium/29/array-and-strings/80/
 # 递增的三元子序列
 # 给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。
 

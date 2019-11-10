@@ -23,15 +23,21 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        # 插入排序
+        # 由于是要找 k 个最大的数，所以没有必要对所有数进行完整的排序。
+        # 每次只保留 k 个当前最大的数就可以，然后每次对新来的元素跟当前 k 个树中最小的数比较，
+        # 新元素大的话则插入到数组中，否则跳过。
+        # 循环结束后数组中最小的数即是我们要找到第 k 大的数。
+        # 时间复杂度 (n-k)logk
+        # 插入排序,
         for i in range(1,k):
             for j in range(i,0,-1):
                 if nums[j] > nums[j-1]:
                     nums[j],nums[j-1] = nums[j-1],nums[j]
                 else:
                     pass
+        # print(nums)
         for i in range(k,len(nums)):
-            if nums[i] > nums[k-1]:
+            if nums[i] > nums[k-1]:#大的放左边
                 nums[k-1] = nums[i]
                 for j in range(k-1,0,-1):
                     if nums[j] > nums[j-1]:
@@ -41,8 +47,9 @@ class Solution(object):
         return nums[k-1]
 
 
+nums = [-1,2,0]
 
-nums = [3,2,1,5,6,4]
+# nums = [3,2,1,5,6,4]
 k = 2
 s = Solution()
 r = s.findKthLargest(nums,k)

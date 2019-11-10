@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-medium/31/linked-list/83/
 # 奇偶链表
 # 给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。
 
@@ -39,7 +39,7 @@ class Solution(object):
         q = head.next.next  # 奇数位
         head.next = q #第三个赋值给第二个,q和p链接起来
         t = p  # 记录第一个偶数位
-        while q.next:#循环从第三个数（奇数）开始，依次跳到下一个奇数
+        while q.next:#循环从第三个数（奇数）下一位开始，依次跳到下一个奇数
             p.next = p.next.next#下一个偶数位
             p = p.next
             q.next = q.next.next#下一个奇数位

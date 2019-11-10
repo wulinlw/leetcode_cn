@@ -31,6 +31,11 @@ class Solution(object):
         :rtype: int
         """
         # 横列竖列只有可能有1种情况，而剩下的坐标的路径数都等于它左边和上边的值相加。
+        # m = 3,n = 2
+        # 1,1,1
+        # 1,2,3
+        # 因为只能向下或者向右走，所以
+        # 每一步 = 上面的 + 左边的
         if m == 1 or n == 1:
             return 1
         dp = [[1 for _ in range(m)] for _ in range(n)]#创建网格数组
@@ -38,6 +43,7 @@ class Solution(object):
             for j in range(1, m):
                 #等于上边和左边的值相加
                 dp[i][j] = dp[i-1][j] + dp[i][j-1]
+        # print(dp)
         return dp[-1][-1]
 
 

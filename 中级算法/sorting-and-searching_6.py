@@ -28,14 +28,17 @@ class Solution(object):
         :type intervals: List[Interval]
         :rtype: List[Interval]
         """
+        # 按起始点排序
         intervals.sort(key=lambda x: x.start)
- 
+        # for interval in intervals:
+        #     print(interval.start, interval.end)
+
         merged = []
         for interval in intervals:
-            if not merged or merged[-1].end < interval.start: #如果当前merged为空或者当前项与最后一项连接不上，直接添加
+            if not merged or merged[-1].end < interval.start: #如果当前merged为空 或者 当前项与最后一项连接不上，直接添加
                 merged.append(interval)
             else:
-                merged[-1].end = max(merged[-1].end, interval.end) #如果能连接上我们就连
+                merged[-1].end = max(merged[-1].end, interval.end) #如果能连接上，就把结尾换成大的那个值
             # print(self.dump(merged))
         
         return merged
@@ -54,7 +57,7 @@ class Solution(object):
 
 
 
-l = [[1,3],[2,6],[8,10],[15,18]]
+l = [[1,3],[2,6],[1,10],[15,18]]
 s = Solution()
 intervals = s.build(l)
 r = s.merge(intervals)

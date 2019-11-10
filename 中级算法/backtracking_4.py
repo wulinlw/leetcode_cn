@@ -30,11 +30,11 @@ class Solution(object):
         """
         output = [[]]
         for i in range(len(nums)):
-            print("1>"+str(i))
+            # print("1>"+str(i))
             for j in range(len(output)):#不断从已有结果中组合新的
                 output.append(output[j]+[nums[i]])
-                print(output[j]+[nums[i]])
-                print(output)
+                # print(output[j]+[nums[i]])
+                # print(output)
         return output
 
 

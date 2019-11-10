@@ -118,6 +118,8 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
+        # 二叉搜索树特点是左节点值小于根节点，而右节点值大于根节点；
+        # 当我们进行中序遍历时【左中右】，就可以将整个二叉搜索树按照从小到大的顺序进行遍历，
         # 中序排序后，返回第K-1个值
         def inorderTraversal(root):
             if root is None:
@@ -127,14 +129,15 @@ class Solution(object):
             res.append(root.val)
             res.extend(inorderTraversal(root.right))
             return res
+        print(inorderTraversal(root))
         return inorderTraversal(root)[k - 1]
 
 
-t = [3,1,None,2,4]
+t = [3,1,4,None,2]
 b = B_Tree()
 b.build(t)
-b.preTraverse(b.root)
-print("\n")
+# b.preTraverse(b.root)
+# print("\n")
 
 s = Solution()
 r = s.kthSmallest(b.root,1)

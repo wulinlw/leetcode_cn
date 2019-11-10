@@ -33,13 +33,13 @@ class Solution(object):
         right = len(nums) - 1
         while mid <= right:
             print(left,mid,right,nums)
-            if nums[mid] == 0:
+            if nums[mid] == 0:#红色向左交换
                 nums[mid], nums[left] = nums[left], nums[mid]
                 left += 1
                 mid += 1
-            elif nums[mid] == 1:
+            elif nums[mid] == 1:#白色向后移动指针
                 mid += 1
-            else:
+            else:#蓝色向右交换，但是中指针不动
                 nums[mid], nums[right] = nums[right], nums[mid]
                 right -= 1
             

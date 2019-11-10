@@ -50,10 +50,11 @@ class Solution(object):
         num = 0
         for i in range(len(s)-1,-1,-1):
             num += (ord(s[i]) - 64) * 26**(len(s)-i-1)
+            print(ord(s[i]) - 64 , 26**(len(s)-i-1),num)
         return num
 
 
-string = "AB"
+string = "ABC"
 s = Solution()
 n = s.titleToNumber2(string)
 print(n)

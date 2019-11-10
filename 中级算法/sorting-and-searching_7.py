@@ -27,6 +27,7 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
+        # 标准二分法
         if len(nums) == 0:
             return -1
         left = 0
@@ -35,12 +36,12 @@ class Solution(object):
             mid = left + (right - left) // 2
             if nums[mid] == target:
                 return mid
-            if nums[left] <= nums[mid]:
+            if nums[left] <= nums[mid]:#在左半侧的情况
                 if nums[left] <= target < nums[mid]:
                     right = mid - 1
                 else:
                     left = mid + 1
-            else:
+            else:#在右半侧的情况
                 if nums[mid] < target <= nums[right]:
                     left = mid + 1
                 else:

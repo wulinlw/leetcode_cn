@@ -59,11 +59,11 @@ class Solution(object):
         left, right = 0, len(nums)-1
         while left<=right:
             mid=left+(right-left)//2
-            if nums[mid]==target:
+            if nums[mid]==target:#刚好找到，但不确定是头还是尾
                 l=r=mid
-                while l>=0 and nums[l]==target:
+                while l>=0 and nums[l]==target:#向左移动找到头
                     l-=1
-                while r<=len(nums)-1 and nums[r]==target:
+                while r<=len(nums)-1 and nums[r]==target:#想右移动找到尾
                     r+=1
                 return [l+1,r-1]
             if nums[mid]<target:

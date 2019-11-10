@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-medium/31/linked-list/82/
 # 两数相加
 # 给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
 # 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
@@ -39,7 +39,7 @@ class Solution(object):
                 l2 = l2.next
 
             temp.val = tempsum % 10     #取和的值，不要进位的1，存入节点，下一行这个值变为进位的值，0或1，1就是有进位，在下一位计算时加上即可
-            tempsum  = int(tempsum / 10)#取进位的1
+            tempsum  = int(tempsum / 10)#取进位的1,没有进位这里就是0
 
             if l1 == None  and l2 == None and tempsum == 0:
                 break

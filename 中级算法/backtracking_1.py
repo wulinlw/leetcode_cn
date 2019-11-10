@@ -36,15 +36,18 @@ class Solution(object):
         }
         
         res = [ i for i in digit2chars[digits[0]] ]
+        # print(res)
         
+        # 每个数字对应的字母都是不重复的，所以直接拼接即可
         for i in digits[1:]:
             res = [ m+n for m in res for n in digit2chars[i] ]
+            # print(res)
         return res
 
 
 
 
-digits = '23'
+digits = '235'
 s = Solution()
 r = s.letterCombinations(digits)
 print(r)

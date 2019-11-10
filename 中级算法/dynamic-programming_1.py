@@ -21,6 +21,7 @@
 
 
 class Solution(object):
+    # 贪心算法
     # 算法过程：遍历数组，但是每遍历到一个index我们都得思考，我们跳跃能跳跃到这个地方吗？
     # 于是我们会有一个历史能达到的最大的index,去通过大小对比来判断我们能不能到达当前的index。
     # 如果能的话，我们就需要更新当前的历史最大的index。
@@ -48,7 +49,7 @@ class Solution(object):
         #从最后一位开始
         i = len(nums) - 1
         for j in range(len(nums)-2, -1, -1):
-            # print(i,j, nums[j])
+            print(i,j, nums[j])
             # i-j 从j到i需要的步数
             # nums[j] 实际能走的步数
             #这一步能到就把终点往前移动一位
@@ -61,7 +62,7 @@ class Solution(object):
 
 
 nums = [2,3,1,1,4]
-nums = [3,2,1,0,4]
+# nums = [3,2,1,0,4]
 s = Solution()
 r = s.canJump2(nums)
 print(r)
