@@ -58,14 +58,30 @@ class Solution(object):
             p = p.next
         return head
 
-    def dump(self, head):
-        while head:
-            print (head.val),
-            head = head.next
-        print("")
+    # 测试打印
+    def printList(self, list_node):
+        re = []
+        while list_node:
+            re.append(list_node.val)
+            list_node = list_node.next
+        print(re)
             
+# s = Solution()
+# head = s.createListnode([1,2,3,3])
+# # s.dump(head)
+# res = s.hasCycle(head)
+# print(res)
+
 s = Solution()
-head = s.createListnode([1,2,3,3])
+l1 = ListNode(1)
+l2 = ListNode(2)
+l3 = ListNode(3)
+l4 = ListNode(4)
+l5 = ListNode(5)
+l4.next =l3#环
+l3.next =l4
+l2.next =l3
+l1.next =l2
 # s.dump(head)
-res = s.hasCycle(head)
+res = s.hasCycle(l1)
 print(res)

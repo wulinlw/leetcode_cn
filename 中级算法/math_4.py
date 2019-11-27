@@ -40,7 +40,7 @@ class Solution(object):
         elif n % 2 == 0 :
             return self.myPow(x*x,n/2)
         else:
-            return self.myPow(x*x,n/2)*x
+            return self.myPow(x*x,n-1)*x
 
 x = 2.00000
 n = 10

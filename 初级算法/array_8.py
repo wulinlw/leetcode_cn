@@ -51,6 +51,7 @@ class Solution(object):
             if nums[i] != 0:
                 nums[j], nums[i] = nums[i], nums[j]
                 j += 1
+            # print(nums)
         return nums
 
 

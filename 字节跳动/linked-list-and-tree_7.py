@@ -58,6 +58,26 @@ class Solution(object):
                 heapq.heappush(heap, (pop[1].next.val, pop[1].next)) # 将该链表下个节点压入栈中
         return dummy.next
     
+    def mergeKLists2(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        # 把所有节点的值放入list，排序后重新生成新的链表
+        valsList = []
+        for nodeItem in lists:
+            while nodeItem:
+                valsList.append(nodeItem.val)
+                nodeItem = nodeItem.next
+        if not valsList: return None
+        else: valsList.sort()
+        head = ListNode(0)
+        tmp_p = head
+        for valItem in valsList:
+            tmp_p.next = ListNode(valItem)
+            tmp_p = tmp_p.next
+        return head.next
+
     
 
 

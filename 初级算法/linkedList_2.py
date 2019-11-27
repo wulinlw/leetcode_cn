@@ -57,7 +57,7 @@ class Solution(object):
         while i < n:
             p1 = p1.next
             i += 1
-        if p1 == None:
+        if p1 == None:#要删除的节点是首节点
             return head.next
         while p1.next != None:
             p1 = p1.next

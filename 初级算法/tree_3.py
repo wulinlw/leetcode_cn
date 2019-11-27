@@ -114,7 +114,7 @@ class Solution(object):
     def recursiveTree(self, left, right):
         if not left and not right:
             return True
-        if not left or not right:
+        if not left or not right:#有一遍是空的，不对称
             return False
         if left.val == right.val:
             return self.recursiveTree(left.left, right.right) and self.recursiveTree(left.right, right.left)

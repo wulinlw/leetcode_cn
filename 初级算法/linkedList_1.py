@@ -2,7 +2,7 @@
 #coding:utf-8
 #https://blog.csdn.net/l_vip/article/details/78976861
 #https://www.cnblogs.com/yupeng/p/3413763.html
-https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/6/linked-list/41/
+# https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/6/linked-list/41/
 # 删除链表中的节点
 # 请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。
 

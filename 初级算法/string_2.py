@@ -53,6 +53,7 @@ class Solution(object):
         while (y > 0):
             sum = sum * 10 + y % 10
             y = y // 10
+        print(sum)
 
         if sum > (2**31 - 1) or -sum < -2**31:
             return 0

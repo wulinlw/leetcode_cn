@@ -61,7 +61,7 @@ class Solution(object):
                 else:
                     p.extend([(i, j), (j, i)])
                 matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
-        print(matrix)
+        # print(matrix)
         for i in range(l):
             matrix[i] = matrix[i][::-1]
 
@@ -74,6 +74,20 @@ class Solution(object):
         如果各个迭代器的元素个数不一致，则返回列表长度与最短的对象相同，利用 * 号操作符，可以将元组解压为列表。
         """
         matrix[::] = zip(*matrix[::-1])
+
+    def rotate3(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: void Do not return anything, modify matrix in-place instead.
+        """
+        n = len(matrix[0])        
+        # transpose matrix
+        for i in range(n):
+            for j in range(i, n):
+                matrix[j][i], matrix[i][j] = matrix[i][j], matrix[j][i] 
+        # reverse each row
+        for i in range(n):
+            matrix[i].reverse()
 
 
 # matrix = [
@@ -91,13 +105,17 @@ class Solution(object):
 #   [9,6,3]
 # ]
 
-matrix = [[5, 1, 9, 11], [2, 4, 8, 10], [13, 3, 6, 7], [15, 14, 12, 16]]
+matrix = [
+    [5, 1, 9, 11], 
+    [2, 4, 8, 10], 
+    [13, 3, 6, 7], 
+    [15, 14, 12, 16]]
 # [5,2,13,15]
 # [1,4,3,14]
 # [9,8,6,12]
 # [11,10,7,16]
 s = Solution()
-n = s.rotate(matrix)
+n = s.rotate3(matrix)
 print('return', matrix)
 for i in range(len(matrix)):
     print(matrix[i])

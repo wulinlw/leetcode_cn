@@ -33,12 +33,12 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        dict = {}
+        dicta = {}
         for i in range(len(nums)):
             x = nums[i]
-            if target - x in dict:
-                return (dict[target - x], i)
-            dict[x] = i
+            if target - x in dicta:
+                return (dicta[target - x], i)
+            dicta[x] = i
 
 
 # nums = [2, 7, 11, 15]
@@ -48,5 +48,5 @@ target = 6
 # nums = [-3,4,3,90]
 # target = 0
 s = Solution()
-n = s.twoSum(nums, target)
+n = s.twoSum2(nums, target)
 print('return', n)

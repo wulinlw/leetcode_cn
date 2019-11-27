@@ -41,6 +41,11 @@ class Solution(object):
             print(s)
         return s
 
+    def singleNumber3(self, nums):
+        s=0
+        for i in nums:
+            s = s^i
+        return s
 
 # [1,2,2]
 # [1,1,2,2,4]
@@ -49,5 +54,5 @@ nums = [4, 1, 2, 1, 2]
 # nums = [17,12,5,-6,12,4,17,-5,2,-3,2,4,5,16,-3,-4,15,15,-4,-5,-6]
 
 s = Solution()
-n = s.singleNumber(nums)
+n = s.singleNumber3(nums)
 print('return', n)

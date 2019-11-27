@@ -114,15 +114,15 @@ class Solution(object):
         if inorder==[]:
             return None
         root = TreeNode(preorder[0])        
-        left_inorder = inorder[: inorder.index(root.val)]
-        right_inorder = inorder[inorder.index(root.val) + 1 :]
+        left_inorder = inorder[: inorder.index(root.val)]       #中序的左边
+        right_inorder = inorder[inorder.index(root.val) + 1 :]  #中序的右边
         
         l_left = len(left_inorder)
-        left_preorder = preorder[1:l_left + 1]
-        right_preorder = preorder[l_left + 1 :]
+        left_preorder = preorder[1:l_left + 1]  #前序的左边
+        right_preorder = preorder[l_left + 1 :] #前序的右边
         
-        root.left = self.buildTree(left_preorder, left_inorder)
-        root.right = self.buildTree(right_preorder, right_inorder)
+        root.left = self.buildTree(left_preorder, left_inorder)#preorder, inorder 的左边
+        root.right = self.buildTree(right_preorder, right_inorder)#preorder, inorder 的右边
         
         return root
 

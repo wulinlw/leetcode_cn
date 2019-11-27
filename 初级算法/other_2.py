@@ -25,7 +25,18 @@ class Solution(object):
         """
         # x^y是异或运算，不同为1，相同为0，bin()的结果是01字符串，求结果01字符串中的'1'字符的个数，就是hamming distance。
         return bin(x^y).count("1")
-
+    
+    def hammingDistance2(self, x, y):
+        print("{:0>32b}".format(x))
+        print("{:0>32b}".format(y))
+        print("{:0>32b}".format(x^y))
+        v = x^y
+        c=0
+        while v!=0 :
+            if v&1 ==1:
+                c+=1
+            v=v>>1
+        return c
 
 x=11
 y=2

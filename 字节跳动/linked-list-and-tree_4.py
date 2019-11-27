@@ -27,6 +27,7 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
+        # 快慢指针找到中间点，并切断链表，递归左边和右边
         if not head or not head.next:
             return head
         cut = slow = fast = head
@@ -55,8 +56,8 @@ class Solution(object):
                 n.next = right
                 right = right.next
             n = n.next
-        n.next = left or right
-        return m.next#返回新链表的头即可
+        n.next = left or right#left 或 right还有剩余的部分，放到n后面
+        return m.next#返回新链表的下一个，因为当前值是0
     
     def createListnode(self, list):
         head = ListNode(list[0])

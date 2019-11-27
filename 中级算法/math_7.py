@@ -36,13 +36,14 @@ class Solution(object):
             denominator = abs(denominator)
             res = ''
             res += '-' if isNegative else ''
-            res += str(numerator//denominator)
-            numerator %= denominator
+            res += str(numerator//denominator)#取整数位
+            numerator %= denominator#取小数位
             if numerator == 0:
                 return res
             else:
                 res +='.'
-                dic = {}
+                dic = {}#用于判断循环的字典
+                # print(numerator)
                 while numerator:
                     if numerator in dic:
                         start = dic[numerator]
@@ -52,11 +53,12 @@ class Solution(object):
                     dic[numerator] = len(res)
                     res += str(numerator*10//denominator)
                     numerator = numerator*10%denominator
+                    # print(dic,res,numerator)
                 return res
 
 
-numerator = 1
-denominator = 2
+numerator = 2
+denominator = 7
 s = Solution()
 n = s.fractionToDecimal(numerator, denominator)
 print(n)

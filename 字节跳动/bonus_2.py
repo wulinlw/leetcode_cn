@@ -64,26 +64,27 @@ class Solution(object):
             data = data[x:]
         return True
     
+    # 推荐看这个解法
     def validUtf8_2(self, data):
         """
         :type data: List[int]
         :rtype: bool
         """
-        cnt=0
+        cnt=0 #除开第一个字节，后面字节有几个是10开头，这个是关键
         for i in range(len(data)):
-            if cnt==0:
+            if cnt==0:#对比第一个字节的情况，就知道后面有几个是10开头的了
                 if (data[i]>>5)==0b110:
                     cnt=1
                 elif (data[i]>>4)==0b1110:
                     cnt=2
                 elif (data[i]>>3)==0b11110:
                     cnt=3
-                elif (data[i]>>7):
+                elif (data[i]>>7):#以上情况都不是，那就是1字节的字符，且第一位是1，不满足utf-8第一位0的要求
                     return False
             else:
-                if(data[i]>>6)!=0b10:
+                if(data[i]>>6)!=0b10:#后面几位不是10开头
                     return False
-                cnt-=1
+                cnt-=1#如果后面几个字节是10开头，每次-1，最后cnt=0，说明复合utf-8规则
         return cnt==0
 
     def validUtf8_3(self, data):

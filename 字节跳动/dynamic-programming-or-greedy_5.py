@@ -23,7 +23,7 @@ class Solution(object):
         :rtype: int
         """
         n = len(triangle)
-        dp = triangle[-1]
+        dp = triangle[-1]#最后一排初始化dp
         for i in range(n - 2, -1, -1):
             for j in range(i + 1):  # 从倒数第二层开始向上，变化数字，dp[-1]一开始就用不到了
                 dp[j] = triangle[i][j] + min(dp[j], dp[j + 1])#当前dp值 = index的值+ min(上一行index + 上一行index+1)

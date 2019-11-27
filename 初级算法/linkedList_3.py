@@ -49,14 +49,17 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
+        # 图形理解
+        # https://blog.csdn.net/qq_42351880/article/details/88637387
         if head is None: return None
         newHead = None
         while head:
             temp = head.next    #后面节点放入temp
             head.next = newHead #新连表newHead放入当前节点的next
-            newHead = head      #当前节点放入newHead
+            newHead = head      #当前节点放入newHead,和上一步可理解为交换节点
             # self.show(newHead)
             head = temp         #后面节点继续循环
+            print(newHead.val)
         return newHead
 
 
@@ -66,7 +69,7 @@ obj = Solution()
 l = obj.list_generate(head)
 obj.show(l)
 r = obj.reverseList(l)
-# obj.show(r)
+obj.show(r)
 
 
 

@@ -13,6 +13,7 @@
 # 输出: 6
 
 
+# 每个位置上积水的高度，应该等于min（左边最高的柱子高度，右边最高的柱子高度） -  这个位置上的柱子高度
 class Solution(object):
     def trap(self, height):
         """

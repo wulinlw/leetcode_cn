@@ -67,6 +67,7 @@ class Solution(object):
         return pos
 
 
+
 nums = [1, 1, 2]
 s = Solution()
 n = s.removeDuplicates(nums)

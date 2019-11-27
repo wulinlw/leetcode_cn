@@ -14,7 +14,7 @@
 # 输出: 3 
 # 解释: 最多信封的个数为 3, 组合为: [2,3] => [5,4] => [6,7]。
 
-
+from typing import List
 class Solution(object):
     def maxEnvelopes(self, envelopes):
         """
@@ -36,11 +36,70 @@ class Solution(object):
                 mem[index] = e[1]#主要是不存在的时候，需要写入
         return len(mem)
 
+    
+
+    # https://leetcode-cn.com/problems/russian-doll-envelopes/solution/tan-xin-suan-fa-er-fen-cha-zhao-python-dai-ma-java/
+    # 该算法超时，不采用
+    def maxEnvelopes2(self, envelopes: List[List[int]]) -> int:
+        size = len(envelopes)
+        # 特判
+        if size < 2:
+            return size
+
+        # 对第一列排序，按照宽度排序（按照高度排序亦可，只不过后面定义状态的时候就得定义宽度）
+        envelopes.sort(key=lambda x: x[0])
+        # print(envelopes)
+        # 以 envelopes[i][1] 结尾的上升子序列的长度
+        dp = [1 for _ in range(size)]
+        for i in range(1, size):
+            for j in range(i):
+                # 注意宽度也要严格小于
+                if envelopes[j][0] < envelopes[i][0] and envelopes[j][1] < envelopes[i][1]:
+                    dp[i] = max(dp[i], dp[j] + 1)
+        return max(dp)
+
+    # https://leetcode-cn.com/problems/russian-doll-envelopes/solution/tan-xin-suan-fa-er-fen-cha-zhao-python-dai-ma-java/
+    def maxEnvelopes3(self, envelopes: List[List[int]]) -> int:
+        size = len(envelopes)
+        # 特判
+        if size < 2:
+            return size
+
+        # 对第一列排序，按照宽度排序
+        # 【特别注意】当宽度相等的时候，按照高度降序排序
+        # 以避免 [[11, 3], [12, 4], [12, 5], [12, 6], [14, 6]] 这种情况发生
+        # 正确排序 [[11, 3], [12, 6], [12, 5], [12, 4], [14, 6]]
+        envelopes.sort(key=lambda x: (x[0], -x[1]))
+
+        # print(envelopes)
+        tail = [envelopes[0][1]]
+
+        for i in range(1, size):
+            target = envelopes[i][1]
+            if target > tail[-1]:
+                tail.append(target)
+                continue
+
+            left = 0
+            right = len(tail) - 1
+
+            while left < right:
+                mid = (left + right) >> 1
+                if tail[mid] < target:
+                    left = mid + 1
+                else:
+                    right = mid
+            tail[left] = target
+        # print(tail)
+        return len(tail)
+
+
  
 
         
 envelopes = [[5,4],[6,1],[6,7],[2,3]]
 envelopes = [[1,2],[2,3],[3,4],[3,5],[4,5],[5,5],[5,6],[6,7],[7,8]]
+envelopes = [[2,100],[3,200],[4,300],[5,500],[5,400],[5,250],[6,370],[6,360],[7,380]]
 s = Solution()
-res = s.maxEnvelopes(envelopes)
+res = s.maxEnvelopes0(envelopes)
 print(res)

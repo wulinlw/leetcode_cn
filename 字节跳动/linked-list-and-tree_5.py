@@ -53,6 +53,11 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
+        # 判断链表是否有环并找到入环节点:（快慢指针）
+        # 1、如果快指针走到空，无环
+        # 2、如果二者相遇，有环
+        # 3、相遇后，慢指针不动，新指针从头开始走
+        # 4、两个指针同时走，每次均走一步，相遇点即为入环点
         if not head or not head.next:
             return None
         first = second = head

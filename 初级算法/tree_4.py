@@ -117,7 +117,7 @@ class Solution(object):
                     queue.append(temp.left)
                 if temp.right:
                     queue.append(temp.right)
-            print(templist)
+            # print(templist)
             res.append(templist)
         return res
 

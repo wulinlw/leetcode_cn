@@ -54,13 +54,23 @@ class Solution(object):
             self.helper(nums1,i+1)
             nums1[i],nums1[l]=nums1[l],nums1[i]#交换回来
 
+    def permute2(self, nums):
+        res = []
+        def backtrack(nums, tmp):
+            if not nums:
+                res.append(tmp)
+                return 
+            for i in range(len(nums)):
+                backtrack(nums[:i] + nums[i+1:], tmp + [nums[i]])
+        backtrack(nums, [])
+        return res
 
 
         
 
 nums = [1,2,3]
 s = Solution()
-r = s.permute(nums)
+r = s.permute2(nums)
 print(r)
 
 

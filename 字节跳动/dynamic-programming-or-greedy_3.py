@@ -19,19 +19,22 @@ class Solution(object):
         :rtype: int
         """
         # dp[i][j]表示以第i行第j列为右下角所能构成的最大正方形边长, 则递推式为: 
-        # dp[i][j] = 1 + min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1])
+        # dp[i][j] = 1 + min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1])  ，
+        # 当前格子 = 当前的1+ min(最近的左上角，左边，上面)
         # 矩阵中的每一个点作为正方形右下角端点所能构成最大正方形的边长，
         # 亦或是该点 左方、上方、左上方相邻端点所能构成最大正方形边长的最小值加1（该点为"1"），亦或为0（该点为0）
         if matrix == []: return 0 
         M, N = len(matrix), len(matrix[0])
         dp = [[0 for _ in range(N)]for _ in range(M)]
         Max = 0
-        for i in range(N):   # dp矩阵初始化
+        for i in range(N):   # 第一排，dp矩阵初始化
             dp[0][i] = int(matrix[0][i])
             Max = max(dp[0][i], Max)
-        for i in range(M):   # dp矩阵初始化
+        # print(dp,Max)
+        for i in range(M):   # 第一列，dp矩阵初始化
             dp[i][0] = int(matrix[i][0])
             Max = max(dp[i][0], Max)
+        # print(dp,Max)
         for i in range(1, M):
             for j in range(1, N):
                 if matrix[i][j] == '1': 

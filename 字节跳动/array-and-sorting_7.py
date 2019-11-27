@@ -59,26 +59,31 @@ class Solution(object):
     # https://cloud.tencent.com/developer/article/1335755
     # n 个数字有 n！种全排列，每种数字开头的全排列有 (n - 1)!种。 
     # 所以用 k / (n - 1)! 就可以得到第 k 个全排列是以第几个数字开头的。 
-    # 用 k % (n - 1)! 就可以得到第 k 个全排列是某个数字开头的全排列中的第几个。
+    # 用 k % (n - 1)! 就可以得到第 k 个全排列是某个数字开头的全排列中的第几位。
     def getPermutation2(self, n, k):
         res = ''
         k -= 1
         fac = 1
-        for i in range(1, n): fac *= i
-        num = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        for i in reversed(range(n)):
-            curr = num[k/fac]
+        # 计算阶乘(n - 1)!
+        for i in range(1, n): 
+            fac *= i
+        # print(fac)
+        num = [1, 2, 3, 4, 5, 6, 7, 8, 9]#仅作为取数字
+        for i in range(n-1,-1,-1):
+            # print(i)
+            curr = num[int(k/fac)]#当前位的数字
             res += str(curr)
-            num.remove(curr)
+            num.remove(curr)#用掉的数字删掉
             if i !=0:
-                k %= fac
-                fac /= i
+                k %= fac#回溯算法，k % (n - 1)! 就可以得到第 k 个全排列是某个数字开头的全排列中的第几个。
+                fac /= i#k / (n - 1)! 就可以得到第 k 个全排列是以第几个数字开头的。
+            # print(k,fac,curr,res)
         return res
 
 
-n = 3
-k = 3
+n = 4
+k = 9
 s = Solution()
-n = s.getPermutation(n, k)
+n = s.getPermutation2(n, k)
 print(n)
 

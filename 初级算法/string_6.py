@@ -96,46 +96,44 @@ class Solution1(object):
             return r
 
 #参考
-class Solution(object):
-    valids = '-+0123456789'
-    int_max = 2147483647
-    int_min = -2147483648
-    
+class Solution(object):   
     def myAtoi(self, s):
         """
         :type str: str
         :rtype: int
         """
-        s = s.strip()
-        
-        if not s:
+        s=s.lstrip()
+        if len(s)==0:
             return 0
-        
-        pre_is_number = False
-        
-        for i in xrange(len(s) + 1):
-            if i < len(s) and s[i] in self.valids:
-                continue
-            break
-        
-        try:
-            number = int(s[:i])
-        except:
-            return 0
-        
-        if number > self.int_max:
-            return self.int_max
-        
-        if number < self.int_min:
-            return self.int_min
-        
-        return number
+        #设置默认输出为0
+        last=0
+        #为了s[:i] ，如果有符号设置起始位置2，其余的为1
+        i=2 if s[0]=='-'or s[0]=='+'  else 1
+        #循环，直到无法强转成int，跳出循环
+        while i <= len(s):
+            try:
+                last=int(s[:i])
+                i+=1
+            except:
+                break#不是数字会出发异常
+            print(last)
+        if last<-2147483648 :
+            return -2147483648
+        if last>2147483647:
+            return 2147483647
+        return last
+
+    def myAtoi2(self, s):
+        import re 
+        return max(min(int(*re.findall('^[\+\-]?\d+', s.lstrip())), 2**31 - 1), -2**31)
+
+
 
 s = "42"
-# s = "   -42"
-s = "4193 with words"
-s = "words and 987"
-s = "-91283472332"
+s = "   -42"
+# s = "4193 with words"
+# s = "words and 987"
+# s = "-91283472332"
 s = "+-2"
 obj = Solution()
 n = obj.myAtoi(s)

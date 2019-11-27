@@ -10,13 +10,12 @@
 
 # 输入: ["flower","flow","flight"]
 # 输出: "fl"
-# 示例 2:
 
+# 示例 2:
 # 输入: ["dog","racecar","car"]
 # 输出: ""
 # 解释: 输入不存在公共前缀。
 # 说明:
-
 # 所有输入只包含小写字母 a-z 。
 class Solution(object):
     def longestCommonPrefix(self, strs):
@@ -26,9 +25,9 @@ class Solution(object):
         """
         # print zip(*strs)
         re = ''
-        for i in zip(*strs):
+        for i in zip(*strs):#数组中每个元素list化， 当前字符的元组
             print(i,set(i),len(set(i)))
-            if len(set(i)) != 1:
+            if len(set(i)) != 1:#set去重
                 return re
             else:
                 re += i[0]

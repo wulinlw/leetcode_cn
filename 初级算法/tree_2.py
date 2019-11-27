@@ -43,7 +43,8 @@ class TreeNode(object):
 class B_Tree(object):
     def __init__(self, node=None):
         self.root = node
-        
+        self.treelist = []
+
     def add(self, item=None):
         #如果输入item是None 则表示一个空节点
         node = TreeNode(x=item)
@@ -80,7 +81,7 @@ class B_Tree(object):
         '''
         if root==None:  
             return  
-        print(root.val)  
+        self.treelist.append(root.val)  
         self.preTraverse(root.left)  
         self.preTraverse(root.right)  
 
@@ -121,8 +122,9 @@ class Solution(object):
             res.append(root.val)
             res += inorderTraversal(root.right)
             return res
- 
+        
         res = inorderTraversal(root)
+        print(res)
         if res != sorted(list(set(res))): return False
         return True
 
@@ -153,10 +155,11 @@ treeList = [5,1,4,None,None,3,6]#false
 b = B_Tree()
 b.build(treeList)
 # b.preTraverse(b.root)
-b.midTraverse(b.root)
+# b.midTraverse(b.root)
 # b.afterTraverse(b.root)
 
-# s = Solution()
+s = Solution()
+s.isValidBST(b.root)
 # deep = s.isValidBST(b.root)
 # print("deep:",deep)
 

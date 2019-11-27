@@ -36,7 +36,16 @@ class Solution(object):
         arr = s[::-1]
         return arr
 
-
+    def reverseString(self, s):
+        arr = list(s)
+        s = 0
+        r = len(arr)-1
+        while s<r:
+            arr[s],arr[r] = arr[r],arr[s]
+            s+=1
+            r-=1
+        return ''.join(arr)
+        
 s = "hello"
 ss = Solution()
 n = ss.reverseString(s)

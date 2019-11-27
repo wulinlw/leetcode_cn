@@ -42,10 +42,19 @@ class Solution(object):
         """
         return len(nums) != len(set(nums))
 
+    def containsDuplicate3(self, nums):
+        d = {}
+        for i in nums:
+            if i in d: 
+                return  True
+            else:
+                d[i] = 1
+        return False
 
-nums = [1, 2, 3, 1]
+
+# nums = [1, 2, 3, 1]
 nums = [1, 2, 3, 4]
 
 s = Solution()
-n = s.containsDuplicate(nums)
+n = s.containsDuplicate3(nums)
 print(n)

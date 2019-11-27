@@ -42,6 +42,7 @@ class Solution(object):
         """
         stack = list()
         path = [p for p in path.split('/') if p]
+        print(path)
         for f in path:
             if f == '.': 
                 continue

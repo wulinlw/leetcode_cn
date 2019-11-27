@@ -37,7 +37,7 @@ class Solution(object):
                 count += 1
             index += 1
     
-
+    #从右往左遍历，向长的后面插最大值
     def merge2(self, nums1, m, nums2, n):
         while m>0 and n>0:
             if nums1[m-1]>nums2[n-1]:#若nums1中最后一个元素大于nums2[]中最后一个元素
@@ -49,13 +49,17 @@ class Solution(object):
             print(nums1)
         if n>0:#若nums1完了，nums2还没完
             nums1[:n]=nums2[:n]#把剩下nums2加在最开始
-
+        return nums1
 
 nums1 = [1,2,3,0,0,0]
 m = 3
 nums2 = [2,5,6]
 n = 3
 
+nums1 = [3,4,5,0,0,0]
+m = 3
+nums2 = [2,5,6]
+n = 3
 s = Solution()
 deep = s.merge2(nums1, m, nums2, n)
 print("deep:",deep)

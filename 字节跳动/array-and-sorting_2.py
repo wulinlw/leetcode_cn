@@ -30,6 +30,7 @@ class Solution(object):
         :type grid: List[List[int]]
         :rtype: int
         """
+        # 图
         def cal(L,i,j):
             c = 1
             x = len(L)

@@ -47,7 +47,7 @@ class Solution(object):
             if num == str(temp):#与前一个相同，数字加1
                 cnt += 1
             else:
-                if temp != -1:#第一个数字不是1，说1个当前数（如，2开头是说1个2，则12）
+                if temp != -1:#有连续相同的的，第一个数字不是1，说1个当前数（如，2开头是说1个2，则12）
                     res += (str(cnt) + str(temp))
                 temp, cnt = num, 1#几个（cnt）+ temp 
         res += (str(cnt) + str(temp))

@@ -45,9 +45,9 @@ class Solution(object):
         return profit
 
     # 28ms
-    def maxProfit(self, prices):
+    def maxProfit2(self, prices):
         total = 0
-        prev = sys.maxint
+        prev = sys.maxsize
         for price in prices:
             if price > prev:
                 total += price - prev
@@ -55,9 +55,10 @@ class Solution(object):
         return total
 
 
+
 prices = [7, 1, 5, 3, 6, 4]
 prices = [1, 2, 3, 4, 5]
-prices = [7, 6, 4, 3, 1]
+# prices = [7, 6, 4, 3, 1]
 
 s = Solution()
 n = s.maxProfit(prices)

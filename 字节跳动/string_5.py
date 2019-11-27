@@ -34,7 +34,10 @@ class Solution(object):
         :rtype: str
         """
         return " ".join(s.split()[::-1])
-
+        # 分三步:
+        # 先翻转整个数组
+        # 再翻转单个单词
+        # 清除多余空格
 
 string = "the sky is blue"
 

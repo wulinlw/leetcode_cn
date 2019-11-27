@@ -54,6 +54,7 @@ class Solution(object):
     def checkInclusion2(self, s1, s2):
         A = [ord(x) - ord('a') for x in s1]
         B = [ord(x) - ord('a') for x in s2]
+        print(A,B)
         
         target = [0] * 26
         for x in A:
@@ -69,6 +70,7 @@ class Solution(object):
         return False
 
     # https://blog.csdn.net/qq_34771726/article/details/88650241
+    # 滑动比较
     def checkInclusion3(self, s1, s2):
         l1 = len(s1)
         l2 = len(s2)
@@ -78,15 +80,19 @@ class Solution(object):
         s = 'abcdefghijklmnopqrstuvwxyz'
         dict1 = {}
         dict2 = {}
-        for char in s:
+        for char in s:#26个字母的出现次数，初始化为0
             dict1[char] = 0          #初始化字典，key为字母，value为字母出现的次数，都初始化为0
             dict2[char] = 0
+        
         for i in range(l1):
             dict1[s1[i]] += 1        # 首先计算前l1长度的不同字母出现次数
-            dict2[s2[i]] += 1
+            dict2[s2[i]] += 1        # s2中剩余的部分没有计算，等会滑动计算
+        # print(dict1)
+        # print(dict2)
         if dict1 == dict2:           # 若两个字典相等，则说明字符串的[0:l1]是字符串l1的不同排列
             return True
         for i in range(l2-l1):       # 开始往后查找，每次移动一个位置
+            #滑动比较，左边的减掉，右边的加入
             dict2[s2[i]] -= 1        # 减去滑动比较得前一个字母出现的次数
             dict2[s2[i+l1]] += 1     # 加上滑动后加进来的字母出现的次数
             if dict1 == dict2:       # 若相等，则返回true
@@ -100,5 +106,5 @@ s2 = "eidboaoo"
 s1 = "abc"
 s2 = "ccccbbbbaaaa"
 s = Solution()
-n = s.checkInclusion(s1, s2)
+n = s.checkInclusion3(s1, s2)
 print(n)

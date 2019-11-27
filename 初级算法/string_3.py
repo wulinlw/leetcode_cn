@@ -61,6 +61,21 @@ class Solution(object):
         else:
             return r
 
+    def firstUniqChar3(self, s):
+        ignore = []
+        for i in range(len(s)):
+            f = True
+            if s[i] in ignore:
+                continue
+            for j in range(i+1,len(s)):
+                if s[i] == s[j]:
+                    f = False
+                    break
+            ignore.append(s[i])
+            if f :
+                return i
+        return -1
+
 
 s = "leetcode"
 # s = "loveleetcode"

@@ -27,7 +27,7 @@ class Solution(object):
         # 用Dp[i]来保存从0 - i的数组的最长递增子序列的长度。
         # 如上数组Dp[0] = 1, Dp[1] = 1, Dp[2] = 1, Dp[3] = 2, Dp[4] = 2。。。
         # 计算Dp[i]的值可以对Dp[i]之前数值进行遍历，如果nums[i] > nums[j], 则Dp[i] = max(Dp[i], Dp[j] + 1)。
-        # 复杂度为O(n * n)
+        # 复杂度为O(n)
         length = len(nums)
         if length <= 1:
             return length

@@ -71,7 +71,20 @@ class Solution(object):
                 j+=1
         return ans
 
-
+    def intersect3(self, nums1, nums2):
+        re = []
+        nums1.sort()
+        nums2.sort()
+        while nums1 and nums2:
+            if nums1[0]>=nums2[0]:
+                re.append(nums2.pop(0))
+            else:
+                re.append(nums1.pop(0))
+        while nums1:
+            re.append(nums1.pop(0))
+        while nums2:
+            re.append(nums2.pop(0))
+        return re
 
 nums1 = [1, 2, 2, 1]
 nums2 = [2, 2, 1]

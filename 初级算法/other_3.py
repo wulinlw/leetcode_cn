@@ -33,9 +33,21 @@ class Solution:
         print(bits)
         return int(bits[::-1], 2)#2进制
 
+    def reverseBits2(self, n):
+        res = 0
+        count = 32
+        
+        while count:
+            res <<= 1
+            # 取出 n 的最低位数加到 res 中
+            res += n&1
+            n >>= 1
+            count -= 1
+            
+        return int(bin(res), 2)
 
 
 n=213
 s = Solution()
 re = s.reverseBits(n)
-print("deep:",re)
+print("deep:","{:0>32b}".format(re))

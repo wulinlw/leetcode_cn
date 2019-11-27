@@ -36,6 +36,23 @@ class Solution(object):
                 return False
         return True
 
+    def isAnagram2(self, s, t):
+        if len(s) != len(t):
+            return False
+        h = {}
+        for i in range(len(s)):
+            if s[i] not in h:
+                h[s[i]] = 1
+            else:
+                h[s[i]] += 1
+        for i in range(len(t)):
+            if t[i] not in h:
+                return False
+            elif h[t[i]]==0:
+                return False
+            else:
+                h[t[i]] -= 1
+        return True
 
 s = "anagram"
 t = "nagaram"
