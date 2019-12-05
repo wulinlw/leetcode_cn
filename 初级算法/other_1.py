@@ -45,6 +45,8 @@ class Solution(object):
                 count+=1
             n=n>>1
         return count
+    
+
 
 
 n=11

@@ -111,7 +111,9 @@ class Solution(object):
         else:
             return root#p，q不在同一边，则公共祖先是层次较浅的
 
-        
+    # 相似题
+    # 二叉搜索树的最近公共祖先
+
 root = [3,5,1,6,2,0,8,None,None,7,4]
 p = 5
 q = 1

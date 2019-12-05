@@ -32,6 +32,7 @@ class Solution(object):
                 cnt += 1
             else:
                 cnt -= 1
+            print(res,cnt)
         return res
 
     def majorityElement2(self, nums):
@@ -42,7 +43,7 @@ class Solution(object):
         nums.sort()
         return nums[len(nums)//2]
 
-nums = [3,2,3]
+nums = [3,2,3,2,2]
 s = Solution()
 n = s.majorityElement(nums)
 print(n)

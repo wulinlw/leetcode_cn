@@ -71,5 +71,5 @@ k = 3
 # k = 3
 
 s = Solution()
-n = s.rotate3(nums, k)
+n = s.rotate(nums, k)
 print(nums)

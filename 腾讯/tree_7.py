@@ -126,7 +126,9 @@ class Solution(object):
         # We have found the split point, i.e. the LCA node.
         else:
             return root
-
+            
+    # 相似题
+    # 二叉树的最近公共祖先
 
 
 

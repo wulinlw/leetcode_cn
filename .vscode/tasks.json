@@ -4,8 +4,8 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "Run python File",
-            "command": "python ${file}",
+            "label": "Run python File by task",
+            "command": "C:/Users/Administrator/AppData/Local/Programs/Python/Python37-32/python.exe ${file}",
             "type": "shell",
             "group": {
                 "kind": "build",

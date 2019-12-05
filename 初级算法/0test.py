@@ -75,26 +75,99 @@ class B_Tree(object):
 
 
 
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+
 class Solution(object):
-    def removeDuplicates(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        idx = 0
-        for i in nums:
-            # idx < 2的情况是前2个值，跳过即可
-            # 当前值不喝上上个相等，idx就可以想下走一步
-            if idx < 2 or i != nums[idx - 2]:
-                nums[idx] = i
-                idx += 1
+    def printn(self, n):
+        num = ['0']*n
+        for i in range(10):
+            num[0] = str(i)
+            self.recur(num,n,0)
 
-        return idx
+    def recur(self,num,n,index):
+        l = len(num)
+        if index ==l-1: 
+            self.printshow(num)
+            return 
+        for i in range(10):
+            num[index+1] = str(i)
+            self.recur(num,n,i+1)
+    def printshow(self,s):
+        print(s)
+        # for i in range(len(s)):
+        #     if s[i]!=0:
+        #         print(i,"")
+        # print("\t")
 
-        
+    def permute(self, nums):
+        res = []
+        def per(nums,i):
+            newstr = nums[:]
+            if i==len(newstr)-1:
+                res.append(newstr)
+            for j in range(i, len(newstr)):
+                newstr[i],newstr[j] = newstr[j],newstr[i]
+                per(newstr, i+1)
+                newstr[i],newstr[j] = newstr[j],newstr[i]
+        per(nums,0)
+        return res
+    
+    def test(self,nums,k):
+        def position(nums,l,r):
+            i = l-1
+            h = nums[r-1]
+            for j in range(r):
+                if nums[i]<h:
+                    i+=1
+                    nums[i],nums[j] = nums[j],nums[i]
+            nums[i+1],h = h,nums[i+1]
+            print(nums,i+1)
+            return i+1
+        position(nums,0,len(nums)-1)
+    
+    def numberOfDice(self,n):
+        res = []
+        f = [[0 for _ in range(6 * n + 1)] for _ in range(n + 1)]
+        print(f)
+        for i in range(1, 7): # 初始状态为1
+            f[1][i] = 1
+        print(f)
+        for i in range(2, n + 1):
+            for j in range(i, 6 * i + 1):
+                for k in range(1, min(j, 6) + 1):
+                    f[i][j] += f[i - 1][j - k] # 上一次抛掷target为j - k时的状态
+
+        for i in range(n, n * 6 + 1):
+            res.append(f[n][i]) # 第n次抛掷时值为i的次数
+        return res
+
+    def multiply(self, A):
+        # write code here
+        if not A:
+            return []
+        num = len(A)
+        B = [None]*num
+        #B[i]的意义是A数组不包括i位置的所有乘积，分为i左边的元素乘积和 i右边的所有元素乘积。
+        #初始化B[0]=1，是因为0左边没有元素，所以乘积为1。
+        B[0] = 1
+        for i in range(1,num):
+            B[i] = B[i-1]*A[i-1]
+        temp = 1
+        for i in range(num-2,-1,-1):#从后往前遍历不算最后一个（num-1）因为第一个for循环中已经计算了 
+            temp *= A[i+1]
+            B[i] *= temp
+        return B
 
 
-nums = [1,1,1,2,2,3]
+
+n=3
 s = Solution()
-deep = s.removeDuplicates(nums)
-print("deep:",deep)
+r = s.numberOfDice(n)
+print(r)
+a = [0,1,2,3,4,5]
+r2 = s.multiply(a)
+print(r2)

@@ -44,12 +44,20 @@ class Solution(object):
         while len(lastrow) < N:
             lastrow = "".join('01' if x == '0' else '10'
                               for x in lastrow)
-        return int(lastrow[-1][K-1])
+        # print(lastrow[K-1])
+        return int(lastrow[K-1])
 
 
 
-N = 2
-K = 1
+
+
+
+
+
+N = 4
+K = 5
 S = Solution()
+deep = S.kthGrammar(N,K)
+print("deep:",deep)
 deep = S.kthGrammar2(N,K)
 print("deep:",deep)

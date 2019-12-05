@@ -43,12 +43,56 @@ class Solution(object):
             str_dict[s[i]] = i# 把当前位置覆盖字典中的位置
             max_len = max(max_len, one_max)# 比较此次循环的最大不重复子串长度和历史循环最大不重复子串长度
         return max_len
+    
+    # 滑动窗口
+    def lengthOfLongestSubstring2(self, strr):
+        a = []
+        num = 0#当前长度
+        big = 0#最长记录
+        for i in strr:
+            while i in a:
+                a.remove(a[0])
+                num -= 1
+            a.append(i)
+            num += 1
+            if big < num : big = num
+        return big
+
+    #动态规划，剑指offer解法
+    def lengthOfLongestSubstring3(self, s) :
+        size = len(s)
+        # 特判
+        if size < 2:
+            return size
+
+        # dp[i] 表示以 s[i] 结尾的最长不重复子串的长度
+        # 因为自己肯定是不重复子串，所以初始值设置为 1
+        dp = [1 for _ in range(size)]
+        d = dict()
+
+        d[s[0]] = 0
+        # 因为要考虑 dp[i - 1]，索引得从 1 开始，故 d[s[0]] = 0 得先写上
+        for i in range(1, size):
+            if s[i] in d:
+                if dp[i - 1] >= i - d[s[i]]:
+                    dp[i] = i - d[s[i]]
+                else:
+                    dp[i] = dp[i - 1] + 1
+            else:
+                dp[i] = dp[i - 1] + 1
+            # 设置字符与索引键值对
+            d[s[i]] = i
+        # 最后拉通看一遍最大值
+        return max(dp)
+
+
 
 nums = "aabcabcbb"
 s = Solution()
 n = s.lengthOfLongestSubstring(nums)
 print(n)
-
+n = s.lengthOfLongestSubstring2(nums)
+print(n)
 
 
 

@@ -46,8 +46,8 @@
 # 解释: 数字 "-91283472332" 超过 32 位有符号整数范围。 
 #      因此返回 INT_MIN (−231) 。
 import math
-class Solution1(object):
-    def myAtoi(self, str):
+class Solution(object):
+    def myAtoi111(self, str):
         """
         :type str: str
         :rtype: int
@@ -95,8 +95,7 @@ class Solution1(object):
         else:
             return r
 
-#参考
-class Solution(object):   
+    # 看这个
     def myAtoi(self, s):
         """
         :type str: str

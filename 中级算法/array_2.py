@@ -52,8 +52,8 @@ class Solution(object):
                 if matrix[i][j] == 0:
                     index.append((i, j))
         for i, j in index:
-            matrix[i] = [0] * len(matrix[i])#这一行设为0
-            for k in range(len(matrix)):#这一列设为0
+            matrix[i] = [0] * len(matrix[i])#这一列设为0
+            for k in range(len(matrix)):#这一行设为0
                 matrix[k][j] = 0
         return
 

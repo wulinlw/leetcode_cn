@@ -89,6 +89,8 @@ class Solution(object):
         return res
 
     # 有重复值的全排列
+    # nums.sort()
+    # self.backtrack(i, [], res)
     def backtrack(self, nums, tmp, res):
         if not nums:
             res.append(tmp)
@@ -98,25 +100,26 @@ class Solution(object):
                 continue
             self.backtrack(nums[:i] + nums[i + 1:], tmp + [nums[i]], res)
 
-    # 打印出所有的走法
-    def __init__(self):
-        self.res = []
-
-    def climbStairs5(self, stack, n):
-        if n == 0:
-            # res += [stack]
-            # self.res.append(stack)
-            print(stack)
-
-            return stack
-        if n >= 1:
-            stack.append(1)
-            self.climbStairs5(stack, n-1)
-            stack.pop()
-        if n >= 2:
-            stack.append(2)
-            self.climbStairs5(stack, n-2)
-            stack.pop()
+    def climbStairs5(self, n):
+        from copy import deepcopy
+        re = []
+        stack = []
+        def climb(stack, n):
+            if n == 0:
+                tmp = deepcopy(stack)
+                re.append(tmp)
+                # print(stack)
+            if n >= 1:
+                stack.append(1)
+                climb(stack, n-1)
+                stack.pop()
+            if n >= 2:
+                stack.append(2)
+                climb(stack, n-2)
+                stack.pop()
+        climb(stack,n)
+        # print(re)
+        return re
 
 
 n = 4
@@ -130,7 +133,5 @@ s = Solution()
 
 n = 4
 s = Solution()
-stack = []
-res = []
-s.climbStairs5(stack, n)
-print("deep:", s.res)
+re = s.climbStairs5( n)
+print("deep:", re)

@@ -39,10 +39,11 @@ class Solution(object):
         return list_node
 
     def show(self, head):
+        re = []
         while head:
-            print(head.val)
+            re.append(head.val)
             head = head.next
-        print("\n")
+        print(re,"\n")
 
     def reverseList(self, head):
         """

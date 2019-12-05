@@ -41,5 +41,5 @@ class Solution(object):
 x=11
 y=2
 s = Solution()
-re = s.hammingDistance(x,y)
+re = s.hammingDistance2(x,y)
 print("deep:",re)

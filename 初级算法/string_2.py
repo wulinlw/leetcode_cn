@@ -65,7 +65,7 @@ class Solution(object):
 
 
 s = 123
-# s = -123
+s = -123
 # s = 1534236469
 obj = Solution()
 n = obj.reverse2(s)

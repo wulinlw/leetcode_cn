@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
-
+# O(n2)
 def bobble(nums):
     for i in range(len(nums)):
         for j in range(len(nums)):
@@ -8,6 +8,7 @@ def bobble(nums):
                 nums[i],nums[j] = nums[j],nums[i]
     return nums
 
+# O(nlog2n)
 def merge(nums):
     n = len(nums)
     if n<=1:
@@ -30,6 +31,7 @@ def _merge(l, r):
         re.append(r.pop(0))
     return re    
 
+# O(nlog2n)
 def quick(nums, low, high):#low, high初始调用是0, len(nums)-1
     if low < high:
         p = positive(nums, low, high)
@@ -46,7 +48,7 @@ def positive(nums, low, high):
             nums[i],nums[j] = nums[j],nums[i] 
     nums[i+1],nums[high] = nums[high],nums[i+1]
     return i+1
-
+# O(n2)
 def insert(nums):
     for i in range(len(nums)):
         pre = i-1
@@ -77,6 +79,8 @@ def count(nums):
                 p += 1
         re[p] = nums[i]
     return re
+
+# O(n2)
 def select(nums):
     for i in range(len(nums)):
         mid_idx = i
@@ -100,6 +104,7 @@ def select(nums):
 #         gap //= 2
 #     return nums 
 
+# O(nlog2n)
 def shell2(nums):
     n = len(nums)
     gap = n//2
@@ -130,8 +135,8 @@ n = len(arr)
 # re = bucket(arr)
 # re = count(arr)
 # re = insert(arr)
-# re = merge(arr)
-re = quick(arr, 0, n-1)
+re = merge(arr)
+# re = quick(arr, 0, n-1)
 # re = select(arr)
 # re = shell2(arr)
 print(re)

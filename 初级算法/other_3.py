@@ -46,6 +46,17 @@ class Solution:
             
         return int(bin(res), 2)
 
+        
+    def reverseBits3(self, n):
+        c=32
+        re = 0
+        while c>0:
+            if n&1 ==1:
+                tmp = 1<<(c-1)
+                re = re^tmp
+            n=n>>1
+            c-=1
+        return re
 
 n=213
 s = Solution()

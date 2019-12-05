@@ -22,41 +22,51 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        # a[i]表示以nums[i]为结尾的最长子序列长度，遍历num[i]之前的数并更新a[i]的值
+        # https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/zui-chang-shang-sheng-zi-xu-lie-dong-tai-gui-hua-2/
+        # dp[i]表示当前位置的最长子序列长度，
+        # 遍历num[i]之前的数并更新dp[i]的值
         # 此算法的复杂度为n2
-        a=[1]*len(nums)
+        dp=[1]*len(nums)
         if len(nums)==0:
             return 0
         for i in range(1,len(nums)):
             for j in range(0,i):
                 if(nums[i]>nums[j]):
-                    a[i]=max(a[i],a[j]+1)
-        return max(a)
+                    dp[i]=max(dp[i],dp[j]+1)
+        return max(dp)
 
-    # https://blog.csdn.net/qq_17550379/article/details/82871892
     # 此算法的复杂度为O(n log n)
-    def lengthOfLIS2(self, nums):
-        mem = list()
-        len_nums = len(nums)
-        for i in range(len_nums):
-            low, upper = 0, len(mem)
-            while low < upper:
-                mid = (upper - low)//2 + low
-                if mem[mid] < nums[i]:
-                    low = mid + 1
-                else:
-                    upper = mid
+    # tails存排序，规则如下
+    # 当前遍历值大于最后一位，则放在tails后面
+    # 小于最后一位，就替换到他应该插入的位置
+    # tails的有效长度就是结果
 
-            if upper == len(mem):
-                mem.append(nums[i])
-            else:
-                mem[upper] = nums[i]
-        
-        return len(mem)
+    #看视频
+    # https://www.bilibili.com/video/av38184838
+    def lengthOfLIS2(self, nums):
+        tails, res = [0] * len(nums), 0
+        for num in nums:
+            i, j = 0, res
+            while i < j:            # while就是在找当前值需要插入到哪里，
+                m = (i + j) // 2
+                if tails[m] < num: 
+                    i = m + 1       # 往后插入
+                else: 
+                    j = m           # 往前插入
+            tails[i] = num
+            # print(tails,i,j,res)
+            if j == res:            # 插入到最后，说明连续增长的数+1
+                res += 1
+        return res
+
+# 作者：jyd
+# 链接：https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/zui-chang-shang-sheng-zi-xu-lie-dong-tai-gui-hua-2/
+# 来源：力扣（LeetCode）
+# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 nums = [10,9,2,5,3,7,101,18]
 s = Solution()
-r = s.lengthOfLIS(nums)
+r = s.lengthOfLIS2(nums)
 print(r)
 
 

@@ -39,7 +39,8 @@ class Solution(object):
         self.DFS(n, n, '', res)#左括号，右括号，生成的字符串，结果集
         return res
         
- 
+    # s 临时变量
+    # res 存储结果
     def DFS(self, left, right, s, res):
         if left == 0 and right == 0:#边界条件
             res.append(s)

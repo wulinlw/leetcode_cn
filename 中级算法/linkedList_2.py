@@ -37,9 +37,9 @@ class Solution(object):
         
         p = head.next  # 偶数位
         q = head.next.next  # 奇数位
-        head.next = q #第三个赋值给第二个,q和p链接起来
+        head.next = q #1，3链接
         t = p  # 记录第一个偶数位
-        while q.next:#循环从第三个数（奇数）下一位开始，依次跳到下一个奇数
+        while q.next:#第4位
             p.next = p.next.next#下一个偶数位
             p = p.next
             q.next = q.next.next#下一个奇数位
