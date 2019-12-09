@@ -5,7 +5,7 @@
     "tasks": [
         {
             "label": "Run python File by task",
-            "command": "C:/Users/Administrator/AppData/Local/Programs/Python/Python37-32/python.exe ${file}",
+            "command": "python3 ${file}",
             "type": "shell",
             "group": {
                 "kind": "build",
