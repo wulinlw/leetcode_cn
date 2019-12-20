@@ -18,10 +18,10 @@ class Solution(object):
 
     def Add2(self, num1, num2):
         while num2:
-            sum = num1 ^ num2
-            carry = (num1 & num2)<<1
+            sum = num1 ^ num2           #异或，取不进位部分的和，不管进位
+            carry = (num1 & num2)<<1    #取进位
             num1 = sum
-            num2 = carry
+            num2 = carry                #有进位就一直循环，直到没有进位
         return num1 
 
 num1, num2 =1,2
