@@ -54,8 +54,8 @@ class Solution:
 
     def PrintFromTopToBottom3(self, root):
         re = []
-        stack = [root]
-        next = []
+        stack = [root]          #偶数行队列
+        next = []               #奇数行队列
         while stack or next:
             tmp = []
             if stack:#遍历偶数栈
@@ -71,7 +71,7 @@ class Solution:
                 while next:
                     node = next.pop()
                     tmp.append(node.val)
-                    if node.right:
+                    if node.right:                  #先放右边，这一行完成时，如9，7，4，1
                         stack.append(node.right)
                     if node.left:
                         stack.append(node.left)

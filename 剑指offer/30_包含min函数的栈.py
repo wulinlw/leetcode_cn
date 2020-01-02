@@ -32,20 +32,31 @@ class StackWithMin:
             return None
         self.stack_min.pop()
         return self.stack.pop()
+    
+    def debug(self):
+        print(self.stack)
+        print(self.stack_min)
+        print("\n")
+
 
 s = StackWithMin()
 s.push(2.98)
 s.push(3)
-print(s.stack)
-print(s.min())
+s.debug()
+
 s.pop()
-print(s.stack)
-print(s.min())
+s.debug()
+
 s.push(1)
-print(s.stack)
-print(s.min())
+s.debug()
+
 s.pop()
-print(s.stack)
-print(s.min())
+s.debug()
 
+s.push(1)
+s.push(2)
+s.push(3)
+s.debug()
 
+s.push(0)
+s.debug()

@@ -13,7 +13,7 @@ class TreeNode:
 
 class Solution:
     # 后续遍历最后一位是root，比他小的是left，大的是right
-    def VerifySquenceOfBST(self, sequence):
+    def VerifySquenceOfBST_1(self, sequence):
             if len(sequence) ==0:return False
             root = sequence[-1]
             small = big = 0
@@ -32,6 +32,20 @@ class Solution:
                 right = self.VerifySquenceOfBST(sequence[small:-1])
             return left and right
 
+    #上一个解法的优化版本,看这个
+    def VerifySquenceOfBST(self, sequence):
+            if len(sequence) <2:return True
+            root = sequence[-1]
+            small  = 0
+            for i in range(len(sequence)):
+                if sequence[i]>root:
+                    small = i                           #找到left的结尾
+                    for j in range(i,len(sequence)):    #对比右边的，有小于root的就是false
+                        if sequence[j]<root:
+                            return False
+                    break
+            return self.VerifySquenceOfBST(sequence[:small]) and self.VerifySquenceOfBST(sequence[small:-1])
+        
         
 
 # 测试树

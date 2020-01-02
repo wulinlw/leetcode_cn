@@ -18,13 +18,13 @@ class Solution:
         if len(s)==0 and len(pattern)==0:return True
         if len(s)!=0 and len(pattern)==0:return False
         if len(pattern) > 1 and pattern[1] =='*':
-            if s[0] == pattern[0] or pattern[0] == '.':
+            if s[0] == pattern[0] or pattern[0] == '.':         #第一位匹配
                 return self.match(s[1:], pattern[2:]) or \
                        self.match(s[1:], pattern[:]) or \
                        self.match(s[:], pattern[2:])
-            else:
+            else:                                               #第一位匹配不匹配时，模式后移2位
                 return self.match(s[:], pattern[2:])
-        if s and (s[0] == pattern[0] or pattern[0] == '.'):
+        if s and (s[0] == pattern[0] or pattern[0] == '.'):     #.都后移一位
             return self.match(s[1:], pattern[1:])
         return False
 

@@ -12,7 +12,7 @@ class TreeNode:
 class Solution:
     def MirrorRecursively(self, root):
         if not root:return 
-        if not root.left and not root.right :return 
+        if not root.left and not root.right :return     #结束条件
         root.left,root.right = root.right,root.left
         if root.left:
             self.MirrorRecursively(root.left)

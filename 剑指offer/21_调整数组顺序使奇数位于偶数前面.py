@@ -13,9 +13,9 @@ class Solution:
         l = 0
         r = n-1
         while l<r:
-            while l<r and s[l]&1 != 0:
+            while l<r and s[l]&1 != 0:  #左边找奇数
                 l += 1
-            while l<r and s[r]&1 == 0:
+            while l<r and s[r]&1 == 0:  #右边找偶数
                 r -= 1
             if l<r:
                 s[l],s[r] = s[r],s[l]
@@ -27,6 +27,6 @@ nums = [1,2,3,4,5]
 obj = Solution()
 #以下是true
 print(obj.ReorderOddEven_1(nums))
-print(obj.ReorderOddEven_1([1,2,3,4,5,6,7,8,9,10]))
+# print(obj.ReorderOddEven_1([1,2,3,4,5,6,7,8,9,10]))
 
 

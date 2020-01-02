@@ -22,7 +22,7 @@ class Solution:
         return re
 
     def HasSubtreeCore(self, root1, root2):
-        if not root2: return True
+        if not root2: return True                       #正确的要放前面，不然会一直错误
         if not root1: return False
 
         if root1.val != root2.val:

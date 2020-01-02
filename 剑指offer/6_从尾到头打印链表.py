@@ -32,6 +32,15 @@ class Solution:
             self.printListFromTailToHead(head.next)
         print(head.val, "")     #放在后面就是倒着打印了，递归到最后才会输出，一层层网上走
 
+    #栈
+    def printListFromTailToHead2(self, head):
+        stack= []
+        while head.next:
+            stack.append(head)
+            head = head.next
+        stack.append(head)
+        while len(stack)>0:
+            print(stack.pop().val)
         
 nums = [1,2,3,4,5]
 obj = Solution()

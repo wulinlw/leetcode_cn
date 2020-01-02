@@ -21,7 +21,7 @@ class Solution:
         # print(dp)
         for i in range(4,length + 1):
             max = 0
-            for j in range(i//2 + 1):
+            for j in range(i//2 + 1):       #由于当i大于n//2时，就不用在计算了
                 tmp = dp[j] * dp[i-j]
                 if tmp>max:
                     max = tmp

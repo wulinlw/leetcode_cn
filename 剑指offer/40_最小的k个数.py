@@ -10,23 +10,24 @@ class Solution:
         start = 0
         end = len(nums)-1
         index = self.partition(nums, start, end)
-        # print(index)
+        # print(index, nums)
         while index != k-1:
-            if index > k-1:
+            if index > k-1:                 #索引需要的值，往左缩小范围
                 end = index-1
             else:
-                start = index+1
+                start = index+1             #不够K个数，继续往右扩大范围，由于前面的都排好了，这里index+1设为新的开始排序点
             index = self.partition(nums, start, end)
         return nums[:k]
 
     def partition(self, nums, start, end):
         i = start-1
-        poivt = nums[end]
+        pivot = nums[end]
         for j in range(start, end):
-            if nums[j] < poivt:
+            if nums[j] < pivot:
                 i += 1
                 nums[i],nums[j] = nums[j],nums[i]
         nums[i+1],nums[end] = nums[end],nums[i+1]
+        # print(nums, i+1)
         return i+1
 
     def GetLeastNumbers2(self, nums, k):
@@ -46,11 +47,11 @@ class Solution:
 nums = [4,5,1,6,2,7,3,8]
 k = 4
 obj = Solution()
-# re = obj.GetLeastNumbers(nums, k)
-# print(re)
-
-re = obj.GetLeastNumbers2(nums, k)
+re = obj.GetLeastNumbers(nums, k)
 print(re)
+
+# re = obj.GetLeastNumbers2(nums, k)
+# print(re)
 
 # a = []
 # for i in nums:

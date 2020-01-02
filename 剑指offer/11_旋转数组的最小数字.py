@@ -16,7 +16,7 @@ class Solution:
         minVal = nums[0]
         if nums[0] < nums[r]:#没有反转
             return nums[0]
-        while r-l>1:
+        while r-l>1:                #l后面是r时结束循环，找到旋转点r
             mid = (r-l)//2+l
             if nums[mid] > nums[r]:
                 l = mid
