@@ -25,7 +25,7 @@ class Solution:
             head = head.next
         print(re)
 
-    def deleteDuplication(self, head):
+    def deleteDuplication_2(self, head):
         if not head :return None
         p = head
         pre = None
@@ -40,6 +40,22 @@ class Solution:
                 pre = p
                 p = p.next
         return head
+
+    # 看这个，
+    # 在最前面做一个头，更方便对比
+    def deleteDuplication(self, head):
+        if not head :return None
+        p = ListNode(0)
+        p.next = head
+        s = p.next
+        f = p.next.next
+        while f:
+            while s.val == f.val:
+                f = f.next
+            s.next = f
+            s = s.next
+            f = f.next
+        return p.next
 
 
 

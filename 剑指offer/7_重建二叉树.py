@@ -31,6 +31,7 @@ class Solution:
         root.left = self.reConstructBinaryTree(pre_left, in_left)
         root.right = self.reConstructBinaryTree(pre_right, in_right)
         return root
+
     
     # 层次遍历
     def levelOrder(self, root):

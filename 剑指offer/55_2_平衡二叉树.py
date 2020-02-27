@@ -11,6 +11,7 @@ class TreeNode:
         self.right = None
 
 class Solution:
+    # 归并的套路，先拿到子结果的集，在处理资结果的集
     def IsBalanced(self, root):
         if not root :return True, 0       #结束的时候是0
         left, left_depth = self.IsBalanced(root.left)

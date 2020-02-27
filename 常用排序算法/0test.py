@@ -1,21 +1,21 @@
 #!/usr/bin/python
 #coding:utf-8
+class Solution(object):
+    def duplicate(self, nums):
+        re = []
+        for i in range(len(nums)):
+            while i != nums[i]:
+                if nums[i] == nums[nums[i]]:
+                    re.append(nums[i])
+                    break
+                else:
+                    idx = nums[i]
+                    nums[idx],nums[i] = nums[i],nums[idx]
+        return re
 
-def shell(a):
-    n = len(a)
-    gap = n//2
-    while gap>0:
-        for i in range(len(a)):
-            j = i
-            cur = a[i]
-            while j-gap >=0 and a[j-gap]>cur:
-                a[j] = a[j-gap]
-                j = j-gap
-            a[j] = cur
-        gap = gap//2
-    return a
 
-if __name__ == '__main__':
-    a = [4, 8, 7, 3, 9,22,10,14]
-    # print(quick(a,0,len(a)-1))
-    print(shell(a))
+
+nums = [2,3,1,0,2,5,3]
+obj = Solution()
+re = obj.duplicate(nums)
+print(re)

@@ -12,11 +12,7 @@ class Solution(object):
 
         index = 0                       #要删除的索引
         while len(nums)>1:
-            if index+m > len(nums):     #索引大于数组长度，回到起点继续
-                index = (index+m) % len(nums) - 1 
-            else:
-                index = index + m - 1
-            # print(nums, index)
+            index = (m+index-1)%len(nums)
             nums.pop(index)
         return nums[0]
 
@@ -29,8 +25,8 @@ class Solution(object):
 
 
 
-n = 5
-m = 3
+n = 9
+m = 13
 S = Solution()
 print(S.LastRemaining_1(n, m))
 print(S.LastRemaining_2(n, m))

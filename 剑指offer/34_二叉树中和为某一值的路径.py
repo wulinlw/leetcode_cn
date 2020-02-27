@@ -12,8 +12,8 @@ class TreeNode:
         self.right = None
 
 class Solution:
-    # 后续遍历最后一位是root，比他小的是left，大的是right
     def FindPath(self, root, expectedSum):
+        if not root:return []
         def core(root, curSum, path):
             path.append(root.val)
             curSum += root.val
@@ -23,7 +23,7 @@ class Solution:
                 core(root.left, curSum, path)
             if root.right:
                 core(root.right, curSum, path)
-            path.pop()
+            path.pop()                          #有成功找到的，弹出最后一位，否则找到第二个结果时，之前的结果还在队列中
         
         return core(root, 0, [])
 
@@ -55,7 +55,23 @@ class Solution:
             res.append(templist)
         return res
         
+    def pathSum(self, root, sum) :
+        re = []
+        def core(root, cursum, path):
+            path.append(root.val)
+            cursum += root.val
+            if cursum == sum and not root.left and not root.right:
+                re.append(path[:])
+                return 
+            if root.left:
+                core(root.left, cursum, path)
+            if root.right:
+                core(root.right, cursum, path)
+            path.pop()
+            return re
 
+        core(root, 0, [])
+        return re
 # 测试树
 #        10
 #    5     12
@@ -76,8 +92,8 @@ t2.right = t5
 
 obj = Solution()
 re = obj.levelOrder(root)
-for i in range(len(re)):
-    print(re[i])
-print("\n")
-obj.FindPath(t1, 19)
-
+# for i in range(len(re)):
+#     print(re[i])
+# print("\n")
+# obj.FindPath(t1, 19)
+print(obj.pathSum(t1, 19))

@@ -4,8 +4,10 @@
 # // 面试题61：扑克牌的顺子
 # // 题目：从扑克牌中随机抽5张牌，判断是不是一个顺子，即这5张牌是不是连续的。
 # // 2～10为数字本身，A为1，J为11，Q为12，K为13，而大、小王可以看成任意数字。
+# 0是大小王
 
 class Solution(object):
+    # 大小王的个数大于等于顺子间分割的数，就是顺子
     def IsContinuous(self, nums):
         if len(nums)<5:return False
         nums.sort()

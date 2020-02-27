@@ -7,6 +7,10 @@
 
 
 class Solution:
+    # 所有数字异或，相同的数字异或后=0，所以最后得到的结果是2个单独数字的异或值
+    # 把他们按照异或值的最右边的1分组，
+    # 异或是不同为1，所以2个单独的数字会被分到不同组
+    # 这样各组异或，相同值异或为0，留下单独的数
     def FindNumsAppearOnce(self, nums):
         if len(nums) ==0:return False
         OR = 0

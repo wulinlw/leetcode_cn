@@ -12,7 +12,12 @@ class Solution:
         for i in range(n):
             dp.append(dp[-1]+dp[-2])
         return dp[-1]
-            
+        
+    def fabonacii2(self,n):        
+        a, b = 1, 1
+        for _ in range(n):
+            a, b = b, a + b
+        return a % 1000000007
         
 obj = Solution()
 print(obj.fabonacii(0))

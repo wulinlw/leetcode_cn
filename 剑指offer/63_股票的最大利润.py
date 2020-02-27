@@ -8,16 +8,13 @@
 # // 收获最大的利润11。
 class Solution(object): 
     def MaxDiff(self, nums):
-        if len(nums)<2:return False
-        minVal = nums[0]
-        maxDiff = nums[1]-minVal
-        for i in range(1,len(nums)):
-            if nums[i] < minVal:
-                minVal = nums[i]
-            curDiff = nums[i]-minVal
-            if curDiff>maxDiff:
-                maxDiff = curDiff
-        return maxDiff
+        if len(nums)==0:return 0
+        maxV = 0
+        minV = nums[0]
+        for i in range(len(nums)):
+            minV = min(minV, nums[i])
+            maxV = max(maxV, nums[i]-minV)
+        return maxV
 
         
 

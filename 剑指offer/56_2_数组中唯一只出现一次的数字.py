@@ -13,9 +13,10 @@ class Solution:
         if len(nums) ==0:return False
         bitSum = [0] * 32
         for i in nums:
+            # print('{:0>32b}'.format(i))
             mask = 1
             for j in range(31,-1,-1):
-                if i & mask == 1:       #bit位=1的，累加
+                if i & mask !=0:       #bit位!=0的累加，有可能等于00010000，所以不能用=1判断
                     bitSum[j] += 1
                 mask = mask<<1
         # print(bitSum)

@@ -14,6 +14,7 @@ class Solution:
         if not root or k<=0:return False
         return self.core(root, k)
     
+    #类似中序遍历
     def core(self, root, k):
         if not root:
             return None
@@ -30,11 +31,29 @@ class Solution:
 # 2. 当左子树没有返回节点时，判断当前的根节点是不是第k个遍历到的值（即第k大）。如果是，则返回该节点，停止递归。
 # 3. 当左子树和根节点都没有返回节点时，递归右子树，并判断有无返回节点。如果有，停止递归，返回所要返回的节点。
 
+
+    def kthLargest3(self, root, k) :
+        ans = []
+        def fuc(root):
+            if not root :
+                return 0
+            fuc(root.left)
+            ans.append(root.val)
+            fuc(root.right)
+        fuc(root)
+        return ans[-k]
+
+
+# 作者：z1m
+# 链接：https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/solution/zhong-xu-bian-li-by-ml-zimingmeng/
+# 来源：力扣（LeetCode）
+# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
 # 测试树
 #        6
 #    2     8
 #  1  4   7 9                
-t1 = TreeNode(1)
+t1 = None
 t2 = TreeNode(2)
 t4 = TreeNode(4)
 t6 = TreeNode(6)
@@ -51,4 +70,4 @@ t8.left = t7
 t8.right = t9
 
 obj = Solution()
-print(obj.KthNode(root, 3).val)
+print(obj.KthNode(root, 1).val)

@@ -12,7 +12,7 @@ class TreeNode:
 
 class Solution:
     def isSymmetrical(self, root):
-        if not root:return False
+        if not root:return True
         def core(L, R):
             if not L and not R:return True
             if not L or not R:return False

@@ -41,6 +41,7 @@ class Solution(object):
         """
         # 为了将index与n对应上，特意把第0行空出来
         res = [[0 for i in range(6*n+1)] for i in range(n+1)]
+        print(res)
         
         # 将第0行与第0列空出来，res[1][1:7] = [1,1,1,1,1,1]
         # 表示第一个骰子6种情况各出现一次
@@ -58,6 +59,13 @@ class Solution(object):
                     res[i][j] += res[i-1][j-k]#i-1上一颗色子的值，j-k是和减去当前 （j是n到6*n的数，k是当前掷的数1-6）
         print(res)
         return res[-1][n:]
+
+        # 每个位置出现的概率
+        # re = []
+        # total = math.pow(6, n)
+        # for i in range(n, 6*n+1):
+        #     re.append(dp[-1][i] / total)
+        # return re
 
 
 n=3

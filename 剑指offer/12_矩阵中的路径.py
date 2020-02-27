@@ -12,7 +12,7 @@ class Solution:
     def hasPath(self, matrix, word):
         m = len(matrix)
         n = len(matrix[0])
-        visited = [[False for i in  range(n)] for i in range(m)]
+        visited = [[False for i in  range(n)] for i in range(m)] #注意这里，外层用行数，否则第二个例子不过
         # print(visited)
         for i in range(m):
             for j in range(n):
@@ -33,6 +33,7 @@ class Solution:
         visited[i][j] = False
         return result
         
+
 matrix = [
     ["a","b","t","g"],
     ["c","f","c","s"],
@@ -40,3 +41,4 @@ matrix = [
 ]
 obj = Solution()
 print(obj.hasPath(matrix, "bfce"))
+print(obj.hasPath([["a","a"]], "aa"))

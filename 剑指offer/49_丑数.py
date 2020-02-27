@@ -9,7 +9,7 @@ import heapq
 class Solution:
     # dp[i] 表示第i个丑数
     # 那么dp[i] = min(2 * dp[l_2], 3 * dp[l_3], 5 * dp[l_5])
-    # 这里 l_2, l_3, l_5是表示，指到的位置。
+    # 这里 l_2, l_3, l_5是表示dp的索引。
     # 时间复杂度：O(n)
     def GetUglyNumber(self, n):
         if n == 0:return
@@ -20,6 +20,7 @@ class Solution:
         l_5 = 0
         for i in range(1, n):
             dp[i] = min(2 * dp[l_2], 3 * dp[l_3], 5 * dp[l_5])
+            print(i,dp[i])
             if dp[i] >= 2 * dp[l_2]:
                 l_2 += 1
             if dp[i] >= 3 * dp[l_3]:
@@ -45,7 +46,7 @@ class Solution:
         return heapq.heappop(heap)
         
 n = 1500
-n=20
+n=10
 obj = Solution()
 print(obj.GetUglyNumber(n))
 print(obj.GetUglyNumber2(n))

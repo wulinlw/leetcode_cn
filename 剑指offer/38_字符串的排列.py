@@ -14,7 +14,7 @@ class Solution:
                 return  
             for i in range(len(s2)):
                 bt(s2[:i]+s2[i+1:], s2[i]+tmp)
-        bt(s, "")
+        bt(s, "") 
         return re
     
     def Permutation2(self, s):

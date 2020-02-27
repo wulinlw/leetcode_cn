@@ -126,7 +126,22 @@ class Solution(object):
         import re 
         return max(min(int(*re.findall('^[\+\-]?\d+', s.lstrip())), 2**31 - 1), -2**31)
 
-
+    # 如果是+或者是-，并且是第一位，我们认为是合法的。
+    # 剩下的迭代，只有在 ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]中，我们才认为合法
+    # 最后如果res是+或者-，说明本身不合法，我们返回0。 否则我们迭代一次求出整数。这里为了简单直接使用了int函数
+    def strToInt(self, s: str) -> int:
+        cs = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+        res = ""
+        s =  s.strip()
+        for i in range(len(s)):
+            c = s[i]
+            if (c == '+' or c == '-') and i == 0:
+                res += c
+                continue
+            if c not in cs: break
+            res += c
+        if res == '+' or res == '-': return 0
+        return max(-2**31, int(res or 0)) if int(res or 0) < 0 else min(2**31 - 1, int(res or 0))
 
 s = "42"
 s = "   -42"

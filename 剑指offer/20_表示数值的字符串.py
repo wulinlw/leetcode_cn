@@ -12,6 +12,7 @@
 # 3. e（或E）、小数点.不能出现在末尾
 class Solution:
     def isNumeric(self, s):
+        s = s.strip()
         if not s: return False
         hasE = False            #是否有E
         hasSign  = False        #是否有符号
@@ -31,11 +32,39 @@ class Solution:
                 if not hasSign and i>0 and s[i-1] not in ['e','E']: #之前无符号，不是首位
                     return False
                 hasSign = True
-            elif s[i]<"0" or s[i]>"9":
+            elif not s[i].isdigit():
                 return False
         return True
     
+    # 正确
+    def isNumber(self, s: str) -> bool:
+        s = s.strip()
+        dot_seen = False
+        e_seen = False
+        num_seen = False
+        for i, a in enumerate(s):
+            if a.isdigit():
+                num_seen = True
+            elif a == ".":
+                if e_seen or dot_seen:
+                    return False
+                dot_seen = True
+            elif a == "e":
+                if e_seen or not num_seen:
+                    return False
+                num_seen = False
+                e_seen = True
+            elif a in "+-":
+                if i > 0 and s[i - 1] != "e":
+                    return False
+            else:
+                return False
+        return num_seen
 
+# 作者：victoria-zhou
+# 链接：https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/solution/onpythonjie-ti-wu-fa-luo-ji-pan-duan-regexdfadeng-/
+# 来源：力扣（LeetCode）
+# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 obj = Solution()
 #以下是true
@@ -45,10 +74,18 @@ print(obj.isNumeric('e3'))
 print(obj.isNumeric('-123'))
 print(obj.isNumeric('3.1415'))
 print(obj.isNumeric('-1e-16'))
+print(obj.isNumeric('.1'))
 
+print("\n")
 #以下是false
 print(obj.isNumeric('12e'))
 print(obj.isNumeric('1a3.14'),1)
 print(obj.isNumeric('1.2.3'))
 print(obj.isNumeric('+-5'))
 print(obj.isNumeric('12e+5.4'))
+print(obj.isNumeric('.'))
+
+
+
+
+

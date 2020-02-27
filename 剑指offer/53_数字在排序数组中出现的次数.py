@@ -20,7 +20,7 @@ class Solution:
             return -1
         mid = (start+end)//2
         if nums[mid] == k:
-            if (mid>0 and nums[mid-1] != k) or (mid==0):
+            if (mid>0 and nums[mid-1] != k) or (mid==0):        #最左边
                 return mid
             else:
                 end = mid -1
@@ -28,7 +28,7 @@ class Solution:
             end = mid-1
         else:
             start = mid+1
-        print(mid,start,end )
+        # print(mid,start,end )
         return self.getFirstK(nums, k, start, end)
 
     def getLastK(self, nums, k, start, end):
@@ -36,7 +36,7 @@ class Solution:
             return -1
         mid = (start+end)//2
         if nums[mid] == k:
-            if (mid<len(nums) and nums[mid+1] != k) or (mid==(len(nums)-1)):
+            if (mid<len(nums) and nums[mid+1] != k) or (mid==(len(nums)-1)):#最右边
                 return mid
             else:
                 start = mid +1
@@ -45,7 +45,39 @@ class Solution:
         else:
             start = mid+1
         return self.getLastK(nums, k, start, end)
+    
+    def search(self, nums, target):
+        if not nums:
+            return 0
 
+        left, right = 0, len(nums)
+        while left < right:
+            mid = left + (right - left) // 2
+            if nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid
+        if left == len(nums) or nums[left] != target:
+            return 0 # 没有找到, 直接返回0
+        idx1 = left
+        
+        # 如果这里能够运行, 肯定是找到了target的
+        left, right = 0, len(nums)
+        while left < right:
+            mid = left + (right - left) // 2
+            # note that change to <=
+            if nums[mid] <= target:
+                left = mid + 1
+            else:
+                right = mid
+        # upper bound 应该是 right - 1
+        # 返回 right - 1 - idx1 + 1
+        return left - idx1
+
+# 作者：lih
+# 链接：https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/solution/python-lower-bound-he-upper-bound-by-lih/
+# 来源：力扣（LeetCode）
+# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 nums = [1,2,3,3,3,3,4,5]
 k = 3

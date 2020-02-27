@@ -39,8 +39,37 @@ class Solution:
         # return num % 10
 
 
+    def findNthDigit(self, n: int) -> int:
+        # 首先判断target是几位数，用digits表示
+        base = 9
+        digits = 1
+        while n - base * digits > 0:
+            n -= base * digits
+            base *= 10
+            digits += 1
+        # 计算target的值
+        idx = n % digits  # 注意由于上面的计算，n现在表示digits位数的第n个数字
+        if idx == 0: 
+            idx = digits
+        number = 1
+        for i in range(1,digits):
+            number *= 10
+        if idx == digits:
+            number += n // digits - 1
+        else:
+            number += n // digits
+        # 找到target中对应的数字
+        for i in range(idx,digits):
+            number //= 10
+        return number % 10
+
+# 作者：z1m
+# 链接：https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/solution/zhe-shi-yi-dao-shu-xue-ti-ge-zhao-gui-lu-by-z1m/
+# 来源：力扣（LeetCode）
+# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
 obj = Solution()
-print(obj.digitAtIndex(1000))
+print(obj.digitAtIndex(13))
 print(obj.digitAtIndex(1001))
 print(obj.digitAtIndex(1002))
 print(obj.digitAtIndex(1003))

@@ -20,7 +20,9 @@ class Solution(object):
         else:
             return self.sumArr2(n-1) + n
 
-
+    def sumNums(self, n: int) -> int:
+        return n and n+self.sumNums(n-1)
+        # n and替代if判断，n==1时，and 后面==0 不成立
 
 n = 5
 S = Solution()

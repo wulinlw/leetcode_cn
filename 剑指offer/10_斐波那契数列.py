@@ -16,7 +16,15 @@ class Solution:
             a = b
             b = tmp
         return tmp
-            
+
+    def fib(self, n: int) -> int:
+        a, b = 0, 1
+        for _ in range(n):
+            a, b = b, a + b
+        return a
+        # return a % 1000000007 # leetcode中答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
+
+
         
 obj = Solution()
 print(obj.fabonacii(0))

@@ -1,9 +1,8 @@
 #!/usr/bin/python
 #coding:utf-8
 
-# // 面试题36：二叉搜索树与双向链表
-# // 题目：输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求
-# // 不能创建任何新的结点，只能调整树中结点指针的指向。
+# // 面试题37：序列化二叉树
+# // 题目：请实现两个函数，分别用来序列化和反序列化二叉树。
 class TreeNode:
     def __init__(self, x):
         self.val = x
@@ -13,21 +12,51 @@ class TreeNode:
 class Solution:
     #用前序遍历，方便解码
     def serialize(self, root):
-        if not root:return '#'
-        return str(root.val)+ self.serialize(root.left) + self.serialize(root.right)
-    
-    def unserialize(self, str):
-        if len(str)==0:
-            return 
-        if str[0]!='#':
-            root = TreeNode(int(str[0]))
-        else:
-            root = None
+        if not root:return 'None'
+        return str(root.val)+','+self.serialize(root.left)+','+self.serialize(root.right)
 
-        if root:
-            root.left = self.unserialize(str[1:])
-            root.right = self.unserialize(str[1:])
-        return root
+    def unserialize(self, data):
+        def rdeserialize(l):
+            if l[0] == 'None':
+                l.pop(0)
+                return None
+                
+            root = TreeNode(l[0])
+            l.pop(0)
+            root.left = rdeserialize(l)
+            root.right = rdeserialize(l)
+            return root
+
+        arr = data.split(',')
+        return rdeserialize(arr)
+
+
+
+    # def serialize(self, root):
+    #     #先序
+    #     res = []
+    #     def helper(node):
+    #         if node == None:
+    #             res.append('#')
+    #             return 
+    #         res.append(str(node.val))
+    #         helper(node.left)
+    #         helper(node.right)
+    #     helper(root)
+    #     return ','.join(res)
+        
+    # def deserialize(self, data):
+    #     D = iter(data.split(','))
+    #     def dfs():
+    #         node_val = next(D)
+    #         if node_val == '#':
+    #             return None
+    #         root = TreeNode(node_val)
+    #         root.left = dfs()
+    #         root.right = dfs()
+    #         return root
+    #     return dfs()
+
 
     # 层次遍历
     def levelOrder(self, root):
@@ -77,10 +106,10 @@ t8.left = t7
 t8.right = t9
 
 obj = Solution()
-re = obj.levelOrder(root)
-for i in range(len(re)):
-    print(re[i])
-print("\n")
+# re = obj.levelOrder(root)
+# for i in range(len(re)):
+#     print(re[i])
+# print("\n")
 
 re = obj.serialize(root)
 print(re)

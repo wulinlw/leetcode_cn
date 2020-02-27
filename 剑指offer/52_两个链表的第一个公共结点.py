@@ -8,6 +8,8 @@ class ListNode:
         self.val = x
         self.next = None
 class Solution:
+    # head1 + head2 =下面的
+    # head2 + head1
     def FindFirstCommonNode(self, head1, head2):
         if not head1 or not head2:return False
         p1 = head1

@@ -19,18 +19,18 @@ class Solution:
         
     def FindGreatestSumOfSubArray2(self, nums):
         sum = nums[0]
-        maxSum = 0
-        for i in nums:
+        maxSum = nums[0]
+        for i in range(1,len(nums)):
             if sum>0:
-                sum += i
+                sum += nums[i]
             else:
-                sum = i
+                sum = nums[i]
             maxSum = max(maxSum, sum)
         return maxSum
 
 
 nums = [1,-2,3,10,-4,7,2,-5]
-
+nums = [1]
 obj = Solution()
 re = obj.FindGreatestSumOfSubArray2(nums)
 print(re)

@@ -10,7 +10,7 @@ class Solution:
         if len(nums) == 0:
             return 0
         numstr = [str(i) for i in nums]
-        #字符排序，相同位，小的排前面，
+        #字符排序，相同位小的排前面，长的排前面
         #冒泡排序
         for i in range(len(numstr)):
             for j in range(i+1,len(numstr)):
@@ -20,9 +20,16 @@ class Solution:
                     numstr[i],numstr[j] = numstr[j],numstr[i]
         print(numstr)
         return ''.join(numstr)
-        
+    
+class Compare(str):
+    def __lt__(x, y):
+        return x + y < y + x
 
+class Solution:
+    def minNumber(self, nums: List[int]) -> str:
+        nums = sorted(map(str, nums), key=Compare)
+        return ''.join(nums)
 nums = [3,32,321]
-# nums = [1,123]
+nums = [3,30,34,5,9]
 obj = Solution()
 print(obj.PrintMinNumber(nums))

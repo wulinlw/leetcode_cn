@@ -7,6 +7,7 @@
 import heapq
 class Solution:
     def GetLeastNumbers(self, nums, k):
+        if k>len(nums) or k<=0:return []
         start = 0
         end = len(nums)-1
         index = self.partition(nums, start, end)
@@ -14,7 +15,7 @@ class Solution:
         while index != k-1:
             if index > k-1:                 #索引需要的值，往左缩小范围
                 end = index-1
-            else:
+            if index < k-1:
                 start = index+1             #不够K个数，继续往右扩大范围，由于前面的都排好了，这里index+1设为新的开始排序点
             index = self.partition(nums, start, end)
         return nums[:k]
@@ -34,7 +35,7 @@ class Solution:
         tmp = []
         re = []
         for i in nums:
-            heapq.heappush(tmp, -i) #用负号存值,这样下面pop时就可以pop掉十几的最大值
+            heapq.heappush(tmp, -i) #用负号存值,这样下面pop时就可以pop掉实际的最大值
             if len(tmp)>k:
                 heapq.heappop(tmp)
         # print(tmp,re)
@@ -49,9 +50,10 @@ k = 4
 obj = Solution()
 re = obj.GetLeastNumbers(nums, k)
 print(re)
-
-# re = obj.GetLeastNumbers2(nums, k)
-# print(re)
+nums = [0,0,0,2,0,5]
+k=0
+re = obj.GetLeastNumbers(nums, k)
+print(re)
 
 # a = []
 # for i in nums:

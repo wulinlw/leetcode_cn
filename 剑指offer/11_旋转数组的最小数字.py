@@ -8,33 +8,60 @@
 # NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
 
 class Solution:
+    #书上的思路
     def minNumberInRotateArray(self, nums):
         n = len(nums)
         if n == 0: return 0
+
+        def minInOrder(nums, l, r):
+            re = nums[l]
+            for i in range(l+1, r+1):
+                if re>nums[i]:
+                    re = nums[i]
+            return re
+
         l = 0
         r = n-1
-        minVal = nums[0]
+        mid = l
         if nums[0] < nums[r]:#没有反转
             return nums[0]
-        while r-l>1:                #l后面是r时结束循环，找到旋转点r
-            mid = (r-l)//2+l
-            if nums[mid] > nums[r]:
+        while nums[l]>=nums[r]:                #l后面是r时结束循环，找到旋转点r
+            if r-l==1:
+                mid = r
+                break
+            mid = (l+r)//2
+            if nums[mid] == nums[l] and nums[mid] == nums[r]:# 极端情况,左=中=右，全部扫描一遍[1,0,1,1,1]
+                return minInOrder(nums, l, r)
+            if nums[mid] >= nums[l]:
                 l = mid
-            elif nums[mid] < nums[r]:
+            elif nums[mid] <= nums[r]:
                 r = mid
-            elif nums[mid] == nums[l] and nums[mid] == nums[r]:
-                # 极端情况,左=中=右，全部扫描一遍
-                # [1,0,1,1,1]
-                # [1,1,1,0,1]
-                for i in range(1, n):
-                    if nums[i] < minVal:
-                        minVal = nums[i]
-                        r = i#终止后r指向返回值
-        minVal = nums[r]
-        return minVal
+        return nums[mid]
+
+
+    #以此答案为准
+    def minArray(self, numbers: [int]) -> int:
+        i, j = 0, len(numbers) - 1
+        while i < j:
+            m = (i + j) // 2
+            if numbers[m] > numbers[j]: i = m + 1
+            elif numbers[m] < numbers[j]: j = m
+            else: j -= 1
+        return numbers[i]
+
+
         
 nums = [3,4,5,1,2]
 obj = Solution()
 print(obj.minNumberInRotateArray(nums))
 print(obj.minNumberInRotateArray([1,0,1,1,1]))
 print(obj.minNumberInRotateArray([1,1,1,0,1]))
+print(obj.minNumberInRotateArray([1,1,1]))
+print(obj.minNumberInRotateArray([3,1,1]))
+print("\n")
+
+print(obj.minArray(nums))
+print(obj.minArray([1,0,1,1,1]))
+print(obj.minArray([1,1,1,0,1]))
+print(obj.minArray([1,1,1]))
+print(obj.minArray([3,1,1]))

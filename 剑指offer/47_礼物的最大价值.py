@@ -8,15 +8,17 @@
 # // 算你最多能拿到多少价值的礼物？
 
 class Solution:
+    # 动态规划
+    # dp[i][j] = 上方和左边，取最大的+matrix[i][j]
     def getMaxValue(self, matrix):
         m = len(matrix)
         n = len(matrix[0])
         dp = [[0 for _ in range(n) ]for _ in range(m)]
 
-        for i  in range(m):
+        for i in range(m):
             for j in range(n):
-                up = dp[i-1][j] if i>0 else 0
-                left = dp[i][j-1] if j>0 else 0
+                left = dp[i-1][j] if i>0 else 0
+                up = dp[i][j-1] if j>0 else 0
                 dp[i][j] = max(up, left) + matrix[i][j]
         # for i in range(n):
         #     print(dp[i])

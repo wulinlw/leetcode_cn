@@ -5,7 +5,11 @@
 # // 题目：请实现函数ComplexListNode* Clone(ComplexListNode* pHead)，复
 # // 制一个复杂链表。在复杂链表中，每个结点除了有一个m_pNext指针指向下一个
 # // 结点外，还有一个m_pSibling 指向链表中的任意结点或者nullptr。
-
+class Node:
+    def __init__(self, x, next= None, random= None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
 
 class ComplexNode(object):
     def __init__(self, value, next=None, sibling=None):
@@ -40,41 +44,81 @@ class Solution:
         
         #偶数的下一个节点是奇数的下一个节点
         cloneList = clonep = p2.next
-        p2.next = clonep.next
-        p2 = p2.next
+        p2.next = clonep.next           #连接1，3节点
+        p2 = p2.next                    #走到第3节点
         while p2:
-            clonep.next = p2.next
-            clonep = clonep.next
-            p2.next = clonep.next
-            p2 = p2.next
+            clonep.next = p2.next       #连接2，4节点  2的下一个基点是第3节点的next
+            clonep = clonep.next        #偶数走一步
+            p2.next = clonep.next       #连接偶节点，3，5
+            p2 = p2.next                #奇数走一步
+
+        self.printlinklist(s)
         return cloneList
 
 
     def printlinklist(self, head):
         re = []
         while head:
-            re.append(head.val)
+            randomval = head.random.val if head.random else None
+            re.append((head.val,randomval))
             head = head.next
         print(re)
+
+    # 算法：深度优先搜索
+    # 从头结点 head 开始拷贝；
+    # 由于一个结点可能被多个指针指到，因此如果该结点已被拷贝，则不需要重复拷贝；
+    # 如果还没拷贝该结点，则创建一个新的结点进行拷贝，并将拷贝过的结点保存在哈希表中；
+    # 使用递归拷贝所有的 next 结点，再递归拷贝所有的 random 结点。
+    # 作者：z1m
+    # 链接：https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/solution/lian-biao-de-shen-kao-bei-by-z1m/
+    def copyRandomList(self, head):
+        def dfs(head):
+            if not head: return None
+            if head in visited:
+                return visited[head]
+            # 创建新结点
+            copy = Node(head.val, None, None)
+            visited[head] = copy
+            copy.next = dfs(head.next)
+            copy.random = dfs(head.random)
+            return copy
+        visited = {}
+        return dfs(head)
+
+
+        
     
     
-node5 = ComplexNode('E')
-node4 = ComplexNode('D', next=node5)
-node3 = ComplexNode('C', next=node4)
-node2 = ComplexNode('B', next=node3)
-node1 = ComplexNode('A', next=node2)
-node1.sibling = node3
-node2.sibling = node5
-node4.sibling = node2
-head = node1
+# node5 = ComplexNode('E')
+# node4 = ComplexNode('D', next=node5)
+# node3 = ComplexNode('C', next=node4)
+# node2 = ComplexNode('B', next=node3)
+# node1 = ComplexNode('A', next=node2)
+# node1.sibling = node3
+# node2.sibling = node5
+# node4.sibling = node2
+# head = node1
 
 
 
 obj = Solution()
+# obj.printlinklist(head)
+# re = obj.clone_complex_link(head)
+# obj.printlinklist(re)
+
+
+
+node5 = Node('5')
+node4 = Node('4', next=node5)
+node3 = Node('3', next=node4)
+node2 = Node('2', next=node3)
+node1 = Node('1', next=node2)
+node1.random = node3
+node2.random = node5
+node4.random = node2
+head = node1
 obj.printlinklist(head)
-re = obj.clone_complex_link(head)
+re = obj.copyRandomList(head)
 obj.printlinklist(re)
-
-
 
 

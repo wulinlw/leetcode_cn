@@ -8,30 +8,33 @@
 class StackWithMin:
     def __init__(self):
         self.stack = []
-        self.stack_min = []
+        self.min_stack = []
+
+    def push(self, node):
+        # write code here
+        self.stack.append(node)
+        if not self.min_stack:
+            self.min_stack.append(node)
+        else:
+            if self.min_stack[-1] < node:
+                self.min_stack.append(self.min_stack[-1])
+            else:
+                self.min_stack.append(node)
+    def pop(self):
+        # write code here
+        self.stack.pop(-1)
+        self.min_stack.pop(-1)
+    
+    def top(self):
+        # write code here
+        if self.stack:
+            return self.stack[-1]
+        else:
+            return []
 
     def min(self):
-        if not self.stack_min:
-            return None
-        return self.stack_min[-1]
-
-    def push(self, obj):
-        self.stack.append(obj)
-        if not self.stack_min:
-            self.stack_min.append(obj)
-        else:#最小的放stack_min最后
-            tmp = None
-            if obj < self.stack_min[-1]:
-                tmp = obj
-            else:
-                tmp = self.stack_min[-1]
-            self.stack_min.append(tmp)
-
-    def pop(self):
-        if not self.stack or not self.stack_min:
-            return None
-        self.stack_min.pop()
-        return self.stack.pop()
+        # write code here
+        return self.min_stack[-1]
     
     def debug(self):
         print(self.stack)
