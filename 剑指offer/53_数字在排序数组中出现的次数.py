@@ -82,4 +82,4 @@ class Solution:
 nums = [1,2,3,3,3,3,4,5]
 k = 3
 obj = Solution()
-print(obj.GetNumberOfK(nums, k))
+print(obj.search(nums, k))

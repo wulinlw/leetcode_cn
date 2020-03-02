@@ -46,16 +46,16 @@ class Solution:
             if a.isdigit():
                 num_seen = True
             elif a == ".":
-                if e_seen or dot_seen:
+                if e_seen or dot_seen:      #有点或有e了 ，e后无小数
                     return False
                 dot_seen = True
-            elif a == "e":
-                if e_seen or not num_seen:
+            elif a == "e":                  
+                if e_seen or not num_seen:  #有e或没有数字
                     return False
-                num_seen = False
+                num_seen = False            #重新开始看额后面有没数字
                 e_seen = True
             elif a in "+-":
-                if i > 0 and s[i - 1] != "e":
+                if i > 0 and s[i - 1] != "e":   #-+前面不是e
                     return False
             else:
                 return False

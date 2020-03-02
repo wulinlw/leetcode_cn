@@ -29,6 +29,20 @@ class Solution:
                         dp[i] += 1
         print(dp)
         return dp[0]
+        
+    # 都不能组合，那每一位都是f(x)， 状态 dp(i)=dp(i-1)
+    # 如果可以组合，那就是dp(i) = dp(i-1)+dp(i-2)
+    def translateNum(self, num: int) -> int:
+        if num < 10:
+            return 1
+        result = [1] *(len(num)+1)
+        for i in range(2, len(num)+1):
+            if num[i-2] == 1 or (num[i-2] == 2 and num[i-1] <= 5):
+                result[i] = result[i-1] + result[i-2] 
+            else:
+                result[i] = result[i-1] 
+        return result[-1]
+
 
 n = 12258
 obj = Solution()

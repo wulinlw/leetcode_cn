@@ -34,12 +34,12 @@ def _merge(l, r):
 # O(nlog2n)
 def quick(nums, low, high):#low, high初始调用是0, len(nums)-1
     if low < high:
-        p = positive(nums, low, high)
+        p = partition(nums, low, high)
         quick(nums, low, p-1)
         quick(nums, p+1, high)
     return nums
 
-def positive(nums, low, high):
+def partition(nums, low, high):
     i = low-1
     pivot = nums[high]
     for j in range(low, high):
@@ -60,24 +60,28 @@ def insert(nums):
     return nums
 
 def bucket(nums):
-    max_len = max(nums)
-    bucket = [0] * (max_len+1)
+    bucket = [0]* (max(nums)+1)
     for i in nums:
         bucket[i] += 1
     re = []
-    for j in range(len(bucket)):
-        if bucket[j] != 0:
-            re.append(j)
+    for i in range(len(bucket)):
+        while bucket[i]>0:
+            re.append(i)
+            bucket[i] -= 1
     return re
 
 def count(nums):
-    re = [0]*len(nums)
+    re =[0]*len(nums)
     for i in range(len(nums)):
-        p = 0
+        c = 0 
+        dupilicate = 0
         for j in range(len(nums)):
-            if nums[i] > nums[j]:
-                p += 1
-        re[p] = nums[i]
+            if nums[i]>nums[j]:
+                c += 1
+            elif nums[i]==nums[j]:
+                dupilicate += 1
+        for k in range(c, c+dupilicate):
+            re[k] = nums[i]
     return re
 
 # 每一位数，他的索引idx，需要对比他后面的所有数，比他小的把位置给idx，比完后当前位交换到idx
@@ -121,61 +125,44 @@ def shell2(nums):
         gap //= 2
     return nums
 
+# https://www.runoob.com/python3/python-heap-sort.html
+def heapSort(arr): 
+    def heapify(arr, n, i): 
+        largest = i  
+        l = 2 * i + 1     # left = 2*i + 1 
+        r = 2 * i + 2     # right = 2*i + 2 
+        if l < n and arr[i] < arr[l]: 
+            largest = l 
+        if r < n and arr[largest] < arr[r]: 
+            largest = r 
+        if largest != i: 
+            arr[i],arr[largest] = arr[largest],arr[i]  # 交换
+            heapify(arr, n, largest) 
 
-def min_heap_sort(input_list):
-	
-	def heap_adjust(input_list, parent, length):
-		temp = input_list[parent]
-		child=2 * parent + 1
-
-		while child < length:
-			if child+1 < length and input_list[child+1] < input_list[child]:
-				child += 1
-			if temp <= input_list[child]:
-				break
-			input_list[parent] = input_list[child]
-			parent = child
-			child = 2 * parent + 1
-		input_list[parent] = temp
-
-	sorted_list = input_list
-	length = len(sorted_list)
-
-	# 初始化堆
-	for i in range(0, length // 2 + 1)[::-1]:
-		heap_adjust(sorted_list, i, length)
-
-	# 
-	for j in range(1, length)[::-1]:
-		sorted_list[j],sorted_list[0]=sorted_list[0],sorted_list[j]
-
-		heap_adjust(sorted_list, 0, j)
-		print('第%d趟排序:' % (length - j), end = '')
-		print(sorted_list)
-
-	return sorted_list
-
-if __name__ == '__main__':
-	input_list = [6, 4, 8, 9, 2, 3, 1]
-	print('排序前:', input_list)
-	sorted_list = min_heap_sort(input_list)
-	print('排序后:', sorted_list)
+    n = len(arr) 
+    # Build a maxheap. 
+    for i in range(n, -1, -1): 
+        heapify(arr, n, i) 
+    # print(arr)
+  
+    # 一个个交换元素
+    for i in range(n-1, 0, -1): 
+        arr[i], arr[0] = arr[0], arr[i]   # 交换
+        heapify(arr, i, 0) 
+    return arr
 
 
 
-
-
-
-
-
-arr = [10, 7, 8, 9, 1, 5]
+arr = [10, 7, 8, 9, 1, 5, 5]
 n = len(arr)
 # re = bobble(arr)
-# re = bucket(arr)
-# re = count(arr)
-# re = insert(arr)
-re = merge(arr)
+# re = merge(arr)
 # re = quick(arr, 0, n-1)
-# re = select(arr)
+# re = insert(arr)--------
+# re = bucket(arr)
+# re = count(arr)-------
+# re = select(arr)-------
 # re = shell2(arr)
+re = heapSort(arr)
 print(re)
+

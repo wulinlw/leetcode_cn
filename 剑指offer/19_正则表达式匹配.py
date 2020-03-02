@@ -52,7 +52,7 @@ class Solution:
         else:
             return first_match and self.isMatch(s[1:], p[1:])
 
-    # 动态规划
+    # 动态规划，思路和回溯一样
     def isMatch2(self, s: str, p: str) -> bool:
         memo = {}
         def dp(i,j):
@@ -73,12 +73,12 @@ class Solution:
 s = 'aaa'
 pattern = 'a.a'
 obj = Solution()
-# print(obj.match(s, 'a.a'))
-# print(obj.match(s, 'ab*ac*a'))
-# print(obj.match(s, 'aa.a'))
-# print(obj.match(s, 'ab*a'))
-# print(obj.match('aa', 'a*'))
-# print(obj.isMatch('ab', 'c'))
+print(obj.match(s, 'a.a'))
+print(obj.match(s, 'ab*ac*a'))
+print(obj.match(s, 'aa.a'))
+print(obj.match(s, 'ab*a'))
+print(obj.match('aa', 'a*'))
+print(obj.isMatch('ab', 'c'))
 print(obj.isMatch('', '.*c'))
 print(obj.isMatch('ab', '.*c'))
 print(obj.isMatch('', 'b*'))

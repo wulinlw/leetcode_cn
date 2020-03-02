@@ -28,7 +28,7 @@ class Solution(object):
 
     #看这个
     def constructArr(self, a: List[int]) -> List[int]:
-        res = [1 for i in range(len(a))]
+        res = [1]*len(a)
         left = 1
         for i in range(len(res)):
             res[i] = left
@@ -38,7 +38,6 @@ class Solution(object):
         for i in range(len(res)-1,-1,-1):
             res[i] *= right
             right *= a[i]
-            
         return res
 
 # 作者：zhu-230

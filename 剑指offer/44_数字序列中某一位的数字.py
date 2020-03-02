@@ -25,18 +25,17 @@ class Solution:
         return 9 * c
     
     # 从第n位中找出index的位数
-    def findIndex(self, index, digits):
+    def findIndex(self, index, digits):#索引  位数
         first = 0
         if index==1:
             first = 0
         else:
             first = pow(10, digits-1)           #n位数的第一个数
         num = first + index//digits             #位数除以长度=第xx位数
-        return str(num)[index % digits]         #第xx位数中找到需要的数
-        # indexFromRight = digits - index % digits
-        # for _ in range(1,indexFromRight):
-        #     num = num//10
-        # return num % 10
+        indexFromRight = digits - index % digits#位数-第几位== 从右边要找的那个位
+        for _ in range(1,indexFromRight):
+            num = num//10
+        return num % 10
 
 
     def findNthDigit(self, n: int) -> int:

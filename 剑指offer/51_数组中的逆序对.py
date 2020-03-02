@@ -28,7 +28,7 @@ class Solution:
                 j += 1
             
             for i in range(len(temp)):
-                nums[start + i] = temp[i]
+                nums[start + i] = temp[i]      #交换了顺序，num变成从小到大排列
             temp.clear()
                     
 
@@ -38,6 +38,7 @@ class Solution:
             mergeSort(nums, start, mid, temp)
             mergeSort(nums, mid + 1, end, temp)
             merge(nums, start, mid,  end, temp)
+
         mergeSort(nums, 0, len(nums) - 1, [])
         return self.cnt
 

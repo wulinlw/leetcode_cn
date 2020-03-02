@@ -5,37 +5,18 @@
 # // 题目：给定一个数组和滑动窗口的大小，请找出所有滑动窗口里的最大值。例如，
 # // 如果输入数组{2, 3, 4, 2, 6, 2, 5, 1}及滑动窗口的大小3，那么一共存在6个
 # // 滑动窗口，它们的最大值分别为{4, 4, 6, 6, 6, 5}，
-
-class Solution:
-    def maxInWindows(self, nums, size):
-        n = len(nums)
-        if n == 0 or n<size or size<1:return False
-        maxWindow = []
-        queue = []                                  #最大值对列,存nums的索引，大->小
-        for i in range(size):                               #创建初始窗口最大值队列
-            while len(queue)>0 and nums[i] > nums[queue[-1]]:
-                queue.pop()
-            queue.append(i)
-        for i in range(size, n):                            
-            maxWindow.append(nums[queue[0]])                    #每次滑动，写入结果集
-            while len(queue)>0 and nums[i] > nums[queue[-1]]:   #弹出队列中所有比当前小的
-                queue.pop()
-            while len(queue)>0 and queue[0] <= i-size:          #窗口向右滑动了，最左边的值（最大）去掉
-                queue.pop(0)
-            queue.append(i)                                     #写入下表，后面用于判断窗口是否滑动过去了i-size
-        maxWindow.append(nums[queue[0]])                        #最后一个值写入
-
-        return maxWindow
-    
+from typing import List
+class Solution:  
     def maxSlidingWindow(self, num: List[int], k: int) -> List[int]:
-        window ,res = [],[]
+        window = []     #窗口，放每次的最小值
+        res = []
         for i in range(len(num)):
-            while window and num[window[-1]]<num[i]: #why =,面试题59-II队列最大值好像没有等号,有没有等号皆可以
+            while window and num[window[-1]]<num[i]:#小于当前的都弹出去
                 window.pop()
             window.append(i)
-            if window[0] == i-k:#已超出窗口左端，过时数据丢弃
+            if window[0] + k==i:                    #已超出窗口左端，过时数据丢弃
                 window.pop(0)
-            if i >=k-1:#要从第k个数据开始输出答案，前面冷启动准备阶段
+            if i >=k-1:                             #超过窗口才记录结果
                 res.append(num[window[0]])
         return res
 
@@ -51,4 +32,4 @@ size = 1
 nums = [7,2,4]
 size = 2
 obj = Solution()
-print(obj.maxInWindows(nums, size))
+print(obj.maxSlidingWindow(nums, size))

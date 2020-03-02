@@ -35,6 +35,14 @@ class Solution:
             head = tmp
         return new
 
+    #https://leetcode-cn.com/problems/reverse-linked-list/solution/dong-hua-yan-shi-206-fan-zhuan-lian-biao-by-user74/
+    def ReverseList2(self, head):
+        if not head or not head.next:
+            return head 
+        cur = self.ReverseList2(head.next)
+        head.next.next = head
+        head.next = None
+        return cur
         
 
 
@@ -45,4 +53,7 @@ obj.printlinklist(head)
 h2 = obj.ReverseList(head)
 obj.printlinklist(h2)
 
+head = obj.initlinklist(nums)
+h3 = obj.ReverseList2(head)
+obj.printlinklist(h3)
 

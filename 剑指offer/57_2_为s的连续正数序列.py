@@ -8,37 +8,20 @@
 
 
 class Solution:
-    def FindContinuousSequence(self, n):
-        if n <3:return False
-        small = 1
-        big = 2
-        mid = (1+n)//2
-        curSum = small + big                        #滑动窗口的累加值
-        while small < mid:                          #只需要走到一半即可，n+n+1 > 2n
-            if curSum == n:                         
-                self.printSequence(small, big)
-            
-            while curSum>n and small<mid:           #滑动窗口累加值大于目标n，需要把左边向右移动一位
-                curSum -= small                     
-                small += 1
-                if curSum == n:                     #移位后再对比一次
-                    self.printSequence(small, big)
-            big += 1                                #滑动窗口sum小于目标n，向右滑动1位
-            curSum += big                           #滑动后累加窗口sum
+    def FindContinuousSequence(self, target):
+        i = j = 1
+        res = []
+        cur_sum = 0
+        while j < target:
+            cur_sum += j
+            j += 1
+            while cur_sum > target:
+                cur_sum -= i
+                i += 1
+            if cur_sum == target:
+                res.append(list(range(i, j)))
+        return res
 
-            # 这样理解更简单
-            # if cursum > n:
-            #     cursum -= small
-            #     small +=1
-            # else:
-            #     big += 1
-            #     cursum += big
-    
-    def printSequence(self, small, big):
-        for i in range(small, big+1):
-            print(i, end=",")
-        print("\n")
-        
 
         
 n = 18

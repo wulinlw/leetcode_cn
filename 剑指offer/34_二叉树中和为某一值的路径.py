@@ -11,23 +11,7 @@ class TreeNode:
         self.left = None
         self.right = None
 
-class Solution:
-    def FindPath(self, root, expectedSum):
-        if not root:return []
-        def core(root, curSum, path):
-            path.append(root.val)
-            curSum += root.val
-            if not root.left and not root.right and curSum == expectedSum:
-                print(path)
-            if root.left:
-                core(root.left, curSum, path)
-            if root.right:
-                core(root.right, curSum, path)
-            path.pop()                          #有成功找到的，弹出最后一位，否则找到第二个结果时，之前的结果还在队列中
-        
-        return core(root, 0, [])
-
-    
+class Solution:    
     # 层次遍历
     def levelOrder(self, root):
         """
@@ -55,30 +39,30 @@ class Solution:
             res.append(templist)
         return res
         
-    def pathSum(self, root, sum) :
-        re = []
-        def core(root, cursum, path):
-            path.append(root.val)
-            cursum += root.val
-            if cursum == sum and not root.left and not root.right:
-                re.append(path[:])
-                return 
+    def pathSum(self, root, target) :
+        if not root:
+            return None
+        res = []
+        def dfs(root,tmp):
+            if not root.left and not root.right:
+                if sum(tmp)== target:
+                    res.append(tmp)
             if root.left:
-                core(root.left, cursum, path)
+                dfs(root.left,tmp+[root.left.val])
             if root.right:
-                core(root.right, cursum, path)
-            path.pop()
-            return re
+                dfs(root.right,tmp+[root.right.val])
 
-        core(root, 0, [])
-        return re
+        dfs(root,[root.val])
+        return res 
+
+
 # 测试树
 #        10
-#    5     12
+#    5     9
 #  4  7                  
 t1 = TreeNode(10)
 t2 = TreeNode(5)
-t3 = TreeNode(12)
+t3 = TreeNode(9)
 t4 = TreeNode(4)
 t5 = TreeNode(7)
 
@@ -95,5 +79,4 @@ re = obj.levelOrder(root)
 # for i in range(len(re)):
 #     print(re[i])
 # print("\n")
-# obj.FindPath(t1, 19)
 print(obj.pathSum(t1, 19))
