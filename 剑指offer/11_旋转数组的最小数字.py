@@ -44,23 +44,23 @@ class Solution:
         i, j = 0, len(numbers) - 1
         while i < j:
             m = (i + j) // 2
-            if numbers[m] > numbers[j]: i = m + 1
-            elif numbers[m] < numbers[j]: j = m
-            else: j -= 1
+            if numbers[m] > numbers[j]: i = m + 1   #大于时，向右推进
+            elif numbers[m] < numbers[j]: j = m     #小于时，j=mid
+            else: j -= 1                            #等于时，想左推进
         return numbers[i]
 
 
         
 nums = [3,4,5,1,2]
 obj = Solution()
-print(obj.minNumberInRotateArray(nums))
-print(obj.minNumberInRotateArray([1,0,1,1,1]))
-print(obj.minNumberInRotateArray([1,1,1,0,1]))
-print(obj.minNumberInRotateArray([1,1,1]))
-print(obj.minNumberInRotateArray([3,1,1]))
-print("\n")
+# print(obj.minNumberInRotateArray(nums))
+# print(obj.minNumberInRotateArray([1,0,1,1,1]))
+# print(obj.minNumberInRotateArray([1,1,1,0,1]))
+# print(obj.minNumberInRotateArray([1,1,1]))
+# print(obj.minNumberInRotateArray([3,1,1]))
+# print("\n")
 
-print(obj.minArray(nums))
+print(obj.minArray([3,4,5,1,2]))
 print(obj.minArray([1,0,1,1,1]))
 print(obj.minArray([1,1,1,0,1]))
 print(obj.minArray([1,1,1]))

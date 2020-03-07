@@ -30,7 +30,7 @@ class Solution:
                  self.find(board, word, cur + 1, i - 1, j, visited) or\
                  self.find(board, word, cur + 1, i, j + 1, visited) or\
                  self.find(board, word, cur + 1, i, j - 1, visited)         
-        visited[i][j] = False
+        visited[i][j] = False       #回溯完毕，恢复状态
         return result
         
 

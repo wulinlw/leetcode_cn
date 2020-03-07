@@ -25,7 +25,7 @@ class Solution:
                 return False
             stack.pop()                                             #如果一样就pop，pop_order指针后移
             popIndex += 1
-
+        print(popIndex,stack)
         if popIndex==popLen and not stack:                          #跑完popIndex,stack也空了
             return True
         return False

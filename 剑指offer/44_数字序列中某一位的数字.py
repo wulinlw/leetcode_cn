@@ -35,7 +35,7 @@ class Solution:
         indexFromRight = digits - index % digits#位数-第几位== 从右边要找的那个位
         for _ in range(1,indexFromRight):
             num = num//10
-        return num % 10
+        return num % 10                         #取一位
 
 
     def findNthDigit(self, n: int) -> int:

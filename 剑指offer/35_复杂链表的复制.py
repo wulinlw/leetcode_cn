@@ -59,7 +59,7 @@ class Solution:
     def printlinklist(self, head):
         re = []
         while head:
-            randomval = head.random.val if head.random else None
+            randomval = head.sibling.val if head.sibling else None
             re.append((head.val,randomval))
             head = head.next
         print(re)
@@ -72,17 +72,15 @@ class Solution:
     # 作者：z1m
     # 链接：https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/solution/lian-biao-de-shen-kao-bei-by-z1m/
     def copyRandomList(self, head):
+        m = {}
         def dfs(head):
-            if not head: return None
-            if head in visited:
-                return visited[head]
-            # 创建新结点
-            copy = Node(head.val, None, None)
-            visited[head] = copy
-            copy.next = dfs(head.next)
-            copy.random = dfs(head.random)
-            return copy
-        visited = {}
+            if not head:return None
+            if head in m:return m[head]
+            new = ComplexNode(head.val)
+            new.next = dfs(head.next)
+            new.sibling = dfs(head.sibling)
+            return new
+
         return dfs(head)
 
 
@@ -108,11 +106,11 @@ obj = Solution()
 
 
 
-node5 = Node('5')
-node4 = Node('4', next=node5)
-node3 = Node('3', next=node4)
-node2 = Node('2', next=node3)
-node1 = Node('1', next=node2)
+node5 = ComplexNode('5')
+node4 = ComplexNode('4', next=node5)
+node3 = ComplexNode('3', next=node4)
+node2 = ComplexNode('2', next=node3)
+node1 = ComplexNode('1', next=node2)
 node1.random = node3
 node2.random = node5
 node4.random = node2

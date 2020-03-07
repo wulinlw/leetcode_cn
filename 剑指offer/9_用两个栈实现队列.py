@@ -21,15 +21,6 @@ class Solution:
     def appendTail(self, node):
         self.stack1.append(node)
 
-    #2个队列互相压栈
-    def deleteHead2(self):
-        n = len(self.stack1)
-        for _ in range(n-1):
-             self.stack2.append(self.stack1.pop(-1))
-        self.stack1 = []
-        while self.stack2:
-            self.stack1.append(self.stack2.pop(-1))
-
     # 正确方式
     # stack2为空时，把stack1全部压入stack2，
     # 总是从stack2中删

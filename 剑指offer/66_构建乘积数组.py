@@ -4,7 +4,7 @@
 # // 面试题66：构建乘积数组
 # // 题目：给定一个数组A[0, 1, …, n-1]，请构建一个数组B[0, 1, …, n-1]，其
 # // 中B中的元素B[i] =A[0]×A[1]×…×A[i-1] × A[i+1]×…×A[n-1]。不能使用除法。
-from tpye import List
+from typing import List
 class Solution(object):
     # 构造的B，第i位是：前面的乘积*后面的乘积，不包含i，
     # 如果能用除法，就用所有的乘积除以i即可
@@ -30,13 +30,13 @@ class Solution(object):
     def constructArr(self, a: List[int]) -> List[int]:
         res = [1]*len(a)
         left = 1
-        for i in range(len(res)):
+        for i in range(len(res)):           #res每一位等于前面的乘积
             res[i] = left
             left *= a[i]
 
         right = 1
         for i in range(len(res)-1,-1,-1):
-            res[i] *= right
+            res[i] *= right                 #需要乘以左边乘好的数
             right *= a[i]
         return res
 

@@ -10,26 +10,14 @@ class TreeNode:
         self.right = None
 
 class Solution:
-    def HasSubtree(self, root1, root2):
-        if not root1 or not root2:return False
-        re = False
-        if root1.val == root2.val:
-            re = self.HasSubtreeCore(root1, root2)      #只有等于才到core里找，不然就分别左右和完整的root2比
-        if not re: 
-            re = self.HasSubtree(root1.left, root2)
-        if not re: 
-            re = self.HasSubtree(root1.right, root2)
-        return re
-
-    def HasSubtreeCore(self, root1, root2):
-        if not root2: return True                       #正确的要放前面，不然会一直错误
-        if not root1: return False
-
-        if root1.val != root2.val:
-            return False
-        
-        return self.HasSubtreeCore(root1.left, root2.left) and \
-        self.HasSubtreeCore(root1.right, root2.right)        
+    def isSubStructure(self, A: TreeNode, B: TreeNode) -> bool:
+        if not A or not B: return False
+        return self.dfs(A,B) or self.isSubStructure(A.left,B) or self.isSubStructure(A.right,B)
+    
+    def dfs(self, A: TreeNode, B: TreeNode) -> bool:
+        if not B :return True
+        if not A :return False
+        return A.val == B.val and self.dfs(A.left,B.left) and self.dfs(A.right,B.right)
 
     # 层次遍历
     def levelOrder(self, root):

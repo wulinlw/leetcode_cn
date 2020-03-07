@@ -8,6 +8,7 @@
 
 
 class Solution:
+    # 双指针
     def FindContinuousSequence(self, target):
         i = j = 1
         res = []

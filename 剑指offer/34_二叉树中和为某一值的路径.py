@@ -55,6 +55,22 @@ class Solution:
         dfs(root,[root.val])
         return res 
 
+    def pathSum(self, root, target) :
+        if not root:return None
+        re = []
+        def bt(r, sum, path):
+            if not r: return None
+            sum+=r.val
+            path.append(r.val)
+            if not r.left and not r.right:
+                if sum==target:
+                    re.append(path[:])      #这里必须把path[:]拷贝一份，不然pop()时re中的结果会变化
+            bt(r.left, sum, path)
+            bt(r.right, sum, path)
+            path.pop()
+
+        bt(root,0,[])
+        return re
 
 # 测试树
 #        10

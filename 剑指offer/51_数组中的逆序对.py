@@ -37,7 +37,7 @@ class Solution:
             mid = (start + end) >> 1
             mergeSort(nums, start, mid, temp)
             mergeSort(nums, mid + 1, end, temp)
-            merge(nums, start, mid,  end, temp)
+            merge(nums, start, mid,  end, temp) #合并的时候，因为要算逆序对，会从起点和中点开始向右走，所以要传mid
 
         mergeSort(nums, 0, len(nums) - 1, [])
         return self.cnt

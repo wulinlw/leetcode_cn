@@ -35,7 +35,7 @@ def _merge(l, r):
 def quick(nums, low, high):#low, high初始调用是0, len(nums)-1
     if low < high:
         p = partition(nums, low, high)
-        quick(nums, low, p-1)
+        quick(nums, low, p-1)           #注意，快排的结尾和开头，不包含p，这个值被用来做标记
         quick(nums, p+1, high)
     return nums
 
@@ -125,6 +125,8 @@ def shell2(nums):
         gap //= 2
     return nums
 
+# 视频讲解
+# https://www.bilibili.com/video/av47196993?from=search&seid=8489142146697475476
 # https://www.runoob.com/python3/python-heap-sort.html
 def heapSort(arr): 
     def heapify(arr, n, i): 

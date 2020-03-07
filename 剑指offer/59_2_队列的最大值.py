@@ -10,32 +10,23 @@ class QueueWithMax:
     # push_back新数据时，把maxQueue中所有小于此值的删除
     # pop_front时，对比弹出数据的索引是不是最大值，是最大值需要把maxQueue的最大值一起删掉(pop(0))
     def __init__(self):
-        self.data = []
-        self.maxQueue = []              #从大到小排列
-        self.index = 0
-    
-    def max(self):
-        if self.maxQueue:
-            return self.maxQueue[0][1]
+        self.queue = []
+        self.deque = []
+        
+    def max_value(self) -> int:
+        return self.deque[0] if self.deque else -1
 
-    def push_back(self,num):
-        while len(self.maxQueue)>0 and num>self.maxQueue[-1][1]:#maxQueue中比当前小的都删除
-            self.maxQueue.pop()
-        node = (self.index, num)
-        self.maxQueue.append(node)
-        self.data.append(node)
-        self.index += 1
-        print(self.data)
-        print(self.maxQueue)
-        print("\n")
+    def push_back(self, value: int) -> None:
+        self.queue.append(value)
+        while self.deque and value > self.deque[-1]:
+            self.deque.pop(-1)
+        self.deque.append(value)
 
-    def pop_front(self):
-        idx, num = self.data.pop(0)
-        if idx == self.maxQueue[0][0]:
-            self.maxQueue.pop(0)
-        print(self.data)
-        print(self.maxQueue)
-        print("\n")
+    def pop_front(self) -> int:
+        front = self.queue and self.queue.pop(0)
+        if self.deque and self.deque[0] == front:
+            self.deque.pop(0)
+        return front or -1
 
 
 obj = QueueWithMax()

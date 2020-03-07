@@ -17,6 +17,7 @@ class Solution(object):
                 count0 += 1
         
         countGap = 0
+        #开始双指针
         small = count0          
         big = count0+1                  #第一个非0位，下标
         while big<len(nums):

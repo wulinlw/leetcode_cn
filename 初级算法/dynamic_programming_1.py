@@ -101,26 +101,21 @@ class Solution(object):
             self.backtrack(nums[:i] + nums[i + 1:], tmp + [nums[i]], res)
 
     def climbStairs5(self, n):
-        from copy import deepcopy
         re = []
-        stack = []
-        def climb(stack, n):
-            if n == 0:
-                tmp = deepcopy(stack)
-                re.append(tmp)
-                # print(stack)
-            if n >= 1:
-                stack.append(1)
-                climb(stack, n-1)
-                stack.pop()
-            if n >= 2:
-                stack.append(2)
-                climb(stack, n-2)
-                stack.pop()
-        climb(stack,n)
-        # print(re)
+        def bt(n,tmp):
+            if n<0:return
+            if n==0:
+                re.append(tmp[:]) 
+            if n>=2:
+                tmp.append(2)
+                bt(n-2,tmp)
+                tmp.pop()
+            if n>=1:
+                tmp.append(1)
+                bt(n-1,tmp)
+                tmp.pop()
+        bt(n,[])
         return re
-
 
 n = 4
 s = Solution()

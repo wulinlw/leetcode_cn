@@ -7,52 +7,31 @@
 # // 那么中位数就是所有数值排序之后中间两个数的平均值。
 import heapq
 class Solution:
-    # 创建一个最大堆，一个最小堆
-    # 总数是偶数时，新数据写入最大堆，都是负数
-    # 总数是奇数时，新数据写入最小堆，都是正数
-    # 为保证2个堆中数据一样多，写入前需做处理
-    # 2个堆的和为偶数时，若对小堆有值，线放入最小堆，弹出堆顶（最小）写入最大堆
-    # 2个堆的和为奇数时，若对大堆有值，线放入最大堆，弹出堆顶（最小）写入最大堆， 最大堆都是负数，所以堆顶转成正数就是最大的
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        # 初始化大顶堆和小顶堆
+        self.max_heap = []
+        self.min_heap = []
 
-    # 返回结果是
-    # 总数是偶数时，中位数 =（最小堆的堆顶 + 最大堆中的堆顶)/2
-    # 总数是奇数时，中位数 = 最大堆的堆顶/2
+    def addNum(self, num: int) -> None:
+        if len(self.max_heap) == len(self.min_heap):# 先加到大顶堆，再把大堆顶元素加到小顶堆
+            heapq.heappush(self.min_heap, -heapq.heappushpop(self.max_heap, -num))
+        else:  # 先加到小顶堆，再把小堆顶元素加到大顶堆
+            heapq.heappush(self.max_heap, -heapq.heappushpop(self.min_heap, num))
 
-    # python3 41_数据流中的中位数.py  测试可以看下效果，协助理解2个堆桌面存储数据
-    def test(self):
-        max_heap = []
-        min_heap = []
-        while True:
-            x = input("input num ")
-            if x == '':
-                if len(min_heap) == 0 and len(max_heap) == 0:
-                    return
+    def findMedian(self) -> float:
+        if len(self.min_heap) == len(self.max_heap):
+            return (-self.max_heap[0] + self.min_heap[0]) / 2
+        else:
+            return self.min_heap[0]
 
-                mid = None
 
-                print(max_heap)
-                print(min_heap)
-                if (len(min_heap) + len(max_heap)) & 1 == 0:
-                    mid = (heapq.heappop(min_heap) - heapq.heappop(max_heap)) / 2
-                else:
-                    mid = heapq.heappop(max_heap) * -1
-
-                
-                print("中位数：%d" % mid)
-                return
-
-            x = int(x)
-            if (len(min_heap) + len(max_heap)) & 1 == 0:    #和为偶数
-                if len(min_heap) > 0:
-                    heapq.heappush(min_heap, x)             #插入最小堆
-                    x = heapq.heappop(min_heap)             #并从最小堆中弹出最顶值（最小）
-                heapq.heappush(max_heap, -1 * x)            #写入最大堆
-            else:
-                if len(max_heap) > 0:
-                    heapq.heappush(max_heap, -1 * x)        #写入最大堆
-                    x = -1 * heapq.heappop(max_heap)        #弹出最大堆中的最顶值（最小）
-                heapq.heappush(min_heap, x)                 #写入最小堆
-
+    # 作者：z1m
+    # 链接：https://leetcode-cn.com/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/solution/you-xian-dui-lie-by-z1m/
+    # 来源：力扣（LeetCode）
+    # 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 #数据理解
 # 1           max -1
 #             min
@@ -77,4 +56,10 @@ class Solution:
 1,2,3,4,5,6     
 
 obj = Solution()
-obj.test()
+obj.addNum(1)
+obj.addNum(2)
+print(obj.findMedian())
+obj.addNum(3)
+obj.addNum(4)
+obj.addNum(5)
+print(obj.findMedian())

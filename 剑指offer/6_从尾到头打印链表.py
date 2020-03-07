@@ -28,23 +28,21 @@ class Solution:
 
     #不允许修改链表，需要用递归打印
     def printListFromTailToHead(self, head):
-        if head.next:
-            self.printListFromTailToHead(head.next)
-        print(head.val, "")     #放在后面就是倒着打印了，递归到最后才会输出，一层层网上走
+        return self.printListFromTailToHead(head.next) + [head.val] if head else []
 
     #栈
     def printListFromTailToHead2(self, head):
-        stack= []
-        while head.next:
-            stack.append(head)
+        stack = []
+        while head:
+            stack.append(head.val)
             head = head.next
-        stack.append(head)
-        while len(stack)>0:
-            print(stack.pop().val)
+        return stack[::-1]
+
+
         
 nums = [1,2,3,4,5]
 obj = Solution()
 re = obj.initlinklist(nums)
 # print(re)
 # obj.printlinklist(re)
-obj.printListFromTailToHead(re)
+obj.printListFromTailToHead2(re)

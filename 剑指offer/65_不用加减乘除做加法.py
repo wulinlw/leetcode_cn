@@ -30,7 +30,7 @@ class Solution(object):
     def add(self, a: int, b: int) -> int:
         a &= 0xFFFFFFFF                         #二进制长度限制，取有效部分，题目要求的32位整数
         b &= 0xFFFFFFFF
-        while b:
+        while b:                                #有进位就循环处理
             carry = a & b       
             a ^= b                              #异或，取不进位部分的和，不管进位
             b = ((carry) << 1) & 0xFFFFFFFF     #取进位

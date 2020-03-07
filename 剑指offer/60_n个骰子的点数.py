@@ -41,7 +41,7 @@ class Solution(object):
         """
         # 为了将index与n对应上，特意把第0行空出来
         res = [[0 for i in range(6*n+1)] for i in range(n+1)]
-        print(res)
+        # print(res)
         
         # 将第0行与第0列空出来，res[1][1:7] = [1,1,1,1,1,1]
         # 表示第一个骰子6种情况各出现一次

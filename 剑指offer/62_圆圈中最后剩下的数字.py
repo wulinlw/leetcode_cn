@@ -9,7 +9,6 @@ class Solution(object):
     def LastRemaining_1(self, n, m):
         if n<0 or m<0:return False
         nums = [i for i in range(n)]
-
         index = 0                       #要删除的索引
         while len(nums)>1:
             index = (m+index-1)%len(nums)

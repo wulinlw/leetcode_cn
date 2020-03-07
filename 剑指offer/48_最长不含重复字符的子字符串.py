@@ -22,27 +22,35 @@ class Solution:
             dp[p] = i
         return maxLen
 
-    # 滑动窗口
+    # 滑动窗口,看这个
+    # https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/solution/tu-jie-hua-dong-chuang-kou-shuang-zhi-zhen-shi-xia/
+    # O(n)
     def lengthOfLongestSubstring(self, s: str) -> int:
-        head = 0
-        tail = 0
-        if len(s) < 2: return len(s) # 边界条件
-        res = 1
-        
-        while tail < len(s) - 1:
-            tail += 1
-            if s[tail] not in s[head: tail]:
-                res = max(tail - head + 1, res)
-            else:
-                while s[tail] in s[head: tail]:
-                    head += 1
-        return res
+        n = len(s)
+        m = {}      #存在的字符坐标
+        l = 0
+        re = 0
+        for r in range(n):
+            if s[r] in m:           #重复了，移动左边界到重复值的下一位
+                l = max(l, m[s[r]])
+            m[s[r]] = r+1
+            re = max(re, r-l+1)
+        return re 
 
-# 作者：z1m
-# 链接：https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/solution/tu-jie-hua-dong-chuang-kou-shuang-zhi-zhen-shi-xia/
-# 来源：力扣（LeetCode）
-# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。    
+    # O(n2)
+    def lengthOfLongestSubstring2(self, s: str) -> int:
+        Set = set()
+        left,right,longest = 0, 0 ,0 
+        while right < len(s):
+            while s[right] in Set:
+                Set.remove(s[left])
+                left += 1 
+            Set.add(s[right])
+            right += 1 
+            longest = max(right-left,longest)
+        return longest
+
 
 s = "arabcacfr"
 obj = Solution()
-print(obj.longestSubstringWithoutDuplication(s))
+print(obj.lengthOfLongestSubstring(s))

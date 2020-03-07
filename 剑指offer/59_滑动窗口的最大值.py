@@ -27,9 +27,9 @@ class Solution:
 
 nums = [2, 3, 4, 2, 6, 2, 5, 1]
 size = 3
-nums = [1,-1]
-size = 1
-nums = [7,2,4]
-size = 2
+# nums = [1,-1]
+# size = 1
+# nums = [7,2,4]
+# size = 2
 obj = Solution()
 print(obj.maxSlidingWindow(nums, size))

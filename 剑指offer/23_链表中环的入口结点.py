@@ -27,33 +27,19 @@ class Solution:
 
     def MeetingNode(self, head):
         if not head:return False
-        meetNode = None                 #相遇节点
-        loopNodes = 0                   #环的长度
-        p1 = p2 = slow = fast = head
+        p1 = slow = fast = head
         while 1:
             slow = slow.next
             if not fast.next.next:
                 return False
             fast = fast.next.next
             if slow == fast:
-                meetNode = slow
                 break
-        # print(meetNode.val)
-        
-        while slow:                     #一个指针继续动，再次回到原地就是环的长度
-            slow = slow.next
-            loopNodes += 1
-            if slow == meetNode:
-                # print(loopNodes)
-                break
-        # print(loopNodes)
-
-        for _ in range(loopNodes):      #一个先走环的长度，然后2个一起走，碰头就是环入口
-            p2 = p2.next
-        while p1 != p2:
+        while p1 != slow:
             p1 = p1.next
-            p2 = p2.next
-        return p1
+            slow = slow.next
+        return slow
+
 
         
 n1 = ListNode(1)
