@@ -104,3 +104,4 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+剑指offer/2test.py

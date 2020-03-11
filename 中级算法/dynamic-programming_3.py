@@ -18,6 +18,7 @@
 # 你可以认为每种硬币的数量是无限的。
 
 # https://blog.csdn.net/qq_17550379/article/details/82909656
+from typing import List
 class Solution(object):
     def coinChange(self, coins, amount):
         """
@@ -28,20 +29,27 @@ class Solution(object):
         # 自底向上
         # dp[i] 表示金额为i需要最少的硬币
         # dp[i] = min(dp[i], dp[i - coins[j]]+1) j所有硬币
-        
         dp = [float("inf")] * (amount + 1)
         dp[0] = 0
-        for i in range(1, amount + 1):
-            for c in coins:
-                if i - c >= 0:
-                    dp[i] = min(dp[i], dp[i - c]+1)
+        for i in range(len(dp)):
+            for coin in coins:
+                if i - coin < 0:continue
+                dp[i] = min(dp[i], dp[i - coin]+1)
         print(dp)
         return dp[-1] if dp[-1] != float("inf") else -1
 
-# 作者：powcai
-# 链接：https://leetcode-cn.com/problems/coin-change/solution/dong-tai-gui-hua-bfs-dfs-by-powcai/
-# 来源：力扣（LeetCode）
-# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+    def coinChange2(self, coins: List[int], amount: int) -> int:
+        def dp(n):
+            if n==0:return 0
+            if n<0:return -1
+            res = float('inf')
+            for coin in coins:
+                sub = dp(n-coin)
+                if sub==-1:continue
+                res = min(res, sub+1)
+            return res if res!=float('inf') else -1
+        return dp(amount)
+
 
 coins = [1, 2, 5]
 amount = 11
