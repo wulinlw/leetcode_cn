@@ -12,18 +12,11 @@ class Solution:
     # head2 + head1
     def FindFirstCommonNode(self, head1, head2):
         if not head1 or not head2:return False
-        p1 = head1
-        p2 = head2
-        while True:
-            if p1 == p2:
-                return p1
-            if not p1.next:
-                p1.next = head2
-            p1 = p1.next
-            if not p2.next:
-                p2.next = head1
-            p2 = p2.next
-        return False
+        l1,l2=head1,head2
+        while l1!=l2:
+            l1=l1.next if l1 else head2
+            l2=l2.next if l2 else head1
+        return l1
         
 
 
