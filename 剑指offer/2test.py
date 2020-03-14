@@ -160,10 +160,47 @@ class Solution:
         dfs(root)
         return p
 
+    def lengthOfLIS1(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n==0:return 0 
+        dp = [1] * n 
+        maxLen = 0
+        for i in range(n):
+            for  j in range(i):
+                if nums[j] < nums[i]:
+                  dp[i] = max(dp[i], dp[j]+1)
+            maxLen = max(maxLen, dp[i])
+        print(dp)
+        return maxLen   
 
-# [4,2,5,1,3,null,6,0]
-# o = Solution()
-# print(o.canThreePartsEqualSum(A))
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n==0:return 0 
+        tail = [nums[0]]
+        for num in nums[1:]:
+            if num > tail[-1]:
+                tail.append(num)
+                continue
+            l,r = 0,len(tail)-1 
+            while l<r:
+                mid = l+(r-l)//2 
+                if tail[mid]<num:
+                    l = mid+1
+                else:
+                    r = mid
+            tail[l] = num
+        print(tail)
+        return len(tail) 
+
+
+
+
+
+
+nums = [10,9,2,5,3,7,101,18]
+# [2,3,7,101]
+o = Solution()
+print(o.lengthOfLIS(nums))
 
 
 #   1
@@ -186,28 +223,29 @@ class Solution:
 #  1 3  6
 # 0
 # [4,2,5,1,3,null,6,0]
-t1 = TreeNode(4)
-t2 = TreeNode(2)
-t3 = TreeNode(5)
-t4 = TreeNode(1)
-t5 = TreeNode(3)
-t6 = TreeNode(6)
-t7 = TreeNode(0)
-root = t1
-root.left = t2
-root.right = t3
-t2.left = t4
-t2.right = t5
-t3.right = t6
-t4.left = t7
+# t1 = TreeNode(4)
+# t2 = TreeNode(2)
+# t3 = TreeNode(5)
+# t4 = TreeNode(1)
+# t5 = TreeNode(3)
+# t6 = TreeNode(6)
+# t7 = TreeNode(0)
+# root = t1
+# root.left = t2
+# root.right = t3
+# t2.left = t4
+# t2.right = t5
+# t3.right = t6
+# t4.left = t7
 
-o = Solution()
-# print(o.findSecondMinimumValue(root))
-# print(o.levelOrder(t))
-t = o.convertBiNode(root)
-re = []
-while t:
-    re.append(t.val)
-    t = t.right
-print(re)
+# nums = [10,9,2,5,3,7,101,18]
+# o = Solution()
+# print(o.lengthOfLIS(nums))
+# # print(o.levelOrder(t))
+# t = o.convertBiNode(root)
+# re = []
+# while t:
+#     re.append(t.val)
+#     t = t.right
+# print(re)
 

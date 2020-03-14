@@ -65,6 +65,13 @@ class Solution:
             return reverseN(head, n)
         head.next = self.reverseBetween(head.next, m-1, n-1)
         return head
+        # 写出了翻转前n个元素的方法后，
+        # 翻转 m 到 n 的问题，和 m-1 到 n-1 的问题一样，都是区间翻转
+        # 那当 m==1 时，问题退化成了翻转前 n 个元素
+        # 递归就可以了
+        # head.next 在递归中接上翻转后到节点
+
+
 
 
 # @lc code=end

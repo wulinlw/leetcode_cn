@@ -40,24 +40,27 @@ class Solution(object):
     # 当前遍历值大于最后一位，则放在tails后面
     # 小于最后一位，就替换到他应该插入的位置
     # tails的有效长度就是结果
-
-    #看视频
-    # https://www.bilibili.com/video/av38184838
+    # https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/
+    # 原理：tail结尾的数字越小，能上升的序列就越多
+    # 但是tail中包含的序列不一定是真实的序列结果，但是长度是对的
     def lengthOfLIS2(self, nums):
-        tails, res = [0] * len(nums), 0
-        for num in nums:
-            i, j = 0, res
-            while i < j:            # while就是在找当前值需要插入到哪里，
-                m = (i + j) // 2
-                if tails[m] < num: 
-                    i = m + 1       # 往后插入
-                else: 
-                    j = m           # 往前插入
-            tails[i] = num
-            # print(tails,i,j,res)
-            if j == res:            # 插入到最后，说明连续增长的数+1
-                res += 1
-        return res
+        n = len(nums)
+        if n==0:return 0 
+        tail = [nums[0]]            #排序数组，
+        for num in nums[1:]:
+            if num > tail[-1]:      #当前数大于最后一位的直接放后面
+                tail.append(num)
+                continue
+
+            l,r = 0,len(tail)-1     #其他情况就在tail中找第一个大于num的位置，然后替换
+            while l<r:
+                mid = l+(r-l)//2 
+                if tail[mid]<num:
+                    l = mid+1
+                else:
+                    r = mid
+            tail[l] = num           #l 就是第一个大于num的位置，替换掉这里的数
+        return len(tail) 
 
 # 作者：jyd
 # 链接：https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/zui-chang-shang-sheng-zi-xu-lie-dong-tai-gui-hua-2/
