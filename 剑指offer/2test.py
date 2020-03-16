@@ -192,16 +192,76 @@ class Solution:
         print(tail)
         return len(tail) 
 
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        def core(grid, i, j):
+            if i<0 or i>=len(grid) or j<0 or j>=len(grid[0]) or grid[i][j]==0:
+                return 0
+            grid[i][j] = 0
+            re = 1
+            re += core(grid, i-1, j) +\
+                  core(grid, i+1, j) +\
+                  core(grid, i, j-1) +\
+                  core(grid, i, j+1)
+            return re
+
+        maxval = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                tmp = core(grid,  i, j)
+                maxval = max(maxval, tmp)
+        return maxval
+
+    #只看递归思路，会超时
+    def divingBoard2(self, shorter: int, longer: int, k: int) -> List[int]:
+        # 0块板    0, 0
+        # 1       shorter, longer
+        # 2       rec(k-1)+shorter, rec(k-1)+longer
+        def recursion(k):
+            nonlocal re
+            if k==0:return 0, 0
+            if k==1:return shorter, longer
+            min, max = recursion(k-1)
+            return min+shorter, max+longer
+        small, big = recursion(k)
+        if longer-shorter==0 :return []
+        re = list(range(small, big+1, longer-shorter))
+        return re
+
+    def divingBoard(self, shorter: int, longer: int, k: int) -> List[int]:
+        if k == 0:return []
+        elif shorter == longer:
+            return [k*shorter]
+        return list(range(shorter*k, longer*k + 1, (longer-shorter)))
+
+    def compressString(self, S: str) -> str:
+        s = list(S)
+        re = ""
+        i=0
+        while i<len(s):
+            j = i
+            while j<len(s) and s[i]==s[j]:
+                j += 1
+            re = re+s[i]+str(j-i)
+            i=j
+        return re if len(re)<len(s) else S
+
+    def missingNumber(self, nums: List[int]) -> int:
+        n = len(nums)
+        re = 0
+        for i in range(n+1):
+            re = re+i
+            if i<n:
+                re -=nums[i]
+        return re
 
 
-
-
-
-nums = [10,9,2,5,3,7,101,18]
-# [2,3,7,101]
+nums = [3,0,1]
+#  输出："a2b1c5a3"
+# s = "abbccd"
+#  输出："abbccd"  a1b2c2d1
+# 输出： {3,4,5,6}
 o = Solution()
-print(o.lengthOfLIS(nums))
-
+print(o.missingNumber(nums))
 
 #   1
 #  2  3

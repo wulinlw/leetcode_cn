@@ -98,6 +98,10 @@ class Solution:
 
 nums1 = [7,2,4,3]
 nums2 = [5,6,4,1]
+nums1 = [1,8]
+nums2 = [0]
+# nums1 = [2,4,3]
+# nums2 = [5,6,4]
 o = Solution()
 head1 = o.initlinklist(nums1)
 head2 = o.initlinklist(nums2)
