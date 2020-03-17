@@ -253,15 +253,30 @@ class Solution:
             if i<n:
                 re -=nums[i]
         return re
+    
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        import collections
+        ans = 0
+        cnt = collections.Counter(chars)
+        print(cnt)
+        for w in words:
+            c = collections.Counter(w)
+            # if all([c[i] <= cnt[i] for i in c]):
+            #     ans += len(w)
+            print(c)
+            status = True
+            for i in c:
+                print(i,c[i],cnt[i])
+                if c[i] > cnt[i]:
+                    status = False
+            if status:
+                ans += len(w)
+        return ans
 
-
-nums = [3,0,1]
-#  输出："a2b1c5a3"
-# s = "abbccd"
-#  输出："abbccd"  a1b2c2d1
-# 输出： {3,4,5,6}
+words=["hello","world","leetcode"]
+chars="welldonehoneyr"
 o = Solution()
-print(o.missingNumber(nums))
+print(o.countCharacters(words,chars))
 
 #   1
 #  2  3
