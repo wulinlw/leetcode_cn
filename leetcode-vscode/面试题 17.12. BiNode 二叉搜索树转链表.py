@@ -18,17 +18,18 @@ class TreeNode:
         self.right = None
 
 class Solution:
+    # [114] 二叉树展开为链表
     def convertBiNode(self, root: TreeNode) -> TreeNode:
         p = pre = None
-        def dfs(root):
+        def dfs(root):                  #中序遍历
             nonlocal pre,p
             if not root:return None
             dfs(root.left)
             root.left = None
             if pre:
-                pre.right = root
+                pre.right = root        #设置下一个节点
             else:
-                p = root
+                p = root                #第一个节点head
             pre = root
             dfs(root.right)
         

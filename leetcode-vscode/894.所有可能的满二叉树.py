@@ -41,14 +41,14 @@
 # 
 # 
 #
-
+from typing import List
 # @lc code=start
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 class Solution:
     # 子问题：构造一棵满二叉树
@@ -56,29 +56,22 @@ class Solution:
         res = []
         if N == 1:
             return [TreeNode(0)]
-        # 结点个数必须是奇数
-        if N % 2 == 0:
+        if N % 2 == 0:                                  # 如果你要为某节点分配一个左节点，那么一定也要为它分配一个右节点。因此，如果 N 为偶数，那一定无法构成一棵满二叉树。
             return []
-        
-        # 左子树分配一个节点
-        left_num = 1
-        # 右子树可以分配到 N - 1 - 1 = N - 2 个节点
-        right_num = N - 2
-        
+
+        left_num = 1                                    # 左子树分配一个节点
+        right_num = N - 2                               # 右子树可以分配到 N - 1(根) - 1(左) = N - 2 个节点
         while right_num > 0:
-            # 递归构造左子树
-            left_tree = self.allPossibleFBT(left_num)
-            # 递归构造右子树
-            right_tree = self.allPossibleFBT(right_num)
-            # 具体构造过程
-            for i in range(len(left_tree)):
+            left_tree = self.allPossibleFBT(left_num)   # 递归构造左子树
+            right_tree = self.allPossibleFBT(right_num) # 递归构造右子树
+            for i in range(len(left_tree)):             # 具体构造过程
                 for j in range(len(right_tree)):
                     root = TreeNode(0)
                     root.left = left_tree[i]
                     root.right = right_tree[j]
                     res.append(root)
-            left_num += 2
-            right_num -= 2
+            left_num += 2                               #左树+2个子节点，左树初始只有一个根节点
+            right_num -= 2                              #右树-2个子节点，右树初始右剩余的所有节点
         
         return res     
 

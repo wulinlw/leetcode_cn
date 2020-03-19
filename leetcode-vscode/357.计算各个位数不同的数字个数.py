@@ -31,7 +31,7 @@ class Solution:
         import functools
         visited = set()
         @functools.lru_cache(None)
-        def helper(d):
+        def helper(d):                      #d 几位数
             if d == n: return 1
             res = 1
             for i in range(1 if d == 0 else 0, 10):

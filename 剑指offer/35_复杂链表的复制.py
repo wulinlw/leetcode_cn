@@ -77,6 +77,7 @@ class Solution:
             if not head:return None
             if head in m:return m[head]
             new = ComplexNode(head.val)
+            m[head] = new
             new.next = dfs(head.next)
             new.sibling = dfs(head.sibling)
             return new

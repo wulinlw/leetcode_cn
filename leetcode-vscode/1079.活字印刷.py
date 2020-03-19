@@ -69,11 +69,12 @@ class Solution:
             for i in range(len(arr)):
                 backtrack(arr[:i]+arr[i+1:], arr[i]+tmp)
         backtrack(tiles, "")
+        # print(ans)
         return len(ans)
 # @lc code=end
 
 tiles = "AAB"
-tiles = "AAABBC"
+# tiles = "AAABBC"
 o = Solution()
 print(o.numTilePossibilities(tiles))
-print(o.numTilePossibilities2(tiles))
+# print(o.numTilePossibilities2(tiles))

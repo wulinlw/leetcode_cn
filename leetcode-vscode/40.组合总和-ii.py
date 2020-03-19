@@ -59,10 +59,10 @@ class Solution:
                 return
             for i in range(idx, len(arr)):
                 if candidates[i] > target:break
-                if i>idx and candidates[i-1] == candidates[i]:      #和前一个相同的跳过,注意i>idx
+                if i>idx and candidates[i-1] == candidates[i]:      #和前一个相同的跳过,注意i>idx 注意这是在同一层循环里才可以生效，而不影响candidates中重复的元素
                     continue
                 tmp.append(candidates[i])
-                backtrack(candidates, target-candidates[i], i+1, tmp)   #注意i没有+1，这样就可以重复选择同一个数
+                backtrack(candidates, target-candidates[i], i+1, tmp)   
                 tmp.pop()
         candidates.sort()#配合剪枝
         backtrack(candidates, target, 0, [])

@@ -71,7 +71,7 @@ class Solution:
     # https://leetcode-cn.com/problems/path-sum-iii/solution/da-dao-zhi-jian-qian-zhui-he-de-li-jie-by-cocowy/
     def pathSum(self, root: TreeNode, sum: int) -> int:
         m = {}
-        m[0] = 1 
+        m[0] = 1                                        #初始化默认值
         return self.help(root, sum, m, 0)
     
     def help(self, root, sum, m, cursum):
@@ -79,16 +79,21 @@ class Solution:
         cursum += root.val
         if cursum-sum not in m:
             m[cursum-sum] = 0
-        count = m[cursum-sum]
+        count = m[cursum-sum]                           #出现的次数，前缀出现的次数
+
         if cursum not in m:
             m[cursum] = 0
-        m[cursum]+=1
+        m[cursum]+=1                                    #回溯，设为1，找下一个
         count += self.help(root.left, sum, m, cursum)
         count += self.help(root.right, sum, m, cursum)
         m[cursum]-=1
         return count
-
-
+    # 10   5   3   数组中找和为 8 的路径
+    # 10   15  18  cursum
+    # 2    7   10  cursum-sum
+    # cursum-sum出现了10，这个10就是前缀和
+    # 回溯前前缀和的值是1，加上后面的，就是总的要反回的
+    # 如果后面也能找到，就是不断的1+1+1+...
 # @lc code=end
 
 

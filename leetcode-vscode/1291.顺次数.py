@@ -53,8 +53,8 @@ class Solution:
                 return
             if(val <= high and val >= low): #符合范围的加入结果集
                 self.res.append(val)
-            if(digit < 9):
-                dfs(val, digit+1)           #下一位+1
+            if(digit < 9):                  #下一位+1,<9是放置进位变成0，这样就不符合向右递增了
+                dfs(val, digit+1)           
 
         self.res = []
         for i in range(1,10):               #1-9

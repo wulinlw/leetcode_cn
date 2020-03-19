@@ -48,6 +48,7 @@ class Solution:
             head = head.next
         print(re)
 
+    #面试题 02.04. 分割链表
     #创建2个链表，比x小的放before,大的放after
     #最后在连起来
     def partition(self, head: ListNode, x: int) -> ListNode:

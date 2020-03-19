@@ -56,13 +56,13 @@ class Solution:
             if idx==N+1:
                 cnt += 1
                 return
-            for i in range(1, N+1):
+            for i in range(1, N+1):                 #当前位置一次填入1-N
                 if not visited[i] and (i%idx==0 or idx%i==0):
                     visited[i] = True
                     backtrack(idx+1, visited)       #注意这里idx+1,不断向下一位推进
                     visited[i] = False
         
-        visited = [False]*(N+1)
+        visited = [False]*(N+1)                     #记录索引是否被填充过数字
         backtrack(1, visited)
         return cnt
         

@@ -40,7 +40,7 @@ class Solution:
             if idx >len(nums):return 
             re.append(tmp[:])
             for i in range(idx, len(nums)):
-                if i>idx and nums[i-1]==nums[i]:continue    #和前一个相同的跳过,注意i>idx
+                if i>idx and nums[i-1]==nums[i]:continue    #在同一层循环中，和前一个相同的跳过,注意i>idx，数组中有重复的没有影响（i==idx时）
                 tmp.append(nums[i])
                 backtrack(nums, i+1, tmp)
                 tmp.pop()

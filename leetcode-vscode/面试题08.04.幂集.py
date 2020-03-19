@@ -27,13 +27,13 @@ from typing import List
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
         re = []
-        def backtrack(nums, idx, re, tmp):
+        def backtrack(nums, idx, tmp):
             re.append(tmp[:])
             for i in range(idx, len(nums)):     #这里是从idx开始
                 tmp.append(nums[i])
-                backtrack(nums, i+1, re, tmp)   #从i+1
+                backtrack(nums, i+1, tmp)   #从i+1
                 tmp.pop()
-        backtrack(nums, 0, re, [])
+        backtrack(nums, 0, [])
         return re
 
 nums = [1,2,3]

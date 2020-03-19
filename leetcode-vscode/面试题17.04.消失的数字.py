@@ -24,6 +24,13 @@ class Solution:
                 re -= nums[i]
         return re
 
-
+    #2次异或等于本身
+    def missingNumber2(self, nums: List[int]) -> int:
+       res = 0
+       for i in range(len(nums)):
+           res ^= i
+           res ^=nums[i]
+       res ^= len(nums)         #前面长度只有N-1，最后异或N
+       return res
 
 

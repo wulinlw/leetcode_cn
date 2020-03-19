@@ -45,7 +45,7 @@ class Solution:
     def binaryTreePaths(self, root: TreeNode) -> List[str]:
         if not root:return []
         re = []
-        def dfs(root, tmp):
+        def dfs(root, tmp):                                     #回溯
             if not root.left and not root.right:
                 re.append("->".join(tmp[:]+[str(root.val)]))
                 return 

@@ -18,7 +18,7 @@ class QueueWithMax:
 
     def push_back(self, value: int) -> None:
         self.queue.append(value)
-        while self.deque and value > self.deque[-1]:
+        while self.deque and value > self.deque[-1]:    #单调栈
             self.deque.pop(-1)
         self.deque.append(value)
 
@@ -33,8 +33,8 @@ obj = QueueWithMax()
 obj.push_back(1)
 obj.push_back(3)
 obj.push_back(2)
-print(obj.max())
+print(obj.max_value())
 obj.pop_front()
-print(obj.max())
+print(obj.max_value())
 
 
