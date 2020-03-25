@@ -69,7 +69,7 @@ class Solution:
             head = head.next
         print(re)
 
-    def middleNode(self, head: ListNode) -> ListNode:
+    def middleNode2(self, head: ListNode) -> ListNode:
         if not head:return None
         s = f = head 
         length = 1
@@ -82,6 +82,13 @@ class Solution:
             s = s.next
         return s
 
+    def middleNode(self, head: ListNode) -> ListNode:
+        if not head: return None
+        s = f = head 
+        while f and f.next:
+            s = s.next
+            f = f.next.next
+        return s
         
 # @lc code=end
 
