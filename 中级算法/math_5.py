@@ -19,16 +19,13 @@
 #      由于返回类型是整数，小数部分将被舍去。
 
 class Solution(object):
+    #二分法
     def mySqrt(self, x):
-        """
-        :type x: int
-        :rtype: int
-        """
         left=0
         right=x
         while left<right:
-            mid=int((left+right)/2)
-            if x<mid**2:
+            mid = int((left+right)/2)
+            if x< mid**2:
                 right=mid
             else:
                 left=mid+1
@@ -36,10 +33,21 @@ class Solution(object):
             return left-1
         else:
             return left
+    #牛顿法
+    def mySqrt2(self, x):
+        if x==0:return x
+        t = x//2 + 1
+        while t > x//t:
+            t = (t + x//t) // 2
+        return t
+
+
+
+
 
 x = 10
 s = Solution()
-n = s.mySqrt(x)
+n = s.mySqrt2(x)
 print(n)
 
 

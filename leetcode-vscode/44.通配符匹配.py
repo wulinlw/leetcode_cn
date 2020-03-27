@@ -76,21 +76,21 @@
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
         s_len, p_len = len(s), len(p)
-        s_idx = p_idx = 0
-        star_idx = s_tmp_idx = -1
+        s_idx = p_idx = 0                                       #s,p的指针
+        p_tmp_idx = s_tmp_idx = -1                              #s,p碰到*的坐标，恢复的时候，从这个坐标+1开始
  
         while s_idx < s_len:
             if p_idx < p_len and p[p_idx] in ['?', s[s_idx]]:   #第一个字符是？或相等
                 s_idx += 1                                      #都走一步
                 p_idx += 1
             elif p_idx < p_len and p[p_idx] == '*':             #如果p是* , 记录 s p 位置
-                star_idx = p_idx
+                p_tmp_idx = p_idx
                 s_tmp_idx = s_idx
                 p_idx += 1                                      #p 继续走，s 不动，看看能否匹配多个
-            elif star_idx == -1:                                #前面2步 ？，*，相同字符都没出现，只能是个错的了
+            elif p_tmp_idx == -1:                                #前面2步 ？，*，相同字符都没出现，只能是个错的了
                 return False
             else:                                               #碰到过*，回溯（更新p_idx, s_idx即可）
-                p_idx = star_idx + 1
+                p_idx = p_tmp_idx + 1
                 s_idx = s_tmp_idx + 1
                 s_tmp_idx = s_idx
         

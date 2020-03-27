@@ -39,7 +39,7 @@ class Solution:
         dp =[1]* (n+1)
         for i in range(2,n+1): 
             if int(num[i-2])==1 or (int(num[i-2])==2 and int(num[i-1])<=5):
-                dp[i] = dp[i - 1]+dp[i-2]
+                dp[i] = dp[i-1]+dp[i-2]
             else:
                 dp[i] = dp[i-1]
         print(dp)
