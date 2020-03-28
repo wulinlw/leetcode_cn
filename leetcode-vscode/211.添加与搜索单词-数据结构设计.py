@@ -40,57 +40,37 @@
 #
 
 # @lc code=start
-class WordDictionary:
-
-    class Node:
-        def __init__(self):
-            self.is_word = False
-            self.next = [None for _ in range(26)]
-
+#Trie前缀树
+class TrieNode:
     def __init__(self):
-        """
-        Initialize your data structure here.
-        """
-        self.root = WordDictionary.Node()
+        self.children = [None for i in range(26)]
+        self.isWord = False
 
-    def addWord(self, word: str) -> None:
-        """
-        Adds a word into the data structure.
-        """
-        size = len(word)
-        cur_node = self.root
-        for i in range(size):
-            alpha = word[i]
-            next = cur_node.next[ord(alpha) - ord('a')]
-            if next is None:
-                cur_node.next[ord(alpha) - ord('a')] = WordDictionary.Node()
-            cur_node = cur_node.next[ord(alpha) - ord('a')]
+class WordDictionary:
+    def __init__(self):
+        self.root = TrieNode()
 
-        if not cur_node.is_word:
-            cur_node.is_word = True
+    def addWord(self, word: str) -> None:                                           #和leetcode 208一样
+        node = self.root
+        for i in word: 
+            if not node.children[ord(i) - ord('a')]:
+                node.children[ord(i) - ord('a')] = TrieNode()
+            node = node.children[ord(i) - ord('a')]
+        node.isWord = True
 
     def search(self, word: str) -> bool:
-        """
-        Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
-        """
-        return self.__match(word, self.root, 0)
-
-    def __match(self, word, node, start):
-        if start == len(word):
-            return node.is_word
-        alpha = word[start]
-        # 关键在这里，如果当前字母是 "." ，每一个分支都要走一遍
-        if alpha == '.':
-            # print(node.next)
-            for i in range(26):
-                if node.next[i] and self.__match(word, node.next[i], start + 1):
-                    return True
+        def dfs(word, node, idx):                                                   #dfs迭代匹配字符
+            if len(word) == idx:
+                return node.isWord
+            ch = word[idx]
+            if ch == '.':                                                           #区别就是需要处理通配符“.” ， 每个分支都走一遍
+                for i in range(26):                                                 #如果children用字典，这里需要用dict.values()迭代
+                    if node.children[i] and dfs(word, node.children[i], idx+1):     #前提是这个分支有内容
+                        return True
+            elif node.children[ord(ch) - ord('a')]:
+                return dfs(word, node.children[ord(ch) - ord('a')], idx+1)
             return False
-        else:
-            if not node.next[ord(alpha)-ord('a')]:
-                return False
-            return self.__match(word, node.next[ord(alpha) - ord('a')], start + 1)
-
+        return dfs(word, self.root, 0)
 
 
 # Your WordDictionary object will be instantiated and called as such:
@@ -99,3 +79,11 @@ class WordDictionary:
 # param_2 = obj.search(word)
 # @lc code=end
 
+obj = WordDictionary()
+obj.addWord("bad")
+obj.addWord("dad")
+obj.addWord("mad")
+print(obj.search("pad")) #-> false
+print(obj.search("bad")) #-> true
+print(obj.search(".ad")) #-> true
+print(obj.search("b..")) #-> true
