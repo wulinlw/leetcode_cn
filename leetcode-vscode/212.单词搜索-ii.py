@@ -70,7 +70,7 @@ class Solution:
                 newRow, newCol = row + rowOffset, col + colOffset     
                 if newRow < 0 or newRow >= rowNum or newCol < 0 or newCol >= colNum:
                     continue
-                if board[newRow][newCol] not in currNode.children:  #当前字符不在Trie树中
+                if board[newRow][newCol] not in currNode.children:  #上下左右字符不在Trie树中
                     continue
                 backtracking(newRow, newCol, currNode)              #传入当前节点
         
