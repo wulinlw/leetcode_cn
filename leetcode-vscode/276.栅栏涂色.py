@@ -32,7 +32,7 @@ class Solution:
     # F(i)=F(i-2)*k-1 + F(i-1)*k-1
     # dp[0], dp[1], dp[2] = 0, k, k * k     解释如下
     # dp[1] 第一个k种
-    # dp[2] 第一个k种，第二个相同时位k，不同时k*(k-1) ,总共是k+k*(k-1)=k*k
+    # dp[2] 第一个k种，第二个相同时位k，不同时k*(k-1) ,总共是k + k*(k-1)=k*k
     def numWays(self, n: int, k: int) -> int:
         dp = [0] * (n + 3)                                      #防止n长度不够溢出
         dp[0], dp[1], dp[2] = 0, k, k * k

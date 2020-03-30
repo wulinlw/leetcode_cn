@@ -66,47 +66,51 @@ class Solution:
         return res
     
     
-    def getLeastNumbers(self, arr: List[int], k: int) -> List[int]:
-        if k==0:return []
-        re = [-1*i for i in arr[:k]]
-        heapq.heapify(re)
-        for i in range(k, len(arr)):
-            if -re[0] > arr[i] :
-                heapq.heappop(re)
-                heapq.heappush(re, -arr[i])
+    def maxSumSubmatrix(self, matrix: List[List[int]], k: int) -> int:
+        row = len(matrix)
+        col = len(matrix[0])
+        re = 0
+
+        def getmax(colsum, k):
+            maxval = cursum = colsum[0]
+            for i in range(1, len(colsum)):
+                cursum = max(cursum, cursum + colsum[i])
+                maxval = max(maxval, cursum)
+            return maxval
+
+        for c in range(col):
+            colsum = [0] * row
+            for j in range(c, col):
+                for r in range(row):
+                    colsum[r] += matrix[r][j]
+                re = max(re, getmax(colsum, k))
+                if re>=k:return k
+        return re
+    
+    def minCost(self, costs: List[List[int]]) -> int:
+        if not costs or not costs[0]: return 0
+        dp = costs                                  #直接更新原始数组，节省空间
         
-        ans = [-i for i in re]
-        return ans
+        def preline(idx, k):
+            minval = float('inf')
+            # minval = max(costs[idx])
+            for i,num in enumerate(costs[idx]):
+                if i==k:
+                    continue
+                minval = min(minval, num)
+            return minval
 
-    def middleNode(self, head: ListNode) -> ListNode:
-        if not head: return None
-        s = f = head 
-        # print(s.val,f.val)
-        # print( head ,not f , not f.next)
-        while f and f.next:
-            # print(1)
-            # print(s.val, f.next)
-            s = s.next
-            f = f.next.next
-            
-        return s
 
-# 12345
-n1 = ListNode(1)
-n2 = ListNode(2)
-n3 = ListNode(3)
-n4 = ListNode(4)
-n5 = ListNode(5)
-n6 = ListNode(6)
-n1.next = n2
-n2.next = n3        #第一个公共节点
-n3.next = n4
-n4.next = n5
-# n5.next = n6
+        for i in range(1,len(costs)):
+            for k in range(len(costs[i])):
+                dp[i][k] += preline(i-1, k)
+
+        return min(dp[-1])
+
+costs = [[1,5,3],[2,9,4]]
 o = Solution()
-re = o.middleNode(n1)
-# o.printlinklist(n1)
-o.printlinklist(re)
+print(o.minCost(costs))
+
 
 #   1
 #  2  3

@@ -30,6 +30,7 @@
 
 # @lc code=start
 class Solution:
+    # dp[i][j]表示s1的前i个字符和s2的前j个字符，是否能构成s3的前i+j个字符。
     # https://leetcode-cn.com/problems/interleaving-string/solution/dong-tai-gui-hua-zhu-xing-jie-shi-python3-by-zhu-3/
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
         len1=len(s1)

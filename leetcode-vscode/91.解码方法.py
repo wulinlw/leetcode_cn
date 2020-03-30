@@ -43,6 +43,7 @@
 class Solution:
     # 动态规划
     # 跑到当前位的时候，不要判断当前位，而要判断前一位和前2位
+    # dp[i] = dp[i-1] + (dp[i-2]){i>2 and 前2位组成的数，在1-26范围内}
     def numDecodings(self, s: str) -> int:
         if len(s)==0: return 0
         dp = [0] * (len(s)+1)

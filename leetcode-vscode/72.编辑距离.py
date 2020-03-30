@@ -60,13 +60,13 @@ class Solution:
         l2 = len(word2)
         dp = [[0 for i in range(l2+1)] for i in range(l1+1)]
         
-        for i in range(1, l1+1):    #第一列
+        for i in range(1, l1+1):                #第一列
             dp[i][0] = i
-        for i in range(1, l2+1):    #第一行
+        for i in range(1, l2+1):                #第一行
             dp[0][i] = i
         for i in range(1,l1+1):
             for j in range(1, l2+1):
-                if word1[i-1]==word2[j-1]:
+                if word1[i-1]==word2[j-1]:      #为什么-1，因为如果对比的2个字符相等，就上面都不需要做，直接取左上方的值即可，即左上方值相等
                     dp[i][j] = dp[i-1][j-1]
                 else:
                     dp[i][j] = min(

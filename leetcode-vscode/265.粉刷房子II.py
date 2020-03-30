@@ -27,19 +27,19 @@ class Solution:
     # f(i, j) = costs(i, j) + min(f(i - 1, x)) 其中x 是（0, 1, 2, 3, ... k）中除去 j的集合（因为不能相邻房间不能同色）
     def minCost(self, costs: List[List[int]]) -> int:
         if not costs or not costs[0]: return 0
-        dp = costs
+        dp = costs                                  #直接更新原始数组，节省空间
         
         def GetMin(idx, k):
-            Min = max(costs[idx])
+            Min = max(costs[idx])                   #也可以设为float('inf')
             for i, cost in enumerate(costs[idx]):
                 if i == k:
                     continue
                 Min = min(Min, cost)
             return Min
         
-        for i in range(1, len(costs)):
+        for i in range(1, len(costs)):              #第一行不用动，第二行开始，相同列不能相同
             for k in range(len(costs[i])):
-                dp[i][k] += GetMin(i - 1, k)        #从上一行下标不为k的元素里找最小的那个
+                dp[i][k] += GetMin(i - 1, k)        #从上一行下标不为k的元素里找最小的那个，结果累加
                 
         return min(dp[-1])
 

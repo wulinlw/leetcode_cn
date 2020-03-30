@@ -76,6 +76,7 @@ from typing import List
 class Solution:
     # dp[i][j] = max(1, min(dp[i+1][j], dp[i][j+1]) - dungeon[i][j])
     # 从右下角到左上角，每次取右，下，较小的 - 当前值，小于0的要设置为1点血
+    # 为什么是减法，反过来思考，因为最小角是最大血，走到左上角的时候位1点血
     def calculateMinimumHP(self, dungeon: List[List[int]]) -> int:
         r = len(dungeon)
         c = len(dungeon[0])

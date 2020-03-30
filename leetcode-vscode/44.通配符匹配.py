@@ -86,13 +86,13 @@ class Solution:
             elif p_idx < p_len and p[p_idx] == '*':             #如果p是* , 记录 s p 位置
                 p_tmp_idx = p_idx
                 s_tmp_idx = s_idx
-                p_idx += 1                                      #p 继续走，s 不动，看看能否匹配多个
+                p_idx += 1                                      #p继续走，s不动，相当于匹配了0次，后面失败回溯回来时，s指向下一个字符，匹配1次，2次...
             elif p_tmp_idx == -1:                                #前面2步 ？，*，相同字符都没出现，只能是个错的了
                 return False
             else:                                               #碰到过*，回溯（更新p_idx, s_idx即可）
                 p_idx = p_tmp_idx + 1
                 s_idx = s_tmp_idx + 1
-                s_tmp_idx = s_idx
+                s_tmp_idx = s_idx                               #s指向遇到*的下一个字符，这样就能匹配0，1，2，3...次
         
         return all(x == '*' for x in p[p_idx:])                 #最后p只剩下*
 

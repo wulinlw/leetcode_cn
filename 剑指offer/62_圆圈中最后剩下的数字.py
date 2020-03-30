@@ -17,11 +17,10 @@ class Solution(object):
 
     def LastRemaining_2(self, n, m):
         if n<0 or m<0:return False
-        last = 0
-        for i in range(2,n+1):
-            last = (last+m) % i
+        last = 0 
+        for i in range(2, n+1):
+            last = (last+m)%i
         return last
-
 
 
 n = 9
