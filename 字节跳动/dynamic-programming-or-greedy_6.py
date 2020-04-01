@@ -72,24 +72,23 @@ class Solution(object):
         envelopes.sort(key=lambda x: (x[0], -x[1]))
 
         # print(envelopes)
-        tail = [envelopes[0][1]]
+        tail = [envelopes[0][1]]            #记录符合条件的（体重）
 
-        for i in range(1, size):
+        for i in range(1, size):            
             target = envelopes[i][1]
-            if target > tail[-1]:
+            if target > tail[-1]:           #比数组中最后一个大直接加入
                 tail.append(target)
                 continue
 
-            left = 0
-            right = len(tail) - 1
-
+            left = 0                        #二分法，找到当前值插入的位置
+            right = len(tail) - 1           #也可以用单调栈排列法做，这里会超时
             while left < right:
                 mid = (left + right) >> 1
                 if tail[mid] < target:
                     left = mid + 1
                 else:
                     right = mid
-            tail[left] = target
+            tail[left] = target             #把这个位置的值更新为新的数据
         # print(tail)
         return len(tail)
 

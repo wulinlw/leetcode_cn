@@ -34,6 +34,8 @@
 from typing import List
 # @lc code=start
 class Solution:
+    #每个金额所需的最少硬币数
+    #dp[i] = min(dp[i], dp[i-j]+1)   i-j 当前金额-当前硬币
     def coinChange(self, coins: List[int], amount: int) -> int:
         dp = [float('inf')]*(amount+1)
         dp[0] = 0 
@@ -49,7 +51,7 @@ class Solution:
 
 coins = [1, 2, 5]
 amount = 11
-coins = [2]
-amount = 3
+# coins = [2]
+# amount = 3
 o = Solution()
 print(o.coinChange(coins, amount))

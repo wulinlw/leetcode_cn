@@ -23,7 +23,8 @@
 
 from typing import List
 class Solution:
-    def pathWithObstacles(self, obstacleGrid: List[List[int]]) -> List[List[int]]:
+    # 动态规划
+    def pathWithObstacles2(self, obstacleGrid: List[List[int]]) -> List[List[int]]:
         M = len(obstacleGrid)
         if M == 0: return []
         N = len(obstacleGrid[0])
@@ -71,6 +72,21 @@ class Solution:
         
         return out[::-1]                        #最后翻转路径
 
+    #dfs
+    def pathWithObstacles(self, obstacleGrid: List[List[int]]) -> List[List[int]]:
+        r, c = len(obstacleGrid), len(obstacleGrid[0])
+        ans = [] 
+        def f(path):
+            if not ans:                                     
+                i, j = path[-1]                             #上一步的x,y坐标
+                if not obstacleGrid[i][j]:                  #0的才能走
+                    obstacleGrid[i][j] = 1                  #visited 标记已经走过了
+                    i < r - 1 and f(path + [[i + 1, j]])    #向下走
+                    j < c - 1 and f(path + [[i, j + 1]])    #向右走
+                    if (i, j) == (r - 1, c - 1):            #走到右下角了
+                        ans.extend(path)
+        f([[0, 0]])
+        return ans
 
 obstacleGrid = [
                 [0,0,0],

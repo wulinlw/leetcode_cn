@@ -107,10 +107,78 @@ class Solution:
 
         return min(dp[-1])
 
-costs = [[1,5,3],[2,9,4]]
-o = Solution()
-print(o.minCost(costs))
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        dp = [float('inf')]*(amount+1)
+        dp[0] = 0
+        for i in range(len(dp)):
+            for j in coins:
+                if i<j:continue 
+                dp[i] = min(dp[i], dp[i-j]+1)
+        # print(dp)
+        return dp[-1] if dp[-1]!=float('inf') else -1
 
+    def getMaxMatrix(self, matrix: List[List[int]]) -> List[int]:
+        m = len(matrix)
+        n = len(matrix[0])
+        # dp = [[0] for i in range(n) for i in range(m)]
+        maxArea = float('-inf')
+        res = [0, 0, 0, 0]
+        re = 0
+        for left in range(n):
+            colSum = [0] * m
+            for right in range(left, n):
+                for i in range(m):
+                    colSum[i] += matrix[i][right]
+                # print(colSum)
+                # startX, endX, maxAreaCur = self.getMax(colSum)
+                # if maxAreaCur > maxArea:
+                #     res = [startX, left, endX, right]
+                #     maxArea = maxAreaCur
+                
+                re = max(self.getMax2(colSum), re)
+                if re==2:return 2
+
+        return re
+
+    def getMax(self, nums):
+        maxval = cursum = nums[0]
+        start, end, startIndex = 0, 0, 0
+        for i in range(len(nums)):
+            if cursum < 0:
+                cursum = nums[i]
+                startIndex = i
+            else:
+                cursum += nums[i]
+            if cursum > maxval:
+                maxval = cursum
+                start = startIndex
+                end = i
+        return start, end , maxval
+
+    def getMax2(self, nums):
+        maxval = cursum = nums[0]
+        for i in range(1, len(nums)):
+            cursum = max(cursum + nums[i], cursum)
+            maxval = max(maxval, cursum)
+        return min(maxval, 2)
+
+
+matrix = [
+   [-1,0],
+   [0,-1]
+]
+# matrix = [
+#    [-1,0,0,0,0],
+#    [0,-1,1,2,3],
+#    [0,-1,0,0,0]
+# ]
+matrix = [
+    [1,0,0],
+    [0,0,0]
+    ]
+k = 2 
+o = Solution()
+print(o.getMaxMatrix(matrix))
 
 #   1
 #  2  3

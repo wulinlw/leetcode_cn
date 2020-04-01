@@ -68,17 +68,16 @@ class Solution:
         if len(coins)==0:
             if amount==0: return 1                  #组成0，只有1种方法
             return 0
-        dp = [[0 for i in range(amount+1)] for i in range(len(coins)+1)]
-        dp[0][0] = 1                        
+        dp = [[0 for i in range(amount+1)] for i in range(len(coins)+1)]                   
         for i in range(len(coins)+1):         #组成0，只有1种方法
             dp[i][0] = 1
 
         for i in range(1, len(coins)+1):
-            for j in range(1,amount+1):
-                dp[i][j] = dp[i-1][j]
+            for j in range(1, amount+1):
                 if j>=coins[i-1]:
-                    dp[i][j] = dp[i][j] + dp[i][j-coins[i-1]]
-
+                    dp[i][j] = dp[i-1][j] + dp[i][j-coins[i-1]]   #由于可以重复使用硬币所以这里是j不是j-1
+                else:
+                    dp[i][j] = dp[i-1][j]
         # print(dp)
         return dp[-1][amount]
     

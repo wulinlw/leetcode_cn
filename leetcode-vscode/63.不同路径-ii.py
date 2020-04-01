@@ -89,7 +89,7 @@ class Solution:
 
         obstacleGrid[0][0] = 1
         for i in range(1,m):
-            obstacleGrid[i][0] = int(obstacleGrid[i][0] == 0 and obstacleGrid[i-1][0] == 1) #当前为0，上一行为1，走的通放1，不通放-1    
+            obstacleGrid[i][0] = int(obstacleGrid[i][0] == 0 and obstacleGrid[i-1][0] == 1) #当前为0，上一行为1，走的通放0，不通放1    
         for j in range(1, n):
             obstacleGrid[0][j] = int(obstacleGrid[0][j] == 0 and obstacleGrid[0][j-1] == 1) #原理同上
 

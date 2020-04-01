@@ -16,26 +16,37 @@
 
 from typing import List
 class Solution:
+    # 俄罗斯套娃信封问题
     # https://leetcode-cn.com/problems/circus-tower-lcci/solution/python-solutiontan-xin-er-fen-cha-zhao-by-gareth/
     def bestSeqAtIndex(self, height: List[int], weight: List[int]) -> int:
         if not height: return 0
         length = len(height)
         actors = [(height[i], weight[i]) for i in range(length)]
-        actors.sort(key=lambda x:(x[0], -x[1]))
-        tail = [0] * length
-        size = 0 
-        for actor in actors:
-            i, j = 0, size
-            while (i != j):
-                mid = (i + j) // 2
-                if tail[mid] < actor[1]: i = mid + 1
-                else: j = mid            
-            tail[i] = actor[1]
-            if i == size: size += 1
-        return size
+        actors.sort(key=lambda x:(x[0], -x[1]))                     #升序排序身高，若身高相同，体重按降序排序。
+        # print(actors)
+
+        tail = [actors[0][1]]                                       #记录符合条件的（体重）
+        for i in range(1, len(actors)):
+            if actors[i][1] > tail[-1]:                             #比数组中最后一个大直接加入
+                tail.append(actors[i][1])
+                continue
+        
+            left, right = 0, len(tail)-1                            #二分法，找到当前值插入的位置
+            while left < right:                                     #也可以用单调栈排列法做，这里会超时
+                mid = (left + right)>>1                             #也可以用bisect找插入点
+                if tail[mid] < actors[i][1]: 
+                    left = mid + 1
+                else:
+                    right = mid
+            tail[left] = actors[i][1]                               #把这个位置的值更新为新的数据
+        return len(tail)
+
 
 height = [65,70,56,75,60,68] 
 weight = [100,150,90,190,95,110]
+
+height = [2868,5485,1356,1306,6017,8941,7535,4941,6331,6181]
+weight = [5042,3995,7985,1651,5991,7036,9391,428,7561,8594]
 o = Solution()
 print(o.bestSeqAtIndex(height, weight))
 # print(o.numberOf2sInRange2(1125))

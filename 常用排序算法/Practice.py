@@ -95,20 +95,6 @@ def select(nums):
         nums[mid_idx],nums[i] = nums[i],nums[mid_idx] #这里是用I换
     return nums
 
-# def shell(nums):
-#     n = len(nums)
-#     gap = n//2
-#     while gap > 0:
-#         for i in range(len(nums)):
-#             cur = nums[i]
-#             j = i 
-#             while j-gap>=0 and nums[j-gap]>cur:
-#                 nums[j] = nums[j-gap]
-#                 j = j-gap
-#             nums[j] = cur
-#         gap //= 2
-#     return nums 
-
 # 插入排序的套路改版
 # O(nlog2n)
 def shell2(nums):
@@ -153,6 +139,24 @@ def heapSort(arr):
         heapify(arr, i, 0) 
     return arr
 
+# 基数排序
+# 从个位排，再十位排，再百位排，一直排到位数最长的那个
+def radix_sort(s):
+    i = 0                                               # 记录当前正在排拿一位，最低位为1
+    max_num = max(s)                                    # 最大值
+    j = len(str(max_num))                               # 记录最大值的位数
+    while i < j:
+        bucket_list =[[] for _ in range(10)]            # 初始化桶数组
+        for x in s:
+            bucket_list[int(x / (10**i)) % 10].append(x)# 找到位置放入桶数组
+        s.clear()
+        # print(bucket_list)
+        for x in bucket_list:                           # 放回原序列
+            for y in x:
+                s.append(y)
+        # print(s)
+        i += 1
+    return s
 
 
 arr = [10, 7, 8, 9, 1, 5, 5]
@@ -165,6 +169,7 @@ n = len(arr)
 # re = count(arr)-------
 # re = select(arr)-------
 # re = shell2(arr)
-re = heapSort(arr)
+# re = heapSort(arr)
+re = radix_sort(arr)
 print(re)
 

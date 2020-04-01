@@ -32,17 +32,17 @@ class Solution:
         if not root:
             return [[]]
         res = []
-        def findPath(cur, q, path):
+        def findPath(cur, q, path):                         #cur当前节点, q存储所有下一个节点, path存储路径队列
             if cur.left:
                 q.append(cur.left)
             if cur.right:
-                q.append(cur.right)
-            if not q:
+                q.append(cur.right)                         #子节点放入队列
+            if not q:                                       #到了叶子节点，记录路径
                 res.append(path)
                 return
-            for i, nex in enumerate(q): 
-                newq = q[:i] + q[i + 1:]
-                findPath(nex, newq, path + [nex.val])
+            for i, nex in enumerate(q):                     #遍历子节点，
+                newq = q[:i] + q[i + 1:]                    #队列中取出这个节点
+                findPath(nex, newq, path + [nex.val])       #取出的节点加入path，dfs
         findPath(root, [], [root.val])
         return res
 
