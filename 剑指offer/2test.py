@@ -66,119 +66,28 @@ class Solution:
         return res
     
     
-    def maxSumSubmatrix(self, matrix: List[List[int]], k: int) -> int:
-        row = len(matrix)
-        col = len(matrix[0])
-        re = 0
+    def isSubsequence(self, s: str, t: str) -> bool:  
+        import collections,bisect 
+        m = collections.defaultdict(list)
+        for i,a in enumerate(t):
+            m[a].append(i)
 
-        def getmax(colsum, k):
-            maxval = cursum = colsum[0]
-            for i in range(1, len(colsum)):
-                cursum = max(cursum, cursum + colsum[i])
-                maxval = max(maxval, cursum)
-            return maxval
+        start = -1
+        for i in s:
+            index = bisect.bisect_left(m[i], start +1)
+            if index>=len(m[a]): 
+                return False
+            start = m[i][index]
+        return True
 
-        for c in range(col):
-            colsum = [0] * row
-            for j in range(c, col):
-                for r in range(row):
-                    colsum[r] += matrix[r][j]
-                re = max(re, getmax(colsum, k))
-                if re>=k:return k
-        return re
-    
-    def minCost(self, costs: List[List[int]]) -> int:
-        if not costs or not costs[0]: return 0
-        dp = costs                                  #直接更新原始数组，节省空间
-        
-        def preline(idx, k):
-            minval = float('inf')
-            # minval = max(costs[idx])
-            for i,num in enumerate(costs[idx]):
-                if i==k:
-                    continue
-                minval = min(minval, num)
-            return minval
-
-
-        for i in range(1,len(costs)):
-            for k in range(len(costs[i])):
-                dp[i][k] += preline(i-1, k)
-
-        return min(dp[-1])
-
-    def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [float('inf')]*(amount+1)
-        dp[0] = 0
-        for i in range(len(dp)):
-            for j in coins:
-                if i<j:continue 
-                dp[i] = min(dp[i], dp[i-j]+1)
-        # print(dp)
-        return dp[-1] if dp[-1]!=float('inf') else -1
-
-    def getMaxMatrix(self, matrix: List[List[int]]) -> List[int]:
-        m = len(matrix)
-        n = len(matrix[0])
-        # dp = [[0] for i in range(n) for i in range(m)]
-        maxArea = float('-inf')
-        res = [0, 0, 0, 0]
-        re = 0
-        for left in range(n):
-            colSum = [0] * m
-            for right in range(left, n):
-                for i in range(m):
-                    colSum[i] += matrix[i][right]
-                # print(colSum)
-                # startX, endX, maxAreaCur = self.getMax(colSum)
-                # if maxAreaCur > maxArea:
-                #     res = [startX, left, endX, right]
-                #     maxArea = maxAreaCur
-                
-                re = max(self.getMax2(colSum), re)
-                if re==2:return 2
-
-        return re
-
-    def getMax(self, nums):
-        maxval = cursum = nums[0]
-        start, end, startIndex = 0, 0, 0
-        for i in range(len(nums)):
-            if cursum < 0:
-                cursum = nums[i]
-                startIndex = i
-            else:
-                cursum += nums[i]
-            if cursum > maxval:
-                maxval = cursum
-                start = startIndex
-                end = i
-        return start, end , maxval
-
-    def getMax2(self, nums):
-        maxval = cursum = nums[0]
-        for i in range(1, len(nums)):
-            cursum = max(cursum + nums[i], cursum)
-            maxval = max(maxval, cursum)
-        return min(maxval, 2)
-
-
-matrix = [
-   [-1,0],
-   [0,-1]
-]
-# matrix = [
-#    [-1,0,0,0,0],
-#    [0,-1,1,2,3],
-#    [0,-1,0,0,0]
-# ]
-matrix = [
-    [1,0,0],
-    [0,0,0]
-    ]
-k = 2 
+s = "abc"
+t = "ahbgdc"
+# s = "axc"
+# t = "ahbgdc"
+# s = "axc"
+# t = "ahabgdc"
 o = Solution()
-print(o.getMaxMatrix(matrix))
+print(o.isSubsequence(s, t))
 
 #   1
 #  2  3

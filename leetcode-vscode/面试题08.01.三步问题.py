@@ -20,6 +20,7 @@
 
 
 class Solution:
+    #迭代，自底向上
     def waysToStep(self, n: int) -> int:
         if n<=2:return n
         dp1,dp2,dp3 = 1,2,4 #1,2,3的情况
@@ -30,11 +31,42 @@ class Solution:
             dp2 = tmp
         return dp3                              #只在这里处理%超级慢
 
+    # 递归法，太大会超过限制maximum recursion
+    def waysToStep2(self, n: int) -> int:
+        if n<2:return n
+        return self.waysToStep(n-1) + self.waysToStep(n-2) + self.waysToStep(n-3)
+
+    # n阶台阶，你一次性可以走1步、2步、3步、n步。一共有多少种走法。
+    def waysAnyStep(self, n):
+        step = 0
+        if n<=1:return 1
+        for i in range(1, n+1):
+            step += self.waysAnyStep(n-i)
+        return step
+
+    #迭代，自底向上
+    # f(n) = f(n-1)+f(n-2)+...+f(n-(n-1)) + f(n-n) 
+    #       => f(0) + f(1) + f(2) + f(3) + ... + f(n-1)
+    # f(n-1) => f(0) + f(1) + f(2) + f(3) + ... + f(n-2)
+    # f(n) = { f(0) + f(1) + f(2) + f(3) + ... + f(n-2) } + f(n-1) 
+    #      = f(n-1) + f(n-1)
+    #      = 2 * f(n-1)
+    def waysAnyStep2(self, n):
+        if n==1:return 1
+        num = 1
+        for _ in range(2, n+1):
+            num = 2 * num
+        return num
+
+
 
 
 o = Solution()
 print(o.waysToStep(5))
 print(o.waysToStep(900750))
+print(o.waysAnyStep(23))
+print(o.waysAnyStep2(23))
+
 # 111
 # 12
 # 21

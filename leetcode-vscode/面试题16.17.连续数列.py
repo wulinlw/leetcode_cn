@@ -16,7 +16,7 @@
 
 from typing import List
 class Solution:
-    def maxSubArray(self, nums: List[int]) -> int:
+    def maxSubArray2(self, nums: List[int]) -> int:
         sum = nums[0]
         maxsum = nums[0]
         for i in range(1, len(nums)):
@@ -27,6 +27,17 @@ class Solution:
             maxsum = max(maxsum, sum)
         return maxsum
 
+    # kadane算法
+    def maxSubArray(self, nums: List[int]) -> int:
+        maxval = cur = nums[0]
+        for i in range(1, len(nums)):
+            cur = max(nums[i], cur+nums[i])
+            maxval = max(maxval, cur)
+        return maxval
+
+
+
 nums = [-2,1,-3,4,-1,2,1,-5,4]
 o = Solution()
+print(o.maxSubArray2(nums))
 print(o.maxSubArray(nums))

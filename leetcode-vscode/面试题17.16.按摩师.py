@@ -23,6 +23,7 @@
 from typing import List
 class Solution:
     #打家劫舍 同类型题
+    # dp[i] = max(dp[i-2]+nums[i], dp[i-1])  今天接（前天+今天），今天不接（和昨天一样）
     def massage2(self, nums: List[int]) -> int:
         if not nums:return 0 
         dp = [0] * len(nums)

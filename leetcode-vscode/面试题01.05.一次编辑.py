@@ -27,20 +27,19 @@ class Solution:
             return False
         
         replace_count = 0
-        if len(first) == len(second):               #不同字符>2，false
+        if len(first) == len(second):               #长度相等，不同字符>2，false
             for i in range(len(first)):
                 if first[i] != second[i]:
                     replace_count += 1
                 if replace_count >= 2:
                     return False
-                
             return True
                                                     #相差1的情况下，长串去掉当前字符，看看是否和短串一样
-        if len(second) > len(first):                #大的放前面
+        if len(second) > len(first):                #长的放前面
             first,second = second, first
 
         if len(first) > len(second):                
-            for i in range(len(first)):
+            for i in range(len(first)):             #遍历长的，每次取走一个，剩下的和second比是否一样
                 if first[0:i] + first[i+1:] == second:
                     return True
             return False
