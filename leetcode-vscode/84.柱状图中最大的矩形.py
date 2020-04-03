@@ -50,7 +50,7 @@ class Solution:
         for i in range(len(heights)):
             while stack and heights[stack[-1]]>heights[i]:      #栈中最后一个比当前大，
                 tmp = stack.pop()                               #大的弹出来
-                re = max(re, (i - stack[-1] - 1) * heights[tmp])#stack[-1]栈中最后一个是上一个比当前小的坐标，i - stack[-1] - 1 就是前面比当前小的所有柱子数
+                re = max(re, (i - stack[-1] - 1) * heights[tmp])#stack[-1]栈中最后一个是上一个比当前小的坐标，i - stack[-1] 就是i到前面柱子的距离，-1是减去那根段的柱子，因为中间的柱子都比当前高，不懂看题目的图
             stack.append(i)
         return re
 

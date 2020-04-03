@@ -87,7 +87,7 @@ class Solution:
                 p_tmp_idx = p_idx
                 s_tmp_idx = s_idx
                 p_idx += 1                                      #p继续走，s不动，相当于匹配了0次，后面失败回溯回来时，s指向下一个字符，匹配1次，2次...
-            elif p_tmp_idx == -1:                                #前面2步 ？，*，相同字符都没出现，只能是个错的了
+            elif p_tmp_idx == -1:                               #前面2步 ？，*，相同字符都没出现，只能是个错的了
                 return False
             else:                                               #碰到过*，回溯（更新p_idx, s_idx即可）
                 p_idx = p_tmp_idx + 1

@@ -54,8 +54,8 @@ class Solution:
             if r-1==1:return 1
             if r-l==2:return l+1
             ans = sum(range(r))
-            for x in range(l+r>>1, r):
-                ans = min(max(dp(l, x-1), dp(x+1, r)) + x, ans)
+            for x in range(l+r>>1, r):                                  #按x分为2边，取大的（至少需要这么多） ，结果+x
+                ans = min(max(dp(l, x-1), dp(x+1, r)) + x, ans)         #然后取min
             return ans 
         return dp(1,n)
 

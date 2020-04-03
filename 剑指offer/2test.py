@@ -22,6 +22,11 @@ class TreeNode:
         self.left = None
         self.right = None
 
+class TrieNode:
+    def __init__(self):
+        self.child = {}
+        self.isword = False
+
 class Solution:
     def initlinklist(self, nums):
         head = ListNode(nums[0])
@@ -66,28 +71,33 @@ class Solution:
         return res
     
     
-    def isSubsequence(self, s: str, t: str) -> bool:  
-        import collections,bisect 
-        m = collections.defaultdict(list)
-        for i,a in enumerate(t):
-            m[a].append(i)
+    def hasGroupsSizeX(self, deck: List[int]) -> bool: 
+        import collections,functools
+        # def gcd(a,b):
+        #     return a if b==0 else gcd(a%b, b)
+        # cnt = collections.Counter(deck)
+        # return functools.reduce(gcd, cnt.values())>=2
 
-        start = -1
-        for i in s:
-            index = bisect.bisect_left(m[i], start +1)
-            if index>=len(m[a]): 
-                return False
-            start = m[i][index]
-        return True
+        cnt = collections.Counter(deck)
+        for i in range(2,len(deck)+1):
+            if i%len(deck)==0:
+                if all(j%i==0 for j in cnt.values()):
+                    return True
+        return False
 
-s = "abc"
-t = "ahbgdc"
-# s = "axc"
-# t = "ahbgdc"
-# s = "axc"
-# t = "ahabgdc"
+
+
+
+
+
+
+# @lc code=end
+
+deck = [1,2,3,4,4,3,2,1]
+# deck = [1]
+deck = [1,1]
 o = Solution()
-print(o.isSubsequence(s, t))
+print(o.hasGroupsSizeX(deck))
 
 #   1
 #  2  3

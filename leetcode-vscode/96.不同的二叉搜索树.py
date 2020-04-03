@@ -39,6 +39,7 @@ class Solution:
     # f(i) = G(i-1)*G(n-i)f(i)=G(i−1)∗G(n−i)
     # 综合两个公式可以得到 卡特兰数 公式
     # G(n) = G(0)*G(n-1) + G(1)*(n-2)+...+ G(n-1)*G(0)
+    # C(n+1) = (4n+2)/(n+2) *C(n)
     # https://leetcode-cn.com/problems/unique-binary-search-trees/solution/bu-tong-de-er-cha-sou-suo-shu-by-leetcode/
     def numTrees2(self, n: int) -> int:
         G = [0]*(n+1)

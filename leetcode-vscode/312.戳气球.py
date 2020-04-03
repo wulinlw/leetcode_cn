@@ -56,7 +56,7 @@ class Solution:
                     cur = nums[left] * nums[i] * nums[right] + dp[left][i] + dp[i][right]
                     tmpmax = max(tmpmax, cur)
                 dp[left][right] = tmpmax
-        return dp[0][n-1]
+        return dp[0][n-1]                               #倒着推的dp，所以在第0行
 
 
 
