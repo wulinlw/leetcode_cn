@@ -32,13 +32,9 @@ class LRUCache(object):
         """
         self.maxlength = capacity
         self.array = {}
-        self.array_list = []
+        self.array_list = []                        #头进尾出
 
     def get(self, key):
-        """
-        :type key: int
-        :rtype: int
-        """
         value = self.array.get(key)
         # 如果密钥存在 将该密钥移到队列首
         if value is not None and self.array_list[0] is not key:
@@ -50,11 +46,6 @@ class LRUCache(object):
         return value
 
     def put(self, key, value):
-        """
-        :type key: int
-        :type value: int
-        :rtype: void
-        """
         # 如果重复
         if self.array.get(key) is not None:
             index = self.array_list.index(key)
