@@ -47,6 +47,7 @@
 from typing import List
 # @lc code=start
 class Solution:
+    #动态规划
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         m = {}                              #放入hash，快速查找O(1)
         for i in wordDict:

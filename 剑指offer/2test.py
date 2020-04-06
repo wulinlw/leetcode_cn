@@ -7,171 +7,124 @@ import heapq
 import collections
 
 class ComplexNode(object):
-	def __init__(self, value, next=None, sibling=None):
-		self.val = value
-		self.next = next
-		self.sibling = sibling
+    def __init__(self, value, next=None, sibling=None):
+        self.val = value
+        self.next = next
+        self.sibling = sibling
 
 class ListNode:
-	def __init__(self, x=None):
-		self.val = x
-		self.next = None
+    def __init__(self, x=None):
+        self.val = x
+        self.next = None
 
 class TreeNode:
-	def __init__(self, x):
-		self.val = x
-		self.left = None
-		self.right = None
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 class TrieNode:
-	def __init__(self):
-		self.child = {}
-		self.isword = False
+    def __init__(self):
+        self.child = {}
+        self.isword = False
 
 class Solution:
-	def initlinklist(self, nums):
-		head = ListNode(nums[0])
-		re = head
-		for i in nums[1:]:
-			re.next = ListNode(i)
-			re = re.next
-		return head
-	
-	def printlinklist(self, head):
-		re = []
-		while head:
-			re.append(head.val)
-			head = head.next
-		print(re)
-		
-	# 层次遍历
-	def levelOrder(self, root):
-		"""
-		:type root: TreeNode
-		:rtype: int
-		"""
-		# 从根开始遍历，每层写入一个新数组
-		# 在将left ,right写入下次需要巡皇的数组
-		# 循环完成即可得到每层的数组
-		queue = [root]
-		res = []
-		if not root:
-			return []
-		while queue:
-			templist = []#此层的数组
-			templen =len(queue)
-			for i in range(templen):                
-				temp = queue.pop(0)
-				templist.append(temp.val)
-				if temp.left:
-					queue.append(temp.left)
-				if temp.right:
-					queue.append(temp.right)
-			# print(templist)
-			res.append(templist)
-		return res
-	
-	
-	def hasGroupsSizeX(self, deck: List[int]) -> bool: 
-		import collections,functools
-		# def gcd(a,b):
-		#     return a if b==0 else gcd(a%b, b)
-		# cnt = collections.Counter(deck)
-		# return functools.reduce(gcd, cnt.values())>=2
+    def initlinklist(self, nums):
+        head = ListNode(nums[0])
+        re = head
+        for i in nums[1:]:
+            re.next = ListNode(i)
+            re = re.next
+        return head
+    
+    def printlinklist(self, head):
+        re = []
+        while head:
+            re.append(head.val)
+            head = head.next
+        print(re)
+        
+    # 层次遍历
+    def levelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        # 从根开始遍历，每层写入一个新数组
+        # 在将left ,right写入下次需要巡皇的数组
+        # 循环完成即可得到每层的数组
+        queue = [root]
+        res = []
+        if not root:
+            return []
+        while queue:
+            templist = []#此层的数组
+            templen =len(queue)
+            for i in range(templen):                
+                temp = queue.pop(0)
+                templist.append(temp.val)
+                if temp.left:
+                    queue.append(temp.left)
+                if temp.right:
+                    queue.append(temp.right)
+            # print(templist)
+            res.append(templist)
+        return res
+    
+    
+    def hasGroupsSizeX(self, deck: List[int]) -> bool: 
+        import collections,functools
+        # def gcd(a,b):
+        #     return a if b==0 else gcd(a%b, b)
+        # cnt = collections.Counter(deck)
+        # return functools.reduce(gcd, cnt.values())>=2
 
-		cnt = collections.Counter(deck)
-		for i in range(2,len(deck)+1):
-			if i%len(deck)==0:
-				if all(j%i==0 for j in cnt.values()):
-					return True
-		return False
+        cnt = collections.Counter(deck)
+        for i in range(2,len(deck)+1):
+            if i%len(deck)==0:
+                if all(j%i==0 for j in cnt.values()):
+                    return True
+        return False
 
 
-class Node:
-	def __init__(self, key=None, value=None, freq=0):
-		self.pre = None
-		self.nex = None
-		self.freq = freq
-		self.key = key
-		self.value = value
+    def minWindow(self, s: str, t: str) -> str:
+        window = collections.defaultdict(int)
+        need = collections.defaultdict(int)
+        match = 0
+        start = 0
+        minlen = float('inf')
+        left,right = 0,0 
+        for i in t:
+            need[i] += 1
+        while right<len(s):
+            ch = s[right]
+            if ch in need:
+                window[ch] += 1 
+                if window[ch] == need[ch]:
+                    match += 1
+            right += 1
+            
+            while match==len(need): 
+                if right-left<minlen:
+                    start = left
+                    minlen = right-left
+                ch2 = s[left]
+                if ch2 in need:                     
+                    window[ch2] -=1 
+                    if window[ch2] < need[ch2]:
+                        match -= 1
+                left += 1
 
-	def insert(self, node):
-		node.nex = self.nex
-		node.pre = self
-		self.nex.pre = node
-		self.nex = node
-
-def linkedlist():
-	head = Node(0, 0)
-	tail = Node(0, 0)
-	head.nex = tail 
-	tail.pre = head
-	return (head, tail)    
-
-class LFUCache:
-	def __init__(self, capacity: int):
-		self.freqMap = collections.defaultdict(linkedlist)
-		self.keyMap = {}
-		self.size = 0
-		self.capacity = capacity
-		self.minFreq = 0
-
-	def get(self, key: int) -> int:
-		if key in self.keyMap:
-			self.increase(self.keyMap[key])
-			return self.keyMap[key].value
-		return -1
-
-	def put(self, key: int, value: int) -> None:
-		if self.capacity != 0:
-			if key in self.keyMap:
-				node = self.keyMap[key]
-				node.value = value
-			else:
-				node = Node(key, value)
-				self.keyMap[key] = node
-				self.size += 1
-			if self.size > self.capacity:
-				self.size -= 1
-				delete = self.delete(self.freqMap[self.minFreq][0].nex)
-				self.keyMap.pop(delete)
-			self.increase(node)
-
-	def increase(self, node):
-		node.freq += 1
-		self.delete(node)
-		self.freqMap[node.freq][-1].pre.insert(node)
-		if node.freq == 1:
-			self.minFreq = 1
-		elif self.minFreq == node.freq - 1:
-			head, tail = self.freqMap[node.freq - 1]
-			if head.nex is tail:
-				self.minFreq = node.freq
-							#最小频率更新为节点当前频率
-
-	def delete(self, node):
-	    if node.pre:
-	        node.pre.nex = node.nex
-	        node.nex.pre = node.pre
-	        if node.pre is self.freqMap[node.freq][0] and node.nex is self.freqMap[node.freq][-1]:
-	            self.freqMap.pop(node.freq)
-	    return node.key
-	
+        return "" if minlen==float('inf') else s[start:start+minlen]
 
 
 
-cache = LFUCache(2)
-cache.put(1, 1)
-cache.put(2, 2)
-print(cache.get(1))       #返回 1
-cache.put(3, 3)    		  		#去除 key 2
-print(cache.get(2))       #返回 -1 (未找到key 2)
-print(cache.get(3))       #返回 3
-cache.put(4, 4)    		  		#去除 key 1
-print(cache.get(1))       #返回 -1 (未找到 key 1)
-print(cache.get(3))       #返回 3
-print(cache.get(4))       #返回 4
 
+
+S = "ADOBECODEBANC"
+T = "ABC"
+o = Solution()
+print(o.minWindow(S, T))
 #   1
 #  2  3
 # 4 5
