@@ -7,30 +7,51 @@
 # 但是，它不能进入方格（35,38），因为3+5+3+8 = 19。请问该机器人能够达到多少个格子？
 
 class Solution:
-    def movingCount(self, threshold, rows, cols):
-        if rows==1 or cols==1 or threshold==0:
-            return 0
-        visited = [[False for j in range(cols)] for i in range(rows)]
-        return self.moving(threshold, rows, cols, 0, 0, visited)
-
-    def moving(self, threshold, rows, cols, i, j, visited):
-        cnt = 0
-        if i<0 or i>=rows or j<0 or j>=cols or visited[i][j] or self.isok(threshold, i,j)==False:
-            return cnt
-        visited[i][j] = True
-        cnt = 1 + self.moving( threshold, rows, cols, i+1, j, visited) + \
-              self.moving(threshold, rows, cols, i-1, j, visited) + \
-              self.moving(threshold, rows, cols, i, j+1, visited) + \
-              self.moving(threshold, rows, cols, i, j-1, visited)
-        return cnt
-    
-    def isok(self, threshold, i, j):
-        sumVal = 0
-        s = list(str(i)+str(j))
-        for i in s: 
-            sumVal += int(i)
-        return True if sumVal<=threshold else False 
+    #dfs
+    def movingCount2(self, m: int, n: int, k: int) -> int:
+        self.cache = {}
+        def moving(x, y):
+            curCnt = 0
+            if x<0 or x>=m or y<0 or y>=n or not check(x, y, k) or (x, y) in self.cache:
+                return curCnt
+            self.cache[(x, y)] = 1
+            curCnt +=  1 + moving(x+1, y)+\
+                    moving(x, y+1)
+            return curCnt
         
+        def check(x, y, k):
+            n = int(str(x)+str(y))
+            ans = 0
+            while n:
+                ans += n % 10
+                n //= 10
+            return True if ans<=k else False
+
+        return moving(0, 0)
+
+    #bfs
+    def movingCount(self, m: int, n: int, k: int) -> int:
+        from queue import Queue
+        q = Queue()
+        q.put((0, 0))
+
+        def digitsum(n):
+            ans = 0
+            while n:
+                ans += n % 10
+                n //= 10
+            return ans
+
+        s = set()
+        while not q.empty():
+            x, y = q.get()
+            if (x, y) not in s and 0 <= x < m and 0 <= y < n and digitsum(x) + digitsum(y) <= k:
+                s.add((x, y))
+                for nx, ny in [(x + 1, y), (x, y + 1)]:
+                    q.put((nx, ny))
+        return len(s)
+
+
 
 obj = Solution()
 print(obj.movingCount(5, 10, 10))

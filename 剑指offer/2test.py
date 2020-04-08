@@ -87,44 +87,47 @@ class Solution:
         return False
 
 
-    def minWindow(self, s: str, t: str) -> str:
-        window = collections.defaultdict(int)
-        need = collections.defaultdict(int)
-        match = 0
-        start = 0
-        minlen = float('inf')
-        left,right = 0,0 
-        for i in t:
-            need[i] += 1
-        while right<len(s):
-            ch = s[right]
-            if ch in need:
-                window[ch] += 1 
-                if window[ch] == need[ch]:
-                    match += 1
-            right += 1
-            
-            while match==len(need): 
-                if right-left<minlen:
-                    start = left
-                    minlen = right-left
-                ch2 = s[left]
-                if ch2 in need:                     
-                    window[ch2] -=1 
-                    if window[ch2] < need[ch2]:
-                        match -= 1
-                left += 1
+    def movingCount(self, m: int, n: int, k: int) -> int:
+        self.cache = {}
+        def moving(x, y):
+            curCnt = 0
+            if x<0 or x>=m or y<0 or y>=n or not check(x, y, k) or (x, y) in self.cache:
+                return curCnt
+            self.cache[(x, y)] = 1
+            curCnt +=  1 + moving(x+1, y)+\
+                    moving(x, y+1)
+            return curCnt
+        
+        def check(x, y, k):
+            n = int(str(x)+str(y))
+            ans = 0
+            while n:
+                ans += n % 10
+                n //= 10
+            return True if ans<=k else False
 
-        return "" if minlen==float('inf') else s[start:start+minlen]
+        return moving(0, 0)
+
+        
 
 
 
+m = 2
+n = 3
+k = 1
 
-
-S = "ADOBECODEBANC"
-T = "ABC"
+# m = 3
+# n = 1
+# k = 0
 o = Solution()
-print(o.minWindow(S, T))
+print(o.movingCount(m, n, k))
+
+
+1 5 5 11
+1 6 11 22
+
+
+
 #   1
 #  2  3
 # 4 5
