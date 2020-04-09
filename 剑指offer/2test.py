@@ -87,44 +87,32 @@ class Solution:
         return False
 
 
-    def movingCount(self, m: int, n: int, k: int) -> int:
-        self.cache = {}
-        def moving(x, y):
-            curCnt = 0
-            if x<0 or x>=m or y<0 or y>=n or not check(x, y, k) or (x, y) in self.cache:
-                return curCnt
-            self.cache[(x, y)] = 1
-            curCnt +=  1 + moving(x+1, y)+\
-                    moving(x, y+1)
-            return curCnt
-        
-        def check(x, y, k):
-            n = int(str(x)+str(y))
-            ans = 0
-            while n:
-                ans += n % 10
-                n //= 10
-            return True if ans<=k else False
-
-        return moving(0, 0)
-
-        
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        cache = {}
+        cache[0] = 1
+        sum=0 
+        re = 0
+        for i in range(len(nums)):
+            sum += nums[i]
+            if sum-k in cache:
+                re += cache[sum-k]
+            cache[sum] = cache.get(sum, 0) +1
+        return  re
 
 
 
-m = 2
-n = 3
-k = 1
 
-# m = 3
-# n = 1
+
+
+# @lc code=end
+
+nums = [1,1,1]
+k = 2
+# nums = [-1,-1,1]
 # k = 0
 o = Solution()
-print(o.movingCount(m, n, k))
+print(o.subarraySum(nums, k))
 
-
-1 5 5 11
-1 6 11 22
 
 
 

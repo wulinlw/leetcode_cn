@@ -35,22 +35,18 @@
 class Solution(object):
     # 如果左括号还有剩余，则可以放置左括号，如果右括号的剩余数大于左括号，则可以放置右括号。
     def generateParenthesis(self, n):
-        res = []
-        self.DFS(n, n, '', res)#左括号，右括号，生成的字符串，结果集
-        return res
-        
-    # s 临时变量
-    # res 存储结果
-    def DFS(self, left, right, s, res):
-        if left == 0 and right == 0:#边界条件
-            res.append(s)
-        else:
-            if left > 0:
-                self.DFS(left-1, right, s+'(', res)
-            if right > left:
-                self.DFS(left, right-1, s+')', res)
-
-
+        def backtrack(l, r, tmp):
+            if r>l:return 
+            if l==0 and r==0:
+                re.append(tmp)
+                return
+            if l>0: 
+                backtrack(l-1, r, "("+tmp)
+            if r>0:
+                backtrack(l, r-1, ")"+tmp)    
+        re = []
+        backtrack(n, n, "")
+        return re
         
 
 digits = 3

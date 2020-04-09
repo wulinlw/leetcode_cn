@@ -40,7 +40,7 @@ class Solution:
                 continue
             tmpMin = float('inf')
             for j in range(i):                          #不是回文串，从头开始分割
-                if s[j+1:i+1] == s[j+1:i+1][::-1]:
+                if s[j+1:i+1] == s[j+1:i+1][::-1]:      #后半段从j+1开始，j在上面已经包含过了
                     tmpMin = dp[j] + 1                  #分割后还是回文，那就是在上一次的基础上+1
                 dp[i] = min(dp[i], tmpMin)              #取最少次数，就是在所有的分割中取最小的
             # dp[i] = min([dp[j] +1 for j in range(i) if s[j+1:i+1] == s[j+1:i+1][::-1] ])

@@ -53,7 +53,7 @@ class Solution:
         dp = [[False for i in range(len(s))] for i in range(len(s))]
         re = 0
         for i in range(len(s)):
-            for j in range(i,-1,-1):
+            for j in range(i,-1,-1):                            #从上到下，从右到左，为什么倒着，dp[i-1][j+1]会用到当前格子右上角数据，
                 if s[i] == s[j] and (i-j<2 or dp[i-1][j+1]):    #2边相等时，只有1-2个字符， or 3个及以上，那就看王两边扩展了还是不是回文
                     dp[i][j] = True
                     re += 1
