@@ -87,31 +87,61 @@ class Solution:
         return False
 
 
-    def subarraySum(self, nums: List[int], k: int) -> int:
-        cache = {}
-        cache[0] = 1
-        sum=0 
-        re = 0
-        for i in range(len(nums)):
-            sum += nums[i]
-            if sum-k in cache:
-                re += cache[sum-k]
-            cache[sum] = cache.get(sum, 0) +1
-        return  re
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        def dfs(l1, l2, cnt):
+            if not l1 or not l2:return 0
+            if cnt>0:
+                tmpsum = l1.val + dfs(l1.next, l2, cnt-1)
+                l1.val = tmpsum % 10
+                return tmpsum // 10
+            else:
+                tmpsum = l1.val + l2.val + dfs(l1.next, l2.next, 0)
+                l1.val = tmpsum % 10
+                return tmpsum // 10
+        len1 = 0
+        tmp = l1 
+        while tmp:
+            len1 += 1
+            tmp = tmp.next
+        
+        len2 = 0
+        tmp = l2 
+        while tmp:
+            len2 += 1
+            tmp = tmp.next
+        
+        if len2>len1:
+            l1,l2 = l2,l1
+            len1,len2 = len2,len1
+        carry = dfs(l1, l2, len1-len2)
+        if carry:
+            dummy = ListNode(1)
+            dummy.next = l1
+            l1 = dummy
+        return l1
 
 
 
 
 
 
-# @lc code=end
 
-nums = [1,1,1]
-k = 2
-# nums = [-1,-1,1]
-# k = 0
+
+
+nums1 = [7,2,4,3]
+nums2 = [5,6,4,1]
+# nums1 = [1,8]
+# nums2 = [0]
+# nums1 = [2,4,3]
+# nums2 = [5,6,4]
 o = Solution()
-print(o.subarraySum(nums, k))
+head1 = o.initlinklist(nums1)
+head2 = o.initlinklist(nums2)
+# o.printlinklist(head1)
+
+h = o.addTwoNumbers(head1, head2)
+# print(h)
+o.printlinklist(h)
 
 
 

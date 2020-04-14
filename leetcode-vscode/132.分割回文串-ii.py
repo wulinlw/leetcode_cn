@@ -33,7 +33,7 @@ class Solution:
     def minCut(self, s: str) -> int:
         if len(s)<2:return 0
         size = len(s)
-        dp = [i for i in range(size)]
+        dp = [float('inf') for i in range(size)]
         for i in range(1, size):
             if s[:i+1] == s[:i+1][::-1]:                #0:i是回文串，不用分割
                 dp[i] = 0
