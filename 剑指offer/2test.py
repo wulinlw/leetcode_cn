@@ -3,7 +3,7 @@
 
 import sys,math
 from typing import List
-import heapq
+import heapq,bisect
 import collections
 
 class ComplexNode(object):
@@ -87,61 +87,80 @@ class Solution:
         return False
 
 
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        def dfs(l1, l2, cnt):
-            if not l1 or not l2:return 0
-            if cnt>0:
-                tmpsum = l1.val + dfs(l1.next, l2, cnt-1)
-                l1.val = tmpsum % 10
-                return tmpsum // 10
+    def reformat(self, s: str) -> str:
+        if not s:return ""
+        if len(s)==1:return s
+        a = []
+        b = []
+        re = ""
+        for i in s:
+            if i.isalpha():
+                a.append(i)
             else:
-                tmpsum = l1.val + l2.val + dfs(l1.next, l2.next, 0)
-                l1.val = tmpsum % 10
-                return tmpsum // 10
-        len1 = 0
-        tmp = l1 
-        while tmp:
-            len1 += 1
-            tmp = tmp.next
-        
-        len2 = 0
-        tmp = l2 
-        while tmp:
-            len2 += 1
-            tmp = tmp.next
-        
-        if len2>len1:
-            l1,l2 = l2,l1
-            len1,len2 = len2,len1
-        carry = dfs(l1, l2, len1-len2)
-        if carry:
-            dummy = ListNode(1)
-            dummy.next = l1
-            l1 = dummy
-        return l1
+                b.append(i)
+        if not a or not b:return ""
+        if len(b)>len(a):
+            a,b = b,a
+        i=0
+        while i<len(s):
+            if a:
+                re = re + a.pop()
+            if b:
+                re = re + b.pop()
+            i+=1
+        return re
+
+    def displayitem(self, orders: List[List[str]]) -> List[List[str]]:
+        item = collections.defaultdict(list)
+        re = [[]]
+        table = []
+        for i in range(len(orders)):
+            if orders[i][2] not in re[0]:
+                bisect.insort_left(re[0], orders[i][2])
+            if orders[i][1] not in item[orders[i][1]]:
+                item[orders[i][1]].append(orders[i][2])
+            if int(orders[i][1]) not in table:
+                bisect.insort_left(table, int(orders[i][1]))
+        re[0].insert(0, 'Table')
+        print(re)
+        print(table)
+        print(item)
+        orders.sort(key = lambda x: int(x[1]))
+        print(orders)
+        for i in table:
+            tmp = [str(i)]
+            for j in range(1, len(re[0])):
+                print(i,j,re[0][j])
+                if re[0][j] in item[i]:
+                    tmp.append("1")
+                else:
+                    tmp.append("0")
+            re.append(tmp)
+        return re
 
 
 
-
-
-
-
-
-
-nums1 = [7,2,4,3]
-nums2 = [5,6,4,1]
-# nums1 = [1,8]
-# nums2 = [0]
-# nums1 = [2,4,3]
-# nums2 = [5,6,4]
+orders = [
+    ["David","3","Ceviche"],
+    ["Corina","10","Beef Burrito"],
+    ["David","3","Fried Chicken"],
+    ["Carla","5","Water"],
+    ["Carla","5","Ceviche"],
+    ["Rous","3","Ceviche"]]
 o = Solution()
-head1 = o.initlinklist(nums1)
-head2 = o.initlinklist(nums2)
-# o.printlinklist(head1)
+print(o.displayitem(orders))
 
-h = o.addTwoNumbers(head1, head2)
-# print(h)
-o.printlinklist(h)
+acbacbacbacb
+abab
+
+# s = "a0b1c2"
+# s = "leetcode"
+# s = "1229857369"
+# s = "covid2019"
+# s = "ab123"
+# o = Solution()
+# print(o.reformat(s))
+
 
 
 
