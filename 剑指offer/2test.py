@@ -110,59 +110,62 @@ class Solution:
             i+=1
         return re
 
-    def displayitem(self, orders: List[List[str]]) -> List[List[str]]:
-        item = collections.defaultdict(list)
-        re = [[]]
-        table = []
-        for i in range(len(orders)):
-            if orders[i][2] not in re[0]:
-                bisect.insort_left(re[0], orders[i][2])
-            if orders[i][1] not in item[orders[i][1]]:
-                item[orders[i][1]].append(orders[i][2])
-            if int(orders[i][1]) not in table:
-                bisect.insort_left(table, int(orders[i][1]))
-        re[0].insert(0, 'Table')
-        print(re)
-        print(table)
-        print(item)
-        orders.sort(key = lambda x: int(x[1]))
-        print(orders)
-        for i in table:
-            tmp = [str(i)]
-            for j in range(1, len(re[0])):
-                print(i,j,re[0][j])
-                if re[0][j] in item[i]:
-                    tmp.append("1")
-                else:
-                    tmp.append("0")
-            re.append(tmp)
+    def numberOfSubarrays(self, nums: List[int], k: int) -> int:
+        if k==0 or not nums:return 0
+        l, r = 0, 0
+        odd = 0
+        re = 0
+        print('n','l','r','o','r')
+        while r<len(nums):
+            if nums[r]%2 != 0:
+                odd += 1
+
+            while l<=r-k and odd>=k:
+
+                re += 1
+                l += 1
+                if nums[l]%2!=0:
+                    # odd-=1
+                    if odd-1<k:
+                        break
+
+            
+            print(nums[r],l,r,odd,re)
+            r += 1 
         return re
 
+    def minTime(self, time: List[int], m: int) -> int:
+        if len(time)<=m:return 0        
+        if m==0: return 0
+        print(sum(time))
+        allsum = sum(time)
+        one = (allsum//m)
+        i ,j= 0,0
+        sumc = 0
+        queue = []
+        while j<len(time):
+            sumc += time[j]
+            if sumc >= one or j==len(time)-1 and i<j:
+                tmp = sum(time[i:j])-max(time[i:j])
+                queue.append(tmp)
+                i = j+1
+            j+=1
 
 
-orders = [
-    ["David","3","Ceviche"],
-    ["Corina","10","Beef Burrito"],
-    ["David","3","Fried Chicken"],
-    ["Carla","5","Water"],
-    ["Carla","5","Ceviche"],
-    ["Rous","3","Ceviche"]]
+
+
+
+        # print(queue)
+        # return sum(time[l:r+1])-max(time[l:r+1])
+
+time = [1,2,3,3]
+m = 2
+# time = [999,999,999]
+# m = 4
+time = [1,2,3,4,5,6,7,8]
+m = 3
 o = Solution()
-print(o.displayitem(orders))
-
-acbacbacbacb
-abab
-
-# s = "a0b1c2"
-# s = "leetcode"
-# s = "1229857369"
-# s = "covid2019"
-# s = "ab123"
-# o = Solution()
-# print(o.reformat(s))
-
-
-
+print(o.minTime(time, m))
 
 
 #   1

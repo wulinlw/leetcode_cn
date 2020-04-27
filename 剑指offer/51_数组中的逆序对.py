@@ -4,10 +4,11 @@
 # // 面试题51：数组中的逆序对
 # // 题目：在数组中的两个数字如果前面一个数字大于后面的数字，则这两个数字组
 # // 成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。
-
-import heapq
+from typing import List
+import bisect
 class Solution:
     # 归并排序
+    # https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/solution/jian-dan-yi-dong-gui-bing-pai-xu-python-by-azl3979/
     def InversePairs(self, nums):
         self.cnt = 0
         def merge(nums, start, mid, end, temp):
@@ -42,11 +43,13 @@ class Solution:
         mergeSort(nums, 0, len(nums) - 1, [])
         return self.cnt
 
-# 作者：fe-lucifer
-# 链接：https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/solution/jian-dan-yi-dong-gui-bing-pai-xu-python-by-azl3979/
-# 来源：力扣（LeetCode）
-# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-
+    # 二分插入
+    def InversePairs2(self, nums: List[int]) -> int:
+        cnt, tmp = 0, []
+        for num in nums[::-1]:
+            cnt += bisect.bisect_left(tmp, num)#二分插入，计算已有列表(后面的先插入)比num小的数字
+            bisect.insort(tmp, num)
+        return cnt
 
 
 nums = [7,5,6,4]

@@ -42,6 +42,19 @@ class Solution:
                 backtrack(nums[:i]+nums[i+1:], [nums[i]]+tmp)
         backtrack(nums, [])
         return re
+
+    def permute2(self, nums: List[int]) -> List[List[int]]:
+        def backtrack(nums, idx):
+            if idx == len(nums)-1:
+                re.append(nums[:])
+                return
+            for i in range(idx, len(nums)):
+                nums[i],nums[idx] = nums[idx],nums[i]
+                backtrack(nums, idx+1)
+                nums[i],nums[idx] = nums[idx],nums[i]
+        re = []
+        backtrack(nums, 0)
+        return re
 # @lc code=end
 
 nums = [1,2,3]

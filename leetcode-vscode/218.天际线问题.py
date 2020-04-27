@@ -54,7 +54,7 @@ class Solution:
         #思路：最大堆，每次在判断关键点的时候，移除所有右端点≤当前点的堆顶。
         if not buildings:return []
         points = []
-        heap = [[0, float('inf')]]          #最大堆，（高度，右上角x坐标）
+        heap = [[0, float('inf')]]          #最大堆，y,x（高度，右上角x坐标）
         res = [[0, 0]]
 
         #1.将所有端点加入到点集中(每个建筑物的左右端点)
