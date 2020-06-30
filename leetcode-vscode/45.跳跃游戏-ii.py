@@ -45,7 +45,7 @@ class Solution:
         re = 0
         for i in range(len(nums)-1):
             maxJump = max(maxJump, i+nums[i])
-            if i == end:                        #每次走到边界时，取这n步中的最大值更新下一个边界，步数+1
+            if i == end:                        #每次走到边界时，更新下一个落脚点，步数+1
                 end = maxJump
                 re += 1
         return re

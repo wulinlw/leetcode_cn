@@ -45,7 +45,7 @@ class Solution:
     
     def reverseList2(self, head: ListNode) -> ListNode:
         if not head or not head.next:return head
-        last = self.reverseList(head.next)
+        last = self.reverseList2(head.next)
         head.next.next = head
         head.next = None
         return last

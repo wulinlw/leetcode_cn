@@ -47,7 +47,7 @@ class Solution:
             if s[l] != s[r]:                            #不相等时，
                 a = s[l+1:r+1]                          #舍弃左字符，r+1包含r
                 b = s[l:r]                              #舍弃右字符，不包含r
-                return a == a[::-1] or b == b[::-1]
+                return a == a[::-1] or b == b[::-1]     #回文的中间，也是回文
             l += 1                                      #相等时往中间走
             r -= 1
         return True

@@ -56,18 +56,18 @@ class Solution:
         dic = collections.Counter(pattern)
         n_a = dic.get('a',0)
         n_b = dic.get('b',0)
-        if n_a == 0 and n_b==0:
+        if n_a == 0 and n_b == 0:
             return not value 
         if n_a == 0:
-            return (len(value)%n_b==0) and n_b*value[:len(value)//n_b] == value
+            return (len(value)%n_b==0) and n_b*value[:len(value)//n_b] == value #value是整数倍，且n个字符长度刚好拼成value
         if n_b == 0:
             return (len(value)%n_a==0) and n_a*value[:len(value)//n_a] == value
 
         candidate = []
-        m = len(value)//n_a
+        m = len(value)//n_a                                     #a字符串的最长长度，下面假设a的长度是0-m，看看何时是正确值
         for i in range(0, m+1):
-            if (len(value)-i*n_a)%n_b == 0:
-                candidate.append([i, (len(value)-i*n_a)//n_b])
+            if (len(value)-i*n_a)%n_b == 0:                     #全部减去所有a后，可以整除b，说明可以这样分割
+                candidate.append([i, (len(value)-i*n_a)//n_b])  #分割索引点，b的长度
         
         for i,j in candidate:
             if self.check(pattern, value, i, j):
@@ -79,16 +79,16 @@ class Solution:
         set2 = set()
         for c in pattern:
             if c == 'a':
-                if set1 and value[:i] not in set1:
+                if set1 and value[:i] not in set1:              #前面i个字符的字符串，不是a
                     return False
-                set1.add(value[:i])
-                value = value[i:]
+                set1.add(value[:i])                             #这里会去重，如果是一样的a，set1始终是a，不然就会有多个值了
+                value = value[i:]                               #去掉前i个字符
             elif c == 'b':
                 if set2 and value[:j] not in set2:
                     return False
                 set2.add(value[:j])
                 value = value[j:]
-        if set1 == set2:        ## a,b对应模式相同返回False
+        if set1 == set2:                                        #a,b对应模式相同返回False
             return False
         return True
 

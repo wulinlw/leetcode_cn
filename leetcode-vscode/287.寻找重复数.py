@@ -43,6 +43,7 @@ from typing import List
 class Solution:
     # 弗洛伊德 快慢指针
     # 和链表中找环的入口一样
+    # O(n)
     def findDuplicate(self, nums: List[int]) -> int:
         slow = nums[0]
         fast = nums[0]                  #由于 0 不能作为 nums 中的值出现，nums[0] 不能作为循环的一部分。
@@ -58,6 +59,31 @@ class Solution:
             ptr1 = nums[ptr1]
             ptr2 = nums[ptr2]
         return ptr1
+
+    # O(nlog(n))
+    def findDuplicate2(self, nums: List[int]) -> int:
+        size = len(nums)
+        left = 1
+        right = size - 1
+
+        while left < right:
+            mid = left + (right - left) // 2
+
+            cnt = 0
+            for num in nums:
+                if num <= mid:
+                    cnt += 1
+            # 根据抽屉原理，小于等于 4 的数的个数如果严格大于 4 个，
+            # 此时重复元素一定出现在 [1, 4] 区间里
+
+            if cnt > mid:
+                # 重复的元素一定出现在 [left, mid] 区间里
+                right = mid
+            else:
+                # if 分析正确了以后，else 搜索的区间就是 if 的反面
+                # [mid + 1, right]
+                left = mid + 1
+        return left
 
 
 # @lc code=end

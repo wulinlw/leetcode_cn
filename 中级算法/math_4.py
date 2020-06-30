@@ -45,13 +45,14 @@ class Solution(object):
     def Power2(self, base, exponent):
         if exponent==0: return 1
         if exponent==1: return base
+        if exponent<0:return self.myPow(1/base, -exponent)
         re = self.Power2(base, exponent>>1)
         re *= re
         if exponent & 1 == 1:#奇数，需要乘以自己
             re *= base
         return re
-x = 2.00000
-n = 3
+x = 2
+n = -2
 s = Solution()
 n = s.myPow(x,n)
 print(n)

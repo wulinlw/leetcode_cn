@@ -36,13 +36,13 @@ class Solution:
         if num<10:return 1
         num = str(num)
         n = len(num)
-        dp =[1]* (n+1)
-        for i in range(2,n+1): 
-            if int(num[i-2])==1 or (int(num[i-2])==2 and int(num[i-1])<=5):
+        dp = [1] * (n+1)
+        for i in range(2, n+1): 
+            if int(num[i-2])==1 or (int(num[i-2])==2 and int(num[i-1])<=5): #10-25，可以组合成两位数
                 dp[i] = dp[i-1]+dp[i-2]
-            else:
+            else:                                                           #不能组合的，和前一个一样
                 dp[i] = dp[i-1]
-        print(dp)
+        # print(dp)
         return dp[-1]
 
 n = 12258

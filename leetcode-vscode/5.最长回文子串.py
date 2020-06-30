@@ -54,7 +54,7 @@ class Solution:
         re = ""
         for i in range(n-1,-1,-1):                                  #倒着才能保证左下角dp[i+1][j-1]存在了
             for j in range(i, n):
-                dp[i][j] = s[i] == s[j] and (j-i<=2 or dp[i+1][j-1]) #and 后面，一个字符或之前也一样
+                dp[i][j] = (s[i] == s[j]) and (j-i<=2 or dp[i+1][j-1]) #and 后面，一个字符或之前也一样
                 if dp[i][j] and j-i>len(re):                        #是回文且长度更长，更新结果
                     re = s[i:j+1]
         return re
